@@ -14,8 +14,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 import Moneybook.MainFrame;
-import demo.PieChartDemo1;
-import demo.orsoncharts.PieChart3D1;
 
 public class ContentsPanel extends JPanel{
 	
