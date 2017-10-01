@@ -4,19 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Moneybook.calender.CalenderPanel;
+import Moneybook.calendar.CalenderPanel;
 import Moneybook.content.ContentsPanel;
 
 public class MainFrame extends JFrame {
@@ -32,7 +29,7 @@ public class MainFrame extends JFrame {
 	public Map data = new HashMap();
 	
 	//(key,value);
-	//insert "ÇÐ¹ø", student object)
+	//insert "ï¿½Ð¹ï¿½", student object)
 	
 	
 	public static MainFrame getInstance() {
@@ -66,11 +63,11 @@ public class MainFrame extends JFrame {
 		menuPanel.add(menuBar);
 
 		JMenu editMenu = new JMenu("Edit");
-		editMenu.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
+		editMenu.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.PLAIN, 20));
 		menuBar.add(editMenu);
 
 		JMenu fileMenu = new JMenu("File");
-		fileMenu.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
+		fileMenu.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.PLAIN, 20));
 		menuBar.add(fileMenu);
 
 

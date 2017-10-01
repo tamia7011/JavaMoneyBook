@@ -1,7 +1,5 @@
 package Moneybook.content;
 
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JButton;

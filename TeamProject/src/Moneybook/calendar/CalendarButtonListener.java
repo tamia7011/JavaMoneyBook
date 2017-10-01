@@ -1,4 +1,4 @@
-package Moneybook.calender;
+package Moneybook.calendar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 import Moneybook.content.ContentsPanel;
 
-public class CalenderButtonListener implements ActionListener{
+public class CalendarButtonListener implements ActionListener{
  
 	
 	@Override
@@ -17,8 +17,7 @@ public class CalenderButtonListener implements ActionListener{
 		CalenderPanel calenderPanel = CalenderPanel.getInstance();
 		ContentsPanel contentsPanel = ContentsPanel.getInstance();
 		
-		JButton[][] dateButs = calenderPanel.getDateButs();
-		// TODO Auto-generated method stub
+		JButton[][] dateButs = calenderPanel.getButtonForm();
 		int k=0,l=0;
 		for(int i=0 ; i<CalenderPanel.CAL_HEIGHT ; i++){
 			for(int j=0 ; j<CalenderPanel.CAL_WIDTH ; j++){
@@ -29,22 +28,24 @@ public class CalenderButtonListener implements ActionListener{
 			}
 		}
 		
-		CalenderManager calenderManager = calenderPanel.calenderManager;
-		Calendar today = calenderManager.getCurrentCal();
-		int calYear = calenderManager.getCalYear();
-		int calMonth = calenderManager.getCalMonth();
-		int calDayOfMon = calenderManager.getCalDayOfMon();
-		int[][] calDates = calenderPanel.getCalDates();
+
+		Calendar today = Calendar.getInstance();
+        Calendar calendarData = CalendarManager.getInstance().getCalendarData();
+        int calYear = calendarData.get(Calendar.YEAR);
+        int calMonth = calendarData.get(Calendar.MONTH);
+		int calDayOfMon = calendarData.get(Calendar.DAY_OF_MONTH);
+
+		int[][] dateForm = calenderPanel.getDateForm();
 		
-		if(!(k ==0 && l == 0)) calDayOfMon = calDates[k][l]; //today버튼을 눌렀을때도 이 actionPerformed함수가 실행되기 때문에 넣은 부분
+		if(!(k ==0 && l == 0)) calDayOfMon = dateForm[k][l];
 
 		Calendar cal = new GregorianCalendar(calYear,calMonth,calDayOfMon);
 		
 		String dDayString = new String();
 		int dDay=((int)((cal.getTimeInMillis() - today.getTimeInMillis())/1000/60/60/24));
-		if(dDay == 0 && (cal.get(Calendar.YEAR) == today.get(Calendar.YEAR)) 
+		if(dDay == 0 && (cal.get(Calendar.YEAR) == today.get(Calendar.YEAR))
 				&& (cal.get(Calendar.MONTH) == today.get(Calendar.MONTH))
-				&& (cal.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH))) dDayString = "Today"; 
+				&& (cal.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH))) dDayString = "Today";
 		else if(dDay >=0) dDayString = "D-"+(dDay+1);
 		else if(dDay < 0) dDayString = "D+"+(dDay)*(-1);
 		
