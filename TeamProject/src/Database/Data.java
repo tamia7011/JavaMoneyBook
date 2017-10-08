@@ -11,12 +11,12 @@ public class Data {
 	//TreeMap<Date,Double> dates = new TreeMap<Date, Double>();
 	int price;
 	int score;
-	Calendar date;
+	int date;
 	String name;
 	String expense;
 	Constants.expenseType type;
 	
-	Data (String in_name, int in_price, Calendar in_date, String in_expense, Constants.expenseType in_type) {
+	public Data (String in_name, int in_price, int in_date, String in_expense, Constants.expenseType in_type) {
 		price = in_price;
 		date = in_date;
 		expense = in_expense;
@@ -46,5 +46,10 @@ public class Data {
 		return score; 
 	}
 	
+	public String toStringInsertQuery(String dbName) {
+		String Qtype = type.toString();
+		String query = "INSERT INTO " + dbName + " VALUES (" + name + ", "+ date + ", "+ price + ", "+ Qtype + ")";
+		return query;
+	}
 }
 

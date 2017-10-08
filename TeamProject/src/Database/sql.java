@@ -10,11 +10,11 @@ import java.util.Calendar;
 
 public class sql {
 	
-	Connection con;
+	static Connection con = null;
 	String dburl;
-	Statement stmt;
+	Statement stmt = null;
 	
-	public sql() {
+	public sql() throws SQLException {
 		
 		String dburl = "jdbc:oracle:thin:@localhost:1521:OID";
 		Connection con = DriverManager.getConnection(dburl, "system", "team1");
@@ -22,10 +22,10 @@ public class sql {
 		
 	}
 	
-	public static void Select(Connection con, String dbName) throws SQLException {
+	public static void Select(String dbName) throws SQLException {
 		Statement stmt = null;
-		String query = "select NAME, DATE, PRICE, TYPE" +
-				"from " + dbName + ".EXPENSES";
+		String query = "SELECT NAME, DATE, PRICE, TYPE" +
+				"from " + dbName;
 		try {
 			//get data from dataBase
 			stmt = con.createStatement();
@@ -36,6 +36,7 @@ public class sql {
 				float price = rs.getInt("PRICE");
 				String type = rs.getString("TYPE");
 				
+				//TODO: change int date into Calendar date
 				//TODO: deal with data
 				
 			}
@@ -45,7 +46,21 @@ public class sql {
 			if (stmt != null) { stmt.close(); }
 		}
 	}
-	
-	public static void Insert(Connection con, String dbName)
+
+	public static void Insert(String dbName, Data data) throws SQLException {
+		Statement stmt = null;
+		String query = data.toStringInsertQuery(dbName);
+		try {
+			//put data to dataBase
+			stmt = con.createStatement();
+			stmt.executeUpdate(query);
+			ResultSet rs = stmt.executeQuery(query);
+			
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		} finally {
+			if (stmt != null) { stmt.close(); }
+		}
+	}
 
 }
