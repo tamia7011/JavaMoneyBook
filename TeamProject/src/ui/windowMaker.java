@@ -27,6 +27,7 @@ public class windowMaker extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	//using EventQueue to run this at last
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

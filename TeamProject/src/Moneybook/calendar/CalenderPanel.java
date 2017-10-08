@@ -22,6 +22,9 @@ public class CalenderPanel extends JPanel {
 	public static final int CAL_WIDTH = 7;
 	public static final int CAL_HEIGHT = 6;
 
+	
+	//TODO: dataform should be replaced with Data type !!!!
+	
 	private int dateForm[][] = new int[CAL_HEIGHT][CAL_WIDTH];
 	private JButton buttonForm[][] = new JButton[CAL_HEIGHT][CAL_WIDTH];
 	

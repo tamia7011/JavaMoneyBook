@@ -29,9 +29,9 @@ public class MainFrame extends JFrame {
 	public Map data = new HashMap();
 	
 	//(key,value);
-	//insert "�й�", student object)
+	//insert "占싻뱄옙", student object)
 	
-	
+	//singleton constructor for MainFrame
 	public static MainFrame getInstance() {
 		if(instance == null) {
 			instance = new MainFrame();
@@ -63,11 +63,11 @@ public class MainFrame extends JFrame {
 		menuPanel.add(menuBar);
 
 		JMenu editMenu = new JMenu("Edit");
-		editMenu.setFont(new Font("���� ���", Font.PLAIN, 20));
+		editMenu.setFont(new Font("占쏙옙占쏙옙 占쏙옙占�", Font.PLAIN, 20));
 		menuBar.add(editMenu);
 
 		JMenu fileMenu = new JMenu("File");
-		fileMenu.setFont(new Font("���� ���", Font.PLAIN, 20));
+		fileMenu.setFont(new Font("占쏙옙占쏙옙 占쏙옙占�", Font.PLAIN, 20));
 		menuBar.add(fileMenu);
 
 
