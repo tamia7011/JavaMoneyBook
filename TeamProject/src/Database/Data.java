@@ -7,8 +7,7 @@ import Constants.Constants;
 
 public class Data {
 	
-	//created TreeMap for date and price
-	//TreeMap<Date,Double> dates = new TreeMap<Date, Double>();
+
 	int price;
 	int score;
 	int date;
@@ -16,10 +15,9 @@ public class Data {
 	String expense;
 	Constants.expenseType type;
 	
-	public Data (String in_name, int in_price, int in_date, String in_expense, Constants.expenseType in_type) {
+	public Data (String in_name, int in_price, int in_date, Constants.expenseType in_type) {
 		price = in_price;
 		date = in_date;
-		expense = in_expense;
 		type = in_type;
 		name = in_name;
 	}
@@ -46,8 +44,9 @@ public class Data {
 		return score; 
 	}
 	
+	//for Insert query
 	public String toStringInsertQuery(String dbName) {
-		String Qtype = type.toString();
+		String Qtype = type.toString(); //to load type to dataBase
 		String query = "INSERT INTO " + dbName + " VALUES (" + name + ", "+ date + ", "+ price + ", "+ Qtype + ")";
 		return query;
 	}
