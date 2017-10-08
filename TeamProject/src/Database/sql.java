@@ -9,6 +9,19 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class sql {
+	
+	Connection con;
+	String dburl;
+	Statement stmt;
+	
+	public sql() {
+		
+		String dburl = "jdbc:oracle:thin:@localhost:1521:OID";
+		Connection con = DriverManager.getConnection(dburl, "system", "team1");
+		Statement stmt = null;
+		
+	}
+	
 	public static void Select(Connection con, String dbName) throws SQLException {
 		Statement stmt = null;
 		String query = "select NAME, DATE, PRICE, TYPE" +
@@ -32,5 +45,7 @@ public class sql {
 			if (stmt != null) { stmt.close(); }
 		}
 	}
+	
+	public static void Insert(Connection con, String dbName)
 
 }
