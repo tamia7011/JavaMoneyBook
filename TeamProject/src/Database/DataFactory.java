@@ -35,5 +35,4 @@ public class DataFactory {
 		priorityQueue.add(data);
 	}
 	
-	
 }

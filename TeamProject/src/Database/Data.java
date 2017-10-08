@@ -12,14 +12,16 @@ public class Data {
 	int price;
 	int score;
 	Calendar date;
+	String name;
 	String expense;
 	Constants.expenseType type;
 	
-	Data (int in_price, Calendar in_date, String in_expense, Constants.expenseType in_type) {
+	Data (String in_name, int in_price, Calendar in_date, String in_expense, Constants.expenseType in_type) {
 		price = in_price;
 		date = in_date;
 		expense = in_expense;
 		type = in_type;
+		name = in_name;
 	}
 	
 	public void DoCalculate(){
@@ -34,14 +36,13 @@ public class Data {
 		if (type == Constants.expenseType.Fixed) {
 			typeScore = 1000;
 		}
-		
 		else if (type == Constants.expenseType.Flexible) {
 			typeScore = 700;
 		}
-		
-		else if (type == Constants.expenseType.Discretionary) {
+		else {
 			typeScore = 0;
-		}
+		}		
+		score = typeScore + priceScore;
 		return score; 
 	}
 	
