@@ -13,9 +13,14 @@ public class Data {
 	int date;
 	String name;
 	String expense;
-	Constants.expenseType type;
+	String type;
 	
-	public Data (String in_name, int in_price, int in_date, Constants.expenseType in_type) {
+	public Data () {
+		Data data = new Data();
+	}
+	
+	
+	public Data (String in_name, int in_price, int in_date, String in_type) {
 		price = in_price;
 		date = in_date;
 		type = in_type;
@@ -26,15 +31,16 @@ public class Data {
 		//calculate the score of data
 		score = 10;
 	}
+
 	
 	public int getScore() {
 		int priceScore = price / 1000;
 		int typeScore;
 		
-		if (type == Constants.expenseType.Fixed) {
+		if (type.equals("fixed")){
 			typeScore = 1000;
 		}
-		else if (type == Constants.expenseType.Flexible) {
+		else if (type.equals("fixed")) {
 			typeScore = 700;
 		}
 		else {
@@ -43,11 +49,11 @@ public class Data {
 		score = typeScore + priceScore;
 		return score; 
 	}
-	
+
 	//for Insert query
 	public String toStringInsertQuery(String dbName) {
 		String Qtype = type.toString(); //to load type to dataBase
-		String query = "INSERT INTO " + dbName + " VALUES (" + name + ", "+ date + ", "+ price + ", "+ Qtype + ")";
+		String query = "INSERT INTO " + dbName + " (name, new_date, price, type)" + " VALUES ('" + name + "', "+ date + ", "+ price + ", '"+ type + "')";
 		return query;
 	}
 }

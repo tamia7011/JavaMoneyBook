@@ -10,6 +10,7 @@ public class DataFactory {
 	DataPriority comparator;
 	PriorityQueue<Data> priorityQueue;
 	
+
 	public class DataPriority implements Comparator<Object> {
 
 		@Override
@@ -23,6 +24,9 @@ public class DataFactory {
 		
 	}
 	
+	
+	
+
 	public DataFactory() {
 		//initialize priority queue 
 		priorityQueue = new PriorityQueue(20, comparator);
@@ -34,5 +38,6 @@ public class DataFactory {
 		//add data to priority queue
 		priorityQueue.add(data);
 	}
+
 	
 }
