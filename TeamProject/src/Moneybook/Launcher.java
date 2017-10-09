@@ -20,10 +20,10 @@ public class Launcher {
 		Data data = new Data("chang", 1000, 1027, "he");
 		
 		jdbc.Insert("expenses", data);
-		Data[] dataArray = new Data[100];
+		Data[] dataArray = new Data[10];
 		int index = 0;
 		dataArray = jdbc.Select("expenses");
-		while (!dataArray[index].name.equals(null)) {
+		while (dataArray[index] != null) {
 			System.out.println(dataArray[index].name);
 			index++;
 		}

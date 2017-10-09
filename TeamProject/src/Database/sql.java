@@ -43,7 +43,7 @@ public class sql {
 			//get data from dataBase
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
-			dataArray = new Data[100];
+			dataArray = new Data[10];
 			while (rs.next()) {
 				dataArray[index] = new Data();
 				String name = rs.getString("NAME");
