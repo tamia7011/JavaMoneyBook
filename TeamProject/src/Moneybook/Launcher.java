@@ -20,7 +20,13 @@ public class Launcher {
 		Data data = new Data("chang", 1000, 1027, "he");
 		
 		jdbc.Insert("expenses", data);
-		System.out.println(jdbc.Select("expenses").toString());
+		Data[] dataArray = new Data[100];
+		int index = 0;
+		dataArray = jdbc.Select("expenses");
+		while (!dataArray[index].name.equals(null)) {
+			System.out.println(dataArray[index].name);
+			index++;
+		}
 		
 		//start main frame
 		MainFrame frame = MainFrame.getInstance();

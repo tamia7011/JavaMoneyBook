@@ -58,7 +58,8 @@ public class sql {
 				dataArray[index].type = type;
 				
 				index++;
-				//TODO: change int date into Calendar date
+				System.out.println(index);
+				//TODO: change date into Calendar date
 			}
 		} catch (SQLException e ) {
 			e.printStackTrace();

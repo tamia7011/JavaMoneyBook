@@ -7,12 +7,12 @@ import Constants.Constants;
 
 public class Data {
 
-	int price;
-	int score;
-	int date;
-	String name;
-	String expense;
-	String type;
+	public int price;
+	public int score;
+	public int date;
+	public String name;
+	public String expense;
+	public String type;
 	
 	public Data () {
 		price = 0;
