@@ -6,7 +6,6 @@ import java.util.Calendar;
 import Constants.Constants;
 
 public class Data {
-	
 
 	int price;
 	int score;
@@ -16,7 +15,12 @@ public class Data {
 	String type;
 	
 	public Data () {
-		Data data = new Data();
+		price = 0;
+		score = 0;
+		date = 0;
+		name = null;
+		expense = null;
+		type = null;
 	}
 	
 	
@@ -53,8 +57,9 @@ public class Data {
 	//for Insert query
 	public String toStringInsertQuery(String dbName) {
 		String Qtype = type.toString(); //to load type to dataBase
-		String query = "INSERT INTO " + dbName + " (name, new_date, price, type)" + " VALUES ('" + name + "', "+ date + ", "+ price + ", '"+ type + "')";
+		String query = "INSERT INTO " + dbName + " (name, date_, price, type)" + " VALUES ('" + name + "', "+ date + ", "+ price + ", '"+ type + "')";
 		return query;
 	}
+	
 }
 

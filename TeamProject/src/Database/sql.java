@@ -13,6 +13,7 @@ public class sql {
 	private static sql sqlInstance = null;
 	static Connection con = null;
 	Statement stmt = null;
+	ResultSet rs = null;
 	Data[] dataArray;
 	
 	public void Init() throws SQLException {
@@ -41,10 +42,10 @@ public class sql {
 		try {
 			//get data from dataBase
 			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			Data[] dataArray = new Data[100];
+			rs = stmt.executeQuery(query);
+			dataArray = new Data[100];
 			while (rs.next()) {
-				
+				dataArray[index] = new Data();
 				String name = rs.getString("NAME");
 				int date = rs.getInt("DATE_");
 				int price = rs.getInt("PRICE");
@@ -63,6 +64,7 @@ public class sql {
 			e.printStackTrace();
 		} finally {
 			if (stmt != null) { stmt.close(); }
+			if (rs != null) {rs.close();}
 		}
 		return dataArray;
 	}
@@ -71,16 +73,18 @@ public class sql {
 		Statement stmt = null;
 		String query = data.toStringInsertQuery(dbName);
 		try {
+			//check insert command
 			System.out.println(query);
 			//put data to dataBase
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
-			ResultSet rs = stmt.executeQuery(query);
+			rs = stmt.executeQuery(query);
 			
 		} catch (SQLException e ) {
 			e.printStackTrace();
 		} finally {
 			if (stmt != null) { stmt.close(); }
+			if (rs != null) {rs.close();}
 		}
 	}
 
