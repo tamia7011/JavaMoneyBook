@@ -22,11 +22,11 @@ public class Launcher {
 		jdbc.Insert("expenses", data);
 		Data[] dataArray = new Data[10];
 		int index = 0;
-		dataArray = jdbc.Select("expenses");
-		while (dataArray[index] != null) {
-			System.out.println(dataArray[index].name);
-			index++;
-		}
+		//dataArray = jdbc.Select("expenses");
+		//while (dataArray[index] != null) {
+		//	System.out.println(dataArray[index].name);
+		//	index++;
+		//}
 		
 		//start main frame
 		MainFrame frame = MainFrame.getInstance();
