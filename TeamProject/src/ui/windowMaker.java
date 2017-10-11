@@ -8,12 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.JList;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -62,14 +66,19 @@ public class windowMaker extends JFrame {
 		menuBar.setBackground(Color.CYAN);
 		menuPanel.add(menuBar);
 		
-		JMenu editMenu = new JMenu("Edit");
-		editMenu.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		menuBar.add(editMenu);
+		JButton btnNewButton_1 = new JButton("\uC608\uC0B0\uC124\uC815");
+		menuBar.add(btnNewButton_1);
 		
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame budgetPopup = new JFrame();
+				String name = JOptionPane.showInputDialog(budgetPopup, "How much is your budget?", null);
+			}
+			
+		});
 		
-		JMenu fileMenu = new JMenu("File");
-		fileMenu.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		menuBar.add(fileMenu);
 		
 		JPanel calenderPanel = new JPanel();
 		calenderPanel.setBackground(Color.LIGHT_GRAY);
