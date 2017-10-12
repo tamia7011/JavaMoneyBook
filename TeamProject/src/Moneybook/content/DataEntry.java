@@ -2,15 +2,21 @@ package Moneybook.content;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import Database.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class DataEntry extends JFrame{
+
+	private static final long serialVersionUID = 1L; //i dont know what it is .....
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	JPanel contentPane;
+	Data data;
+	sql sql;
 	
 	public DataEntry() {
 		setBounds(100, 100, 450, 450);
@@ -37,17 +43,17 @@ public class DataEntry extends JFrame{
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("\uC774\uB984");
-		lblNewLabel_1.setBounds(102, 75, 78, 21);
-		panel.add(lblNewLabel_1);
+		JLabel nameLabel = new JLabel("\uC774\uB984");
+		nameLabel.setBounds(102, 75, 78, 21);
+		panel.add(nameLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("\uAC00\uACA9");
-		lblNewLabel_2.setBounds(102, 137, 78, 21);
-		panel.add(lblNewLabel_2);
+		JLabel priceLabel = new JLabel("\uAC00\uACA9");
+		priceLabel.setBounds(102, 137, 78, 21);
+		panel.add(priceLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("\uC18C\uBE44\uC720\uD615");
-		lblNewLabel_3.setBounds(88, 195, 78, 21);
-		panel.add(lblNewLabel_3);
+		JLabel typeLabel = new JLabel("\uC18C\uBE44\uC720\uD615");
+		typeLabel.setBounds(88, 195, 78, 21);
+		panel.add(typeLabel);
 		
 		JButton btnNewButton = new JButton("\uC785\uB825");
 		btnNewButton.setBounds(158, 256, 125, 29);
@@ -56,10 +62,21 @@ public class DataEntry extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				data = new Data();
+				try {
+					sql.Init();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				};
+				data.name = nameLabel.getText();
+				data.price = Integer.parseInt(priceLabel.getText());
+				data.type = typeLabel.getText();
+				try {
+					sql.Insert("expenses", data);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
-			
 		});
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
