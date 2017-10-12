@@ -1,5 +1,7 @@
 package Moneybook.content;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -32,6 +34,19 @@ public class ContentsPanel extends JPanel{
 	private ContentsPanel() { 
 		
 		JButton btnNewButton = new JButton("New button");
+		
+		btnNewButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//JFrame budgetPopup = new JFrame();
+				DataEntry dataEntry =  new DataEntry();
+				dataEntry.setVisible(true);
+				//String name = JOptionPane.showInputDialog(dataEntry, "How much is your budget?", null);
+			}
+			
+		});
+		
 		add(btnNewButton);
 		
 		JLabel lblContent = new JLabel("Content");
@@ -41,20 +56,20 @@ public class ContentsPanel extends JPanel{
 	
 	
 	public void show(Calendar cal) {
-		 DefaultPieDataset dataset = new DefaultPieDataset( );
-	      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
-	      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
-	      dataset.setValue( "MotoG" , new Double( 40 ) );    
-	      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );
-	      JFreeChart chart = ChartFactory.createPieChart(      
-	    	         "Mobile Sales",   // chart title 
-	    	         dataset,          // data    
-	    	         true,             // include legend   
-	    	         true, 
-	    	         false);
-	      
-	      add(new ChartPanel( chart ));
-	      
+//		 DefaultPieDataset dataset = new DefaultPieDataset( );
+//	      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
+//	      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
+//	      dataset.setValue( "MotoG" , new Double( 40 ) );    
+//	      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );
+//	      JFreeChart chart = ChartFactory.createPieChart(      
+//	    	         "Mobile Sales",   // chart title 
+//	    	         dataset,          // data    
+//	    	         true,             // include legend   
+//	    	         true, 
+//	    	         false);
+//	      
+//	      add(new ChartPanel( chart ));
+//	      
 		//Panel up
 		if(status) {
 			status = false;
