@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Moneybook.content.DataEntry;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -73,8 +76,10 @@ public class windowMaker extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame budgetPopup = new JFrame();
-				String name = JOptionPane.showInputDialog(budgetPopup, "How much is your budget?", null);
+				//JFrame budgetPopup = new JFrame();
+				DataEntry dataEntry =  new DataEntry();
+				dataEntry.setVisible(true);
+				//String name = JOptionPane.showInputDialog(dataEntry, "How much is your budget?", null);
 			}
 			
 		});

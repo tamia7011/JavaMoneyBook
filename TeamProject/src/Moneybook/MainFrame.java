@@ -4,12 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -29,7 +33,7 @@ public class MainFrame extends JFrame {
 	public Map data = new HashMap();
 	
 	//(key,value);
-	//insert "占싻뱄옙", student object)
+	//insert "�뜝�떩諭꾩삕", student object)
 	
 	//singleton constructor for MainFrame
 	public static MainFrame getInstance() {
@@ -51,25 +55,31 @@ public class MainFrame extends JFrame {
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);
 		mainPanel.setLayout(new BorderLayout(0, 0));
-
+ 
+		
+		//Menu Panel Layout
 		JPanel menuPanel = new JPanel();
 		menuPanel.setBackground(Color.RED);
 		mainPanel.add(menuPanel, BorderLayout.NORTH);
 		FlowLayout fl_menuPanel = new FlowLayout(FlowLayout.LEFT, 0, 0);
 		menuPanel.setLayout(fl_menuPanel);
-
+		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(Color.CYAN);
 		menuPanel.add(menuBar);
+		
+		JButton btnNewButton_1 = new JButton("\uC608\uC0B0\uC124\uC815");
+		menuBar.add(btnNewButton_1);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
 
-		JMenu editMenu = new JMenu("Edit");
-		editMenu.setFont(new Font("占쏙옙占쏙옙 占쏙옙占�", Font.PLAIN, 20));
-		menuBar.add(editMenu);
-
-		JMenu fileMenu = new JMenu("File");
-		fileMenu.setFont(new Font("占쏙옙占쏙옙 占쏙옙占�", Font.PLAIN, 20));
-		menuBar.add(fileMenu);
-
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame budgetPopup = new JFrame();
+				String name = JOptionPane.showInputDialog(budgetPopup, "How much is your budget?", null);
+			}
+			
+		});
 
 		
 		calenderPanel = CalenderPanel.getInstance();
