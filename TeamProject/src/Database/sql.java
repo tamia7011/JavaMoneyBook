@@ -13,7 +13,6 @@ public class sql {
 	private static sql sqlInstance = null;
 	static Connection con = null;
 	Statement stmt = null;
-	ResultSet rs = null;
 	Data[] dataArray;
 	
 	public void Init() throws SQLException {
@@ -36,6 +35,7 @@ public class sql {
 	public Data[] Select(String dbName) throws SQLException {
 		Statement stmt = null;
 		int index = 0;
+		ResultSet rs = null;
 		String query = "SELECT * " +
 				"FROM " + dbName;
 		System.out.println(query);
@@ -50,15 +50,14 @@ public class sql {
 				int date = rs.getInt("DATE_");
 				int price = rs.getInt("PRICE");
 				String type = rs.getString("TYPE");
-
+				
 				dataArray[index].name = name;
 				dataArray[index].date = date;
 				dataArray[index].price = price;
 				//data[index].type = Constants.Constants.expenseType.valueOf(type);
 				dataArray[index].type = type;
-				
+				System.out.println(dataArray[index].date);
 				index++;
-				System.out.println(index);
 				//TODO: change date into Calendar date
 			}
 		} catch (SQLException e ) {
@@ -79,13 +78,11 @@ public class sql {
 			//put data to dataBase
 			stmt = con.createStatement();
 			stmt.executeUpdate(query);
-			rs = stmt.executeQuery(query);
 			
 		} catch (SQLException e ) {
 			e.printStackTrace();
 		} finally {
 			if (stmt != null) { stmt.close(); }
-			if (rs != null) {rs.close();}
 		}
 	}
 

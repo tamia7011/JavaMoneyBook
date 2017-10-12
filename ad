@@ -1,0 +1,126 @@
+[33mcommit 54bc30c4f619396c8299a9f5dbf71501d4d897e2[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Mon Oct 9 21:58:33 2017 +0900
+
+    shit
+
+[33mcommit fb73d5bed662d36b3e77f02aaf485331459271da[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Mon Oct 9 21:21:37 2017 +0900
+
+    fucking insert error poped
+
+[33mcommit f4fa1a0431422a072f57f9589c856aa436dbdc3c[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Mon Oct 9 20:43:21 2017 +0900
+
+    database test completed
+
+[33mcommit cf5be0c8aaea3611d1fe259dc05ee54d2114094b[m[33m ([m[1;32mmoks_branch[m[33m)[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Mon Oct 9 18:26:05 2017 +0900
+
+    almost catched the connection problem
+
+[33mcommit 875874841af80141e2d0455bf4d25d80947826ca[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Sun Oct 8 16:40:23 2017 +0900
+
+    completed the select method in sql to return data
+
+[33mcommit 7b01f30abedfbca6123633c8d98f070bf797061e[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Sun Oct 8 14:48:29 2017 +0900
+
+    added Insert method in sql class
+
+[33mcommit fdccdf1e1d03f17377b4254957ed4cfe13827672[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Sun Oct 8 12:42:17 2017 +0900
+
+    moved sql to dataBase package
+
+[33mcommit 14d274707b2f65af35546bba67244314449244c4[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Sun Oct 8 11:49:18 2017 +0900
+
+    added sql class and select method(not completely implemented)
+
+[33mcommit 0ac402b76bc91a2826be16d3aaf6d761b5977c9e[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Sun Oct 8 10:43:45 2017 +0900
+
+    added type constants in constants class and added calculation for type (but not completely implemented)
+
+[33mcommit 495b9e9d5323f54cfaec564084cd2d8be876c180[m
+Author: Soonmok <tnsahr2580@gmail.com>
+Date:   Sun Oct 8 10:26:26 2017 +0900
+
+    added database and data format, but need to implement the calculate method and complete compatibility of date
+
+[33mcommit e4f9e23781096a9da114d24a3e81f75a2d0c479f[m
+Author: shonjiho <jihoson94@gmail.com>
+Date:   Mon Oct 2 14:18:18 2017 +0900
+
+    Modify .classpath File for Library path
+    
+    Library Absolute Path is Problem at other enviroment.
+    so change to relative path
+
+[33mcommit 4e84619e46ab9df990465acb515dfc87ae9f2c24[m
+Author: shonjiho <jihoson94@gmail.com>
+Date:   Sun Oct 1 18:40:07 2017 +0900
+
+    catche error
+    
+    catch error in CalendarManager.java
+
+[33mcommit b1abbfebab5198dd31db19d10dd09bf1722cfd3a[m
+Merge: 48268b4 6f5c7c1
+Author: shonjiho <jihoson94@gmail.com>
+Date:   Sun Oct 1 17:50:48 2017 +0900
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 6f5c7c1027fdd8068b19a919fe09b5069aee117e[m
+Author: jiho <shonjiho@users.noreply.github.com>
+Date:   Sun Oct 1 01:13:34 2017 +0900
+
+    Update README.md
+
+[33mcommit 824dc714e8718129e25256e4cc16d53758442678[m
+Author: jiho <shonjiho@users.noreply.github.com>
+Date:   Sun Oct 1 01:08:40 2017 +0900
+
+    Update README.md
+
+[33mcommit 48268b40da0abcd86a2fa91cece85714173a5287[m
+Author: tamia <tamia7011@gmail.com>
+Date:   Sat Sep 30 16:43:42 2017 +0900
+
+    add library path in .classpath
+
+[33mcommit 44adbb7e27bc8ad912f8e1cd46c546e01626cf56[m
+Author: tamia <tamia7011@gmail.com>
+Date:   Sat Sep 30 16:39:29 2017 +0900
+
+    reload jfreechar lib
+
+[33mcommit 283a4c53e7ca08d4c0ddc3a93490f05dfeecc8c1[m
+Author: tamia <tamia7011@gmail.com>
+Date:   Sat Sep 30 16:11:49 2017 +0900
+
+    Add JFreeChar Library.
+    - jfreechart.jar
+
+[33mcommit 3f8edd154d5660f9186c9afe2b7ba294d7bc4c8f[m
+Author: tamia <tamia7011@gmail.com>
+Date:   Sat Sep 30 15:52:34 2017 +0900
+
+    MoneyBook Demo Project
+
+[33mcommit 4a4590345bbff680e35e5e776d4d272b657d1544[m
+Author: tamia7011 <32115911+tamia7011@users.noreply.github.com>
+Date:   Sat Sep 30 15:43:41 2017 +0900
+
+    Create README.md
