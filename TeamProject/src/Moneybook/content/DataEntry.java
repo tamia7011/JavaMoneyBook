@@ -8,15 +8,13 @@ import Database.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class DataEntry extends JFrame{
-
-	private static final long serialVersionUID = 1L; //i dont know what it is .....
-	private JTextField textField;
+public class DataEntry extends JFrame implements ActionListener{
 	private JTextField textField_1;
 	private JTextField textField_2;
 	JPanel contentPane;
-	MoneyData moneyData;
+	MoneyData moneyData = new MoneyData();
 	DataAccessObject dataAccessObject;
+	private String[] petStrings = { "Fixed", "Flexible", "Discretionary"};
 	
 	public DataEntry() {
 		setBounds(100, 100, 450, 450);
@@ -24,15 +22,10 @@ public class DataEntry extends JFrame{
 		JPanel contentPane = panel;
 		panel.setLayout(null);
 		panel.setLayout(null);
-		
+	
 		JLabel lblNewLabel = new JLabel("insert information");
 		lblNewLabel.setBounds(147, 15, 145, 21);
 		panel.add(lblNewLabel);
-		
-		textField = new JTextField();
-		textField.setBounds(182, 75, 182, 27);
-		panel.add(textField);
-		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(182, 134, 182, 27);
@@ -64,7 +57,6 @@ public class DataEntry extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				moneyData = new MoneyData();
 				try {
 					dataAccessObject.Init();
 				} catch (SQLException e1) {
@@ -83,8 +75,20 @@ public class DataEntry extends JFrame{
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		 
+		
+		JComboBox petList = new JComboBox(petStrings);
+		petList.setBounds(182, 75, 182, 24);
+		petList.setSelectedIndex(0);
+		petList.addActionListener(this);
+		panel.add(petList);
 		
 	}
 
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JComboBox comboBox = (JComboBox) e.getSource();
+		moneyData.type = (String) comboBox.getSelectedItem();
+		System.out.println(moneyData.type);
+	}
 }
