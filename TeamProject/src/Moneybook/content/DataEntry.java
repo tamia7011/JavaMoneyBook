@@ -15,8 +15,8 @@ public class DataEntry extends JFrame{
 	private JTextField textField_1;
 	private JTextField textField_2;
 	JPanel contentPane;
-	Data data;
-	sql sql;
+	MoneyData moneyData;
+	DataAccessObject dataAccessObject;
 	
 	public DataEntry() {
 		setBounds(100, 100, 450, 450);
@@ -63,17 +63,17 @@ public class DataEntry extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				data = new Data();
+				moneyData = new MoneyData();
 				try {
-					sql.Init();
+					dataAccessObject.Init();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				};
-				data.name = nameLabel.getText();
-				data.price = Integer.parseInt(priceLabel.getText());
-				data.type = typeLabel.getText();
+				moneyData.name = nameLabel.getText();
+				moneyData.price = Integer.parseInt(priceLabel.getText());
+				moneyData.type = typeLabel.getText();
 				try {
-					sql.Insert("expenses", data);
+					dataAccessObject.Insert("expenses", moneyData);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
