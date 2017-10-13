@@ -1,25 +1,30 @@
 package Moneybook.content;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import Database.*;
-import Moneybook.MainFrame;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class DataEntry extends JFrame{
+import Database.DataAccessObject;
+import Database.MoneyData;
+ 
+public class DataEntry extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L; //i dont know what it is .....
 	private static DataEntry thisFrame;
 	private JTextField typeField;
 	private JTextField nameField;
-	private JTextField priceField;
+	private JTextField priceField; 
 	JPanel contentPane;
-	MoneyData moneyData;
+	MoneyData moneyData = new MoneyData();
 	DataAccessObject dataAccessObject;
+	private String[] petStrings = { "Fixed", "Flexible", "Discretionary"};
 	
 	public static DataEntry getInstance() {
 		if(thisFrame == null) {
@@ -39,20 +44,22 @@ public class DataEntry extends JFrame{
 		JPanel contentPane = panel;
 		panel.setLayout(null);
 		panel.setLayout(null);
-		
+	
 		JLabel lblNewLabel = new JLabel("insert information");
 		lblNewLabel.setBounds(147, 15, 145, 21);
 		panel.add(lblNewLabel);
-		
-		typeField = new JTextField();
-		typeField.setBounds(182, 75, 182, 27);
-		panel.add(typeField);
-		typeField.setColumns(10);
+		 
+		JComboBox petList = new JComboBox(petStrings);
+		petList.setBounds(182, 75, 182, 27);
+		petList.setSelectedIndex(0);
+		petList.addActionListener(this);
+		panel.add(petList);
 		
 		nameField = new JTextField();
 		nameField.setBounds(182, 134, 182, 27);
 		panel.add(nameField);
 		nameField.setColumns(10);
+
 		
 		priceField = new JTextField();
 		priceField.setBounds(182, 192, 182, 27);
@@ -79,7 +86,6 @@ public class DataEntry extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				moneyData = new MoneyData();
 				try {
 					dataAccessObject = Database.DataAccessObject.getInstance();
 				} catch (SQLException e1) {
@@ -100,8 +106,14 @@ public class DataEntry extends JFrame{
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		 
 		
 	}
 
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JComboBox comboBox = (JComboBox) e.getSource();
+		moneyData.type = (String) comboBox.getSelectedItem();
+		System.out.println(moneyData.type);
+	}
 }
