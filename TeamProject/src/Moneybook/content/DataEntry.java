@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 import Database.DataAccessObject;
 import Database.MoneyData;
  
-public class DataEntry extends JFrame implements ActionListener{
+public class DataEntry extends JFrame{
 
 	private static final long serialVersionUID = 1L; //i dont know what it is .....
 	private static DataEntry thisFrame;
@@ -51,8 +51,7 @@ public class DataEntry extends JFrame implements ActionListener{
 		 
 		JComboBox petList = new JComboBox(petStrings);
 		petList.setBounds(182, 75, 182, 27);
-		petList.setSelectedIndex(0);
-		petList.addActionListener(this);
+		petList.setSelectedIndex(0); 
 		panel.add(petList);
 		
 		nameField = new JTextField();
@@ -94,7 +93,7 @@ public class DataEntry extends JFrame implements ActionListener{
 				moneyData.name = nameField.getText();
 				//System.out.println(Integer.parseInt(priceLabel.getText()));
 				moneyData.price = Integer.parseInt(priceField.getText());
-				moneyData.type = typeField.getText();
+				moneyData.type = petList.getSelectedItem().toString();
 				try {
 					dataAccessObject.Insert("expenses", moneyData);
 				} catch (SQLException e1) {
@@ -109,11 +108,5 @@ public class DataEntry extends JFrame implements ActionListener{
 		 
 		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JComboBox comboBox = (JComboBox) e.getSource();
-		moneyData.type = (String) comboBox.getSelectedItem();
-		System.out.println(moneyData.type);
-	}
+ 
 }
