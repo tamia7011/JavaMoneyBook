@@ -2,6 +2,7 @@ package Moneybook.content;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -23,40 +24,12 @@ public class ContentsPanel extends JPanel{
 			return instance;
 		}
 		return instance;
-	}
+	} 
 	
 	private ContentsPanel() {
-//		JButton btnNewButton = new JButton("insert information");
-//		btnNewButton.setBounds(144, 5, 171, 29);
-//		btnNewButton.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				DataEntry dataEntry =  new DataEntry();
-//				dataEntry.setVisible(true);
-//			}
-//			
-//		}); 
-//		add(btnNewButton);
-//		
-//		JTable table = new JTable();
-//		table.setModel(new DefaultTableModel(
-//			new Object[][] {
-//				{"type", "name", "price"},
-//				{null, null, null},
-//				{null, null, null},
-//				{null, null, null},
-//				{null, null, null},
-//			},
-//			new String[] {
-//				"type", "name", "price"
-//			}
-//		));
-//		add(table);
-		JButton btnNewButton = new JButton("insert information");
-		btnNewButton.setBounds(44, 31, 200, 29);
-		Container contentsPanel = null;
-		contentsPanel.add(btnNewButton);
+		this.setLayout(new BorderLayout());
+		JButton btnNewButton = new JButton("insert information"); 
+		add(btnNewButton,BorderLayout.NORTH);
 		btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -67,8 +40,7 @@ public class ContentsPanel extends JPanel{
 			
 		}); 
 		
-		JTable table = new JTable();
-		table.setBounds(17, 75, 268, 179);
+		JTable table = new JTable(); 
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"type", "name", "price"},
@@ -81,7 +53,7 @@ public class ContentsPanel extends JPanel{
 				"type", "name", "price"
 			}
 		));
-		contentsPanel.add(table);
+		add(table,BorderLayout.CENTER);
 		
 		setVisible(status);
 	}
