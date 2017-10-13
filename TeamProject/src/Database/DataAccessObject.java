@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class sql {
+public class DataAccessObject {
 	
-	private static sql sqlInstance = null;
+	private static DataAccessObject sqlInstance = null;
 	static Connection con = null;
 	Statement stmt = null;
-	Data[] dataArray;
+	ArrayList<MoneyData> dataArray = new ArrayList<MoneyData>(); 
 	
 	public void Init() throws SQLException {
 		String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -21,20 +22,19 @@ public class sql {
 		Statement stmt = null;
 	}
 	
-	private sql() throws SQLException {
+	private DataAccessObject() throws SQLException {
 		Init();
 	}
 	
-	public static sql getInstance() throws SQLException {
+	public static DataAccessObject getInstance() throws SQLException {
 		if (sqlInstance == null) {
-			sqlInstance = new sql();
+			sqlInstance = new DataAccessObject();
 		}
 		return sqlInstance;
 	}
 	
-	public Data[] Select(String dbName) throws SQLException {
-		Statement stmt = null;
-		int index = 0;
+	public ArrayList<MoneyData> Select(String dbName) throws SQLException {
+		Statement stmt = null; 
 		ResultSet rs = null;
 		String query = "SELECT * " +
 				"FROM " + dbName;
@@ -42,23 +42,16 @@ public class sql {
 		try {
 			//get data from dataBase
 			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
-			dataArray = new Data[10];
+			rs = stmt.executeQuery(query); 
 			while (rs.next()) {
-				dataArray[index] = new Data();
-				String name = rs.getString("NAME");
-				int date = rs.getInt("DATE_");
-				int price = rs.getInt("PRICE");
-				String type = rs.getString("TYPE");
+				MoneyData data = new MoneyData();	
+				data.name = rs.getString("NAME");
+				data.price = rs.getInt("PRICE");
+				data.type = rs.getString("TYPE");
+				//data.date
 				
-				dataArray[index].name = name;
-				dataArray[index].date = date;
-				dataArray[index].price = price;
-				//data[index].type = Constants.Constants.expenseType.valueOf(type);
-				dataArray[index].type = type;
-				System.out.println(dataArray[index].date);
-				index++;
-				//TODO: change date into Calendar date
+				dataArray.add(data);
+				return dataArray;
 			}
 		} catch (SQLException e ) {
 			e.printStackTrace();
@@ -69,7 +62,7 @@ public class sql {
 		return dataArray;
 	}
 
-	public void Insert(String dbName, Data data) throws SQLException {
+	public void Insert(String dbName, MoneyData data) throws SQLException {
 		Statement stmt = null;
 		String query = data.toStringInsertQuery(dbName);
 		try {
