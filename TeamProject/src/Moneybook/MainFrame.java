@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 	public Map data = new HashMap();
 	
 	//(key,value);
-	//insert "�뜝�떩諭꾩삕", student object)
+	//insert "占쎈쐻占쎈뼦獄�袁⑹굲", student object)
 	
 	//singleton constructor for MainFrame
 	public static MainFrame getInstance() {
@@ -68,7 +68,7 @@ public class MainFrame extends JFrame {
 		menuBar.setBackground(Color.CYAN);
 		menuPanel.add(menuBar);
 		
-		JButton btnNewButton_1 = new JButton("\uC608\uC0B0\uC124\uC815");
+		JButton btnNewButton_1 = new JButton("set budget");
 		menuBar.add(btnNewButton_1);
 		
 		btnNewButton_1.addActionListener(new ActionListener() {

@@ -1,56 +1,60 @@
 package Moneybook.content;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
-
-import Moneybook.MainFrame;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class ContentsPanel extends JPanel{
-	
 	private static ContentsPanel instance;
 	boolean status = false;
-	
-	
-	
 	
 	public static ContentsPanel getInstance() {
 		if(instance == null) {
 			instance = new ContentsPanel();
 			return instance;
 		}
-		
 		return instance;
-	}
-	private ContentsPanel() { 
-		
-		JButton btnNewButton = new JButton("New button");
-		
+	} 
+	
+	private ContentsPanel() {
+		this.setLayout(new BorderLayout());
+		JButton btnNewButton = new JButton("insert information"); 
+		add(btnNewButton,BorderLayout.NORTH);
 		btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//JFrame budgetPopup = new JFrame();
 				DataEntry dataEntry =  new DataEntry();
 				dataEntry.setVisible(true);
-				//String name = JOptionPane.showInputDialog(dataEntry, "How much is your budget?", null);
 			}
 			
-		});
+		}); 
 		
-		add(btnNewButton);
+		JTable table = new JTable(); 
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"type", "name", "price"},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"type", "name", "price"
+			}
+		));
+		add(table,BorderLayout.CENTER);
 		
-		JLabel lblContent = new JLabel("Content");
-		add(lblContent);
 		setVisible(status);
 	}
 	
@@ -69,7 +73,7 @@ public class ContentsPanel extends JPanel{
 //	    	         false);
 //	      
 //	      add(new ChartPanel( chart ));
-//	      
+	      
 		//Panel up
 		if(status) {
 			status = false;
