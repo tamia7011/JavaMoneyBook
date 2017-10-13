@@ -11,9 +11,9 @@ import javax.swing.border.EmptyBorder;
 public class DataEntry extends JFrame{
 
 	private static final long serialVersionUID = 1L; //i dont know what it is .....
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField typeField;
+	private JTextField nameField;
+	private JTextField priceField;
 	JPanel contentPane;
 	MoneyData moneyData;
 	DataAccessObject dataAccessObject;
@@ -29,20 +29,20 @@ public class DataEntry extends JFrame{
 		lblNewLabel.setBounds(147, 15, 145, 21);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(182, 75, 182, 27);
-		panel.add(textField);
-		textField.setColumns(10);
+		typeField = new JTextField();
+		typeField.setBounds(182, 75, 182, 27);
+		panel.add(typeField);
+		typeField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(182, 134, 182, 27);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		nameField = new JTextField();
+		nameField.setBounds(182, 134, 182, 27);
+		panel.add(nameField);
+		nameField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(182, 192, 182, 27);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		priceField = new JTextField();
+		priceField.setBounds(182, 192, 182, 27);
+		panel.add(priceField);
+		priceField.setColumns(10);
 		
 		JLabel nameLabel = new JLabel("type");
 		nameLabel.setBounds(107, 78, 43, 21);
@@ -66,13 +66,14 @@ public class DataEntry extends JFrame{
 
 				moneyData = new MoneyData();
 				try {
-					dataAccessObject.Init();
+					dataAccessObject = Database.DataAccessObject.getInstance();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				};
-				moneyData.name = nameLabel.getText();
-				moneyData.price = Integer.parseInt(priceLabel.getText());
-				moneyData.type = typeLabel.getText();
+				moneyData.name = nameField.getText();
+				//System.out.println(Integer.parseInt(priceLabel.getText()));
+				moneyData.price = Integer.parseInt(priceField.getText());
+				moneyData.type = typeField.getText();
 				try {
 					dataAccessObject.Insert("expenses", moneyData);
 				} catch (SQLException e1) {

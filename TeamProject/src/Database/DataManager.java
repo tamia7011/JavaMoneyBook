@@ -43,7 +43,7 @@ public class DataManager {
 		if (data.type.equals("fixed")){
 			typeScore = 1000;
 		}
-		else if (data.type.equals("fixed")) {
+		else if (data.type.equals("Flexible")) {
 			typeScore = 700;
 		}
 		else {
