@@ -34,7 +34,7 @@ public class ContentsPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DataEntry dataEntry =  new DataEntry();
+				DataEntry dataEntry =  DataEntry.getInstance();
 				dataEntry.setVisible(true);
 			}
 			

@@ -5,12 +5,15 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import Database.*;
+import Moneybook.MainFrame;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class DataEntry extends JFrame{
 
 	private static final long serialVersionUID = 1L; //i dont know what it is .....
+	private static DataEntry thisFrame;
 	private JTextField typeField;
 	private JTextField nameField;
 	private JTextField priceField;
@@ -18,7 +21,19 @@ public class DataEntry extends JFrame{
 	MoneyData moneyData;
 	DataAccessObject dataAccessObject;
 	
-	public DataEntry() {
+	public static DataEntry getInstance() {
+		if(thisFrame == null) {
+			thisFrame = new DataEntry();
+			return thisFrame;
+		}
+		return thisFrame;
+	}
+	
+	private DataEntry() {
+		init(); 
+	}
+	
+	public void init() {
 		setBounds(100, 100, 450, 450);
 		JPanel panel = new JPanel();
 		JPanel contentPane = panel;
@@ -79,6 +94,7 @@ public class DataEntry extends JFrame{
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				thisFrame.setVisible(false);
 			}
 		});
 		

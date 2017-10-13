@@ -77,7 +77,7 @@ public class windowMaker extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//JFrame budgetPopup = new JFrame();
-				DataEntry dataEntry =  new DataEntry();
+				DataEntry dataEntry =  DataEntry.getInstance();
 				dataEntry.setVisible(true);
 				//String name = JOptionPane.showInputDialog(dataEntry, "How much is your budget?", null);
 			}
