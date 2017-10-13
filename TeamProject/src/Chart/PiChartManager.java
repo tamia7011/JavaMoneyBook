@@ -1,16 +1,26 @@
 package Chart;
 
+import java.util.ArrayList;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
+import Database.MoneyData;
+
 public class PiChartManager {
 
 	
-	public ChartPanel getChart(){
+	public ChartPanel getChart(ArrayList<MoneyData> list){
+		//
 		
 		 DefaultPieDataset dataset = new DefaultPieDataset( );
+		 
+		 for(MoneyData d:list){
+			 //d.price;
+		 }
+		 
 	      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
 	      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
 	      dataset.setValue( "MotoG" , new Double( 40 ) );    
@@ -27,4 +37,5 @@ public class PiChartManager {
 		
 		return new ChartPanel(chart);
 	}
+	
 }
