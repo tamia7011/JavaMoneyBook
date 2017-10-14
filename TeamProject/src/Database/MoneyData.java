@@ -34,7 +34,7 @@ public class MoneyData {
 	
 	//for Insert query
 	public String toStringInsertQuery(String dbName) {
-		String Qtype = type.toString(); //to load type to dataBase
+		//String Qtype = type.toString(); //to load type to dataBase
 		String query = "INSERT INTO " + dbName + " (name, date_, price, type)" + " VALUES ('" + name + "', "+ date + ", "+ price + ", '"+ type + "')";
 		return query;
 	}

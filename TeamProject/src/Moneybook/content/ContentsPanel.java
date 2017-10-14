@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -13,10 +14,12 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import Database.*;
 
 public class ContentsPanel extends JPanel{
 	private static ContentsPanel instance;
 	boolean status = false;
+	public JTable table;
 	
 	public static ContentsPanel getInstance() {
 		if(instance == null) {
@@ -40,24 +43,20 @@ public class ContentsPanel extends JPanel{
 			
 		}); 
 		
-		JTable table = new JTable(); 
+		table = new JTable(); 
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"type", "name", "price"},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
 			},
 			new String[] {
 				"type", "name", "price"
 			}
 		));
+		
 		add(table,BorderLayout.CENTER);
 		
 		setVisible(status);
 	}
-	
 	
 	public void show(Calendar cal) {
 //		 DefaultPieDataset dataset = new DefaultPieDataset( );
