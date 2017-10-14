@@ -70,7 +70,7 @@ public class DataManager {
 	
 	public void AddToPriorityQueue(ArrayList<MoneyData> arraylist) {
 		//add data to priority queue
-		Iterator it = arraylist.iterator();
+		Iterator<MoneyData> it = arraylist.iterator();
 		while (it.hasNext()){
 			priorityQueue.add((MoneyData) it.next());
 		}

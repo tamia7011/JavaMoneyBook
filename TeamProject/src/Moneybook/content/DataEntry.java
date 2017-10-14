@@ -10,10 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Database.DataAccessObject;
 import Database.MoneyData;
- 
+
 public class DataEntry extends JFrame{
 
 	private static final long serialVersionUID = 1L; //i dont know what it is .....
@@ -96,6 +97,11 @@ public class DataEntry extends JFrame{
 				moneyData.type = petList.getSelectedItem().toString();
 				try {
 					dataAccessObject.Insert("expenses", moneyData);
+					ContentsPanel panel = ContentsPanel.getInstance();
+					Object[] row = {moneyData.type, moneyData.name, moneyData.price};
+				    DefaultTableModel model = (DefaultTableModel) panel.table.getModel();
+				    model.addRow(row);
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}

@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame {
 	//insert "占쎈쐻占쎈뼦獄�袁⑹굲", student object)
 	
 	//singleton constructor for MainFrame
-	public static MainFrame getInstance() {
+	public static MainFrame getInstance() throws SQLException {
 		if(instance == null) {
 			instance = new MainFrame();
 			return instance;
@@ -44,11 +45,11 @@ public class MainFrame extends JFrame {
 		return instance;
 	}
 	
-	private MainFrame() {
+	private MainFrame() throws SQLException {
 		init(); 
 	}
 
-	private void init() {
+	private void init() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 914, 545);
 		mainPanel = new JPanel();
