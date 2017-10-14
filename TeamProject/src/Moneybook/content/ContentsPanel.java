@@ -2,9 +2,11 @@ package Moneybook.content;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Frame;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -14,7 +16,15 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.jfree.ui.RefineryUtilities;
+
 import Database.*;
+import ui.PieChart_AWT;
+
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
+import Chart.PiChartManager;
 
 public class ContentsPanel extends JPanel{
 	private static ContentsPanel instance;
@@ -31,17 +41,7 @@ public class ContentsPanel extends JPanel{
 	
 	private ContentsPanel() {
 		this.setLayout(new BorderLayout());
-		JButton btnNewButton = new JButton("insert information"); 
-		add(btnNewButton,BorderLayout.NORTH);
-		btnNewButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				DataEntry dataEntry =  DataEntry.getInstance();
-				dataEntry.setVisible(true);
-			}
-			
-		}); 
 		
 		table = new JTable(); 
 		table.setModel(new DefaultTableModel(
@@ -54,6 +54,41 @@ public class ContentsPanel extends JPanel{
 		));
 		
 		add(table,BorderLayout.CENTER);
+		
+		JToolBar toolBar = new JToolBar();
+		add(toolBar, BorderLayout.SOUTH);
+		
+		JButton btnNewButton_1 = new JButton("insert data");
+		toolBar.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DataEntry dataEntry =  DataEntry.getInstance();
+				dataEntry.setVisible(true);
+			}
+			
+		}); 
+		
+		JButton btnNewButton_2 = new JButton("delete data");
+		toolBar.add(btnNewButton_2);
+		
+		JButton btnNewButton = new JButton("edit data");
+		toolBar.add(btnNewButton);
+		
+		JButton btnNewButton_3 = new JButton("statistic");
+		toolBar.add(btnNewButton_3);
+		btnNewButton_3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PieChart_AWT demo = new PieChart_AWT( "Mobile Sales" );  
+			    demo.setSize( 560 , 367 );    
+			    RefineryUtilities.centerFrameOnScreen( demo );    
+			    demo.setVisible( true ); 
+			}
+			
+		}); 
 		
 		setVisible(status);
 	}
