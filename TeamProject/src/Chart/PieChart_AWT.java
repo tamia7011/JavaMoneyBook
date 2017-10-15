@@ -11,11 +11,11 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 public class PieChart_AWT extends ApplicationFrame {
-	   private static budgetData budgetdata;
+	   private static MonthAccount budgetdata;
 	
 	   public PieChart_AWT( String title ) {
 	      super( title ); 
-	      budgetdata = budgetData.getInstance();
+	      budgetdata = MonthAccount.getInstance();
 	      setContentPane(createDemoPanel( ));
 	   }
 	   

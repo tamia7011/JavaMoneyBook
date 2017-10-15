@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
 
 import Database.*;
+import Moneybook.calendar.CalendarManager;
 import Chart.PieChart_AWT;
 
 import javax.swing.JSplitPane;
@@ -93,29 +94,31 @@ public class ContentsPanel extends JPanel{
 		setVisible(status);
 	}
 	
-	public void show(Calendar cal) {
-//		 DefaultPieDataset dataset = new DefaultPieDataset( );
-//	      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
-//	      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
-//	      dataset.setValue( "MotoG" , new Double( 40 ) );    
-//	      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );
-//	      JFreeChart chart = ChartFactory.createPieChart(      
-//	    	         "Mobile Sales",   // chart title 
-//	    	         dataset,          // data    
-//	    	         true,             // include legend   
-//	    	         true, 
-//	    	         false);
-//	      
-//	      add(new ChartPanel( chart ));
-	      
-		//Panel up
+	public void show(Calendar cal) { 
 		if(status) {
 			status = false;
 		}else {
 			status = true;
 		}
-		setVisible(status);
-		//content 
-		System.out.println("Calender - "+ cal.get(Calendar.MONTH)+"-"+ cal.get(Calendar.DAY_OF_MONTH));
+		setVisible(status); 
+		showTable();
+		
+	}
+	
+	public void showTable() {
+		table.removeAll();
+		
+		AccountDAO accountDAO = AccountDAO.getInstance();
+		String date = CalendarManager.getDate();
+		ArrayList<Account> list = accountDAO.selectByDate(date);
+		
+		
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		for(Account account:list) {
+			Object[] row = { account.getType(), account.getName(), account.getPrice() };
+			model.addRow(row);
+		} 
+		
 	}
 }

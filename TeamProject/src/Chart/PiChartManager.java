@@ -7,13 +7,13 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-import Database.MoneyData;
-import Database.budgetData;
+import Database.Account;
+import Database.MonthAccount;
 
 public class PiChartManager {
 
 	
-	public ChartPanel getChart(budgetData budgetdata){
+	public ChartPanel getChart(MonthAccount budgetdata){
 		
 		
 		 DefaultPieDataset dataset = new DefaultPieDataset( );

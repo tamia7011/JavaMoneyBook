@@ -12,10 +12,8 @@ import java.io.IOException;
 
 public class Launcher {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		//for sql testing 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		DataAccessObject jdbc = DataAccessObject.getInstance();
-		
+ 
+		Class.forName("com.mysql.jdbc.Driver");  
 		
 		//start main frame
 		MainFrame frame = MainFrame.getInstance();

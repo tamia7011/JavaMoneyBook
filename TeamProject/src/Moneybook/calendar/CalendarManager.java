@@ -1,14 +1,29 @@
 package Moneybook.calendar;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 import Constants.Constants;
 
 public class CalendarManager {
     private static CalendarManager instance;
-
+    
 	//Calendar Data.
-	private Calendar calendarData;
+	private static Calendar calendarData = Calendar.getInstance();
 
+	public static String getDate() {
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date time = calendarData.getTime();
+		String date = format.format(time);   
+		return date;
+	}
+	
+	public Calendar getCalendarData() {
+		return calendarData;
+	}
+	
 	public static CalendarManager getInstance(){
 	    if(instance == null){
 	        instance = new CalendarManager();
@@ -16,17 +31,7 @@ public class CalendarManager {
         }
         return instance;
     }
-
-	public Calendar getCalendarData() {
-		return calendarData;
-	}
-
-	
-	private CalendarManager() {
-	    //default calendar Data is current Time.
-		calendarData = Calendar.getInstance();
-	}
-
+ 
 	public void makeCalendarFormatData(int[][] calDates){
         int calYear = calendarData.get(Calendar.YEAR);
         int calMonth = calendarData.get(Calendar.MONTH);
