@@ -8,23 +8,19 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 import Database.MoneyData;
+import Database.budgetData;
 
 public class PiChartManager {
 
 	
-	public ChartPanel getChart(ArrayList<MoneyData> list){
-		//
+	public ChartPanel getChart(budgetData budgetdata){
+		
 		
 		 DefaultPieDataset dataset = new DefaultPieDataset( );
 		 
-		 for(MoneyData d:list){
-			 //d.price;
-		 }
-		 
-	      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
-	      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
-	      dataset.setValue( "MotoG" , new Double( 40 ) );    
-	      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );
+	      dataset.setValue( "Fixed" , new Double( budgetdata.getFixedExpenses() ) );  
+	      dataset.setValue( "Flexible" , new Double( budgetdata.getFlexibleExpenses() ) );   
+	      dataset.setValue( "Discretionary" , new Double( budgetdata.getDiscretionaryExpenses() ) );    
 	      
 	
 	      JFreeChart chart = ChartFactory.createPieChart(      

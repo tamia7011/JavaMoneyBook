@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Database.budgetData;
 import Moneybook.calendar.CalenderPanel;
 import Moneybook.content.ContentsPanel;
 
@@ -77,7 +78,10 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFrame budgetPopup = new JFrame();
-				String name = JOptionPane.showInputDialog(budgetPopup, "How much is your budget?", null);
+				int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your income?", null));
+				budgetData budget = budgetData.getInstance();
+				budget.salary = salary;
+				budgetPopup.dispose();
 			}
 			
 		});
