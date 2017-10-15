@@ -34,7 +34,7 @@ public class AccountDAO {
 		return Instance;
 	}
 
-	public ArrayList<Account> AllSelect() {
+	public ArrayList<Account> selectAll() {
 		// TODO: Statement -> PreparedStatement
 		Statement stmt = null;
 		ResultSet rs = null;

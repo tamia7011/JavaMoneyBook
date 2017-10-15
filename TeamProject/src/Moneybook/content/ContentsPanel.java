@@ -2,6 +2,8 @@ package Moneybook.content;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -45,6 +47,12 @@ public class ContentsPanel extends JPanel{
 
 		
 		table = new JTable(); 
+		
+		table.setFont(new Font("Arial", Font.PLAIN, 20));
+		Dimension dim = new Dimension(20,1);
+		table.setIntercellSpacing(new Dimension(dim));
+		int height = table.getRowHeight();
+		table.setRowHeight(height+10);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"type", "name", "price"},
@@ -83,10 +91,7 @@ public class ContentsPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" );  
-			    demo.setSize( 560 , 367 );    
-			    RefineryUtilities.centerFrameOnScreen( demo );    
-			    demo.setVisible( true ); 
+				showStatics();
 			}
 			
 		}); 
@@ -105,20 +110,29 @@ public class ContentsPanel extends JPanel{
 		
 	}
 	
-	public void showTable() {
-		table.removeAll();
+	public void showStatics() {
+		AccountDAO accountDAO = AccountDAO.getInstance();
+		String date = CalendarManager.getDate();
+		ArrayList<Account> list = accountDAO.selectByDate(date);
+		
+		Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" , list  );  
+	    demo.setSize( 560 , 367 );    
+	    RefineryUtilities.centerFrameOnScreen( demo );    
+	    demo.setVisible( true ); 
+	}
+	
+	public void showTable() { 
 		
 		AccountDAO accountDAO = AccountDAO.getInstance();
 		String date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
 		
 		
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		
+		DefaultTableModel model = (DefaultTableModel) table.getModel(); 
+		model.setNumRows(1); 
 		for(Account account:list) {
 			Object[] row = { account.getType(), account.getName(), account.getPrice() };
 			model.addRow(row);
-		} 
-		
+		}  
 	}
 }

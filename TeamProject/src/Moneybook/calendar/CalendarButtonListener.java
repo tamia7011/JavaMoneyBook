@@ -30,7 +30,7 @@ public class CalendarButtonListener implements ActionListener{
 		
 
 		Calendar today = Calendar.getInstance();
-        Calendar calendarData = CalendarManager.getInstance().getCalendarData();
+        Calendar calendarData = CalendarManager.getCalendarData();
         int calYear = calendarData.get(Calendar.YEAR);
         int calMonth = calendarData.get(Calendar.MONTH);
 		int calDayOfMon = calendarData.get(Calendar.DAY_OF_MONTH);
@@ -38,9 +38,9 @@ public class CalendarButtonListener implements ActionListener{
 		int[][] dateForm = calenderPanel.getDateForm();
 		
 		if(!(k ==0 && l == 0)) calDayOfMon = dateForm[k][l];
-
-		Calendar cal = new GregorianCalendar(calYear,calMonth,calDayOfMon);
 		
+		//DDAY
+		Calendar cal = new GregorianCalendar(calYear,calMonth,calDayOfMon); 
 		String dDayString = new String();
 		int dDay=((int)((cal.getTimeInMillis() - today.getTimeInMillis())/1000/60/60/24));
 		if(dDay == 0 && (cal.get(Calendar.YEAR) == today.get(Calendar.YEAR))
@@ -51,6 +51,10 @@ public class CalendarButtonListener implements ActionListener{
 		
 		//selectedDate.setText("<Html><font size=3>"+(calMonth+1)+"/"+calDayOfMon+"/"+calYear+"&nbsp;("+dDayString+")</html>");
 		
+		
+		
+		CalendarManager.setCalendarDay(dateForm[k][l]);
+		System.out.println(CalendarManager.getDate());
 		contentsPanel.show(cal);
 		
 	}
