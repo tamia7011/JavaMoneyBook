@@ -1,7 +1,7 @@
 package Chart;
 
 import javax.swing.JPanel;
-
+import Database.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -11,18 +11,19 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 public class PieChart_AWT extends ApplicationFrame {
-	   
+	   private static budgetData budgetdata;
+	
 	   public PieChart_AWT( String title ) {
 	      super( title ); 
+	      budgetdata = budgetData.getInstance();
 	      setContentPane(createDemoPanel( ));
 	   }
 	   
-	   private static PieDataset createDataset( ) {
+	   private static PieDataset createDataset() {
 	      DefaultPieDataset dataset = new DefaultPieDataset( );
-	      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
-	      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
-	      dataset.setValue( "MotoG" , new Double( 40 ) );    
-	      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );  
+	      dataset.setValue( "Fixed" , new Double( budgetdata.getFixedExpenses() ) );  
+	      dataset.setValue( "Flexible" , new Double( budgetdata.getFlexibleExpenses() ) );   
+	      dataset.setValue( "Discretionary" , new Double( budgetdata.getDiscretionaryExpenses() ) );
 	      return dataset;         
 	   }
 	   

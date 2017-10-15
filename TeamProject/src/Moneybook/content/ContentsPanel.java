@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
 
 import Database.*;
-import ui.PieChart_AWT;
+import Chart.PieChart_AWT;
 
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
@@ -82,7 +82,7 @@ public class ContentsPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PieChart_AWT demo = new PieChart_AWT( "Mobile Sales" );  
+				Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" );  
 			    demo.setSize( 560 , 367 );    
 			    RefineryUtilities.centerFrameOnScreen( demo );    
 			    demo.setVisible( true ); 

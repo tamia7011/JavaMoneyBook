@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Database.DataAccessObject;
 import Database.MoneyData;
+import Database.budgetData;
 
 public class DataEntry extends JFrame{
 
@@ -22,6 +23,7 @@ public class DataEntry extends JFrame{
 	private JTextField typeField;
 	private JTextField nameField;
 	private JTextField priceField; 
+	budgetData budgetdata = budgetData.getInstance();
 	JPanel contentPane;
 	MoneyData moneyData = new MoneyData();
 	DataAccessObject dataAccessObject;
@@ -78,10 +80,10 @@ public class DataEntry extends JFrame{
 		typeLabel.setBounds(107, 195, 50, 21);
 		panel.add(typeLabel);
 		
-		JButton btnNewButton = new JButton("insert data");
-		btnNewButton.setBounds(147, 260, 125, 29);
-		panel.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton insertBtn = new JButton("insert data");
+		insertBtn.setBounds(147, 260, 125, 29);
+		panel.add(insertBtn);
+		insertBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -97,6 +99,7 @@ public class DataEntry extends JFrame{
 				moneyData.type = petList.getSelectedItem().toString();
 				try {
 					dataAccessObject.Insert("expenses", moneyData);
+					budgetdata.calculateDataset(moneyData);
 					ContentsPanel panel = ContentsPanel.getInstance();
 					Object[] row = {moneyData.type, moneyData.name, moneyData.price};
 				    DefaultTableModel model = (DefaultTableModel) panel.table.getModel();
