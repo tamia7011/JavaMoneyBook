@@ -21,12 +21,13 @@ import javax.swing.border.EmptyBorder;
 import Database.MonthAccount;
 import Moneybook.calendar.CalenderPanel;
 import Moneybook.content.ContentsPanel;
+import Moneybook.menus.MenuBar;
 
 public class MainFrame extends JFrame {
 
 	private static MainFrame instance;
 	
-	private JPanel mainPanel; 
+	private JPanel mainPanel;
 	public CalenderPanel calenderPanel;
 	public ContentsPanel contentsPanel;
 	
@@ -60,32 +61,11 @@ public class MainFrame extends JFrame {
  
 		
 		//Menu Panel Layout
-		JPanel menuPanel = new JPanel();
-		menuPanel.setBackground(Color.RED);
-		mainPanel.add(menuPanel, BorderLayout.NORTH);
+		MenuBar menubar = new MenuBar();
+		menubar.setBackground(Color.RED);
+		mainPanel.add(menubar, BorderLayout.NORTH);
 		FlowLayout fl_menuPanel = new FlowLayout(FlowLayout.LEFT, 0, 0);
-		menuPanel.setLayout(fl_menuPanel);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(Color.CYAN);
-		menuPanel.add(menuBar);
-		
-		JButton btnNewButton_1 = new JButton("set budget");
-		menuBar.add(btnNewButton_1);
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JFrame budgetPopup = new JFrame();
-				int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your income?", null));
-				MonthAccount budget = MonthAccount.getInstance();
-				budget.salary = salary;
-				budgetPopup.dispose();
-			}
-			
-		});
-
+		menubar.setLayout(fl_menuPanel);
 		
 		calenderPanel = CalenderPanel.getInstance();
 		mainPanel.add(calenderPanel, BorderLayout.CENTER);
