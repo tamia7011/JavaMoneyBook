@@ -4,7 +4,7 @@ CREATE DATABASE moneybook; # create database
 CREATE TABLE expense(
 id int(11) auto_increment PRIMARY KEY,
 name varchar(255),
-price in(11),
+price int(11),
 type varchar(255),
 date date
 ) # simple expense table
