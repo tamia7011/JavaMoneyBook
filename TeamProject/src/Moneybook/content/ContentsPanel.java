@@ -81,6 +81,15 @@ public class ContentsPanel extends JPanel{
 		
 		JButton btnNewButton_2 = new JButton("delete data");
 		toolBar.add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DeleteData delData = new DeleteData();
+				delData.setVisible(true);
+			}
+			
+		});
 		
 		JButton btnNewButton = new JButton("edit data");
 		toolBar.add(btnNewButton);

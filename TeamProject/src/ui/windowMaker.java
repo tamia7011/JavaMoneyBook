@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 public class windowMaker extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -59,31 +60,6 @@ public class windowMaker extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel menuPanel = new JPanel();
-		menuPanel.setBackground(Color.RED);
-		contentPane.add(menuPanel, BorderLayout.NORTH);
-		FlowLayout fl_menuPanel = new FlowLayout(FlowLayout.LEFT, 0, 0);
-		menuPanel.setLayout(fl_menuPanel);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(Color.CYAN);
-		menuPanel.add(menuBar);
-		
-		JButton btnNewButton_1 = new JButton("\uC608\uC0B0\uC124\uC815");
-		menuBar.add(btnNewButton_1);
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//JFrame budgetPopup = new JFrame();
-				DataEntry dataEntry =  DataEntry.getInstance();
-				dataEntry.setVisible(true);
-				//String name = JOptionPane.showInputDialog(dataEntry, "How much is your budget?", null);
-			}
-			
-		});
-		
 		
 		JPanel calenderPanel = new JPanel();
 		calenderPanel.setBackground(Color.LIGHT_GRAY);
@@ -95,17 +71,20 @@ public class windowMaker extends JFrame {
 		
 		JPanel panel = new JPanel();
 		calenderPanel.add(panel);
-		panel.setLayout(new GridLayout(10, 0, 0, 0));
+		panel.setLayout(null);
 		
-		JPanel contentsPanel = new JPanel();
-		contentsPanel.setBackground(Color.GREEN);
-		contentPane.add(contentsPanel, BorderLayout.SOUTH);
+		JLabel lblNewLabel_1 = new JLabel("Insert data name for delete data");
+		lblNewLabel_1.setFont(new Font("±¼¸²", Font.PLAIN, 24));
+		lblNewLabel_1.setBounds(274, 36, 341, 45);
+		panel.add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		contentsPanel.add(btnNewButton);
+		textField = new JTextField();
+		textField.setBounds(292, 111, 174, 27);
+		panel.add(textField);
+		textField.setColumns(10);
 		
-		JLabel lblContent = new JLabel("Content");
-		contentsPanel.add(lblContent);
+		JButton btnNewButton = new JButton("Delete");
+		btnNewButton.setBounds(483, 110, 96, 29);
+		panel.add(btnNewButton);
 	}
-
 }

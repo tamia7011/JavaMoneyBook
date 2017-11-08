@@ -48,6 +48,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	private MainFrame() throws SQLException {
+		setTitle("MoneyBook");
 		init(); 
 	}
 

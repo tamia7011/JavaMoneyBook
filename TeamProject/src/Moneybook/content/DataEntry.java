@@ -22,6 +22,7 @@ import Database.Account;
 import Database.MonthAccount;
 import Moneybook.calculator.Calculator;
 import Moneybook.calendar.CalendarManager;
+import java.awt.Font;
 
 public class DataEntry extends JFrame {
 
@@ -49,6 +50,7 @@ public class DataEntry extends JFrame {
 	}
 
 	public DataEntry() {
+		setTitle("DataEntry");
 		init();
 	}
 
@@ -58,8 +60,9 @@ public class DataEntry extends JFrame {
 		JPanel contentPane = panel;
 		panel.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("insert information");
-		lblNewLabel.setBounds(147, 15, 145, 21);
+		JLabel lblNewLabel = new JLabel("Insert information");
+		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 22));
+		lblNewLabel.setBounds(147, 15, 168, 34);
 		panel.add(lblNewLabel);
 
 	    comboList = new JComboBox(petStrings);

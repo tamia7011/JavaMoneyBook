@@ -138,8 +138,8 @@ public class AccountDAO {
 
 	}
 
-	public void Delete(Account data) {
-		String query = "DELETE FROM expense WHERE name=" + data.getName();
+	public void Delete(String name) {
+		String query = "DELETE FROM expense WHERE name='" + name + "'";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
