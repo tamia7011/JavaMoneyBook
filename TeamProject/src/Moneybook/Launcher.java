@@ -17,6 +17,6 @@ public class Launcher {
 		
 		//start main frame
 		MainFrame frame = MainFrame.getInstance();
-		frame.start(); 
+		frame.start();
 	}
 }

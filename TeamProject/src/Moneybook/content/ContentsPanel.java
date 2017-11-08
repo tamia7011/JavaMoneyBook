@@ -118,7 +118,7 @@ public class ContentsPanel extends JPanel{
 		Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" , list  );  
 	    demo.setSize( 560 , 367 );    
 	    RefineryUtilities.centerFrameOnScreen( demo );    
-	    demo.setVisible( true ); 
+	    demo.setVisible( true );
 	}
 	
 	public void showTable() { 

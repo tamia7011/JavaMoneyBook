@@ -29,17 +29,6 @@ public class MenuBar extends JMenuBar {
 			}
 			
 		});
-		JButton btnNewButton_2 = new JButton("calculator");
-		add(btnNewButton_2);
-		
-		btnNewButton_2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				 new Calculator().create();
-			}
-			
-		});
 	}
 
 	
