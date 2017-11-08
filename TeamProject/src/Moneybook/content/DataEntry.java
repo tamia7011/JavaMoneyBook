@@ -3,6 +3,7 @@ package Moneybook.content;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,15 +20,17 @@ import Constants.Constants;
 import Database.AccountDAO;
 import Database.Account;
 import Database.MonthAccount;
+import Moneybook.calculator.Calculator;
 import Moneybook.calendar.CalendarManager;
 
 public class DataEntry extends JFrame {
 
 	private static final long serialVersionUID = 1L; // i dont know what it is .....
-	private static DataEntry thisFrame;
+	public static DataEntry thisFrame;
 	private JTextField typeField;
 	private JTextField nameField;
-	private JTextField priceField; 
+	public static JTextField priceField;
+    private BigDecimal resultValue;
 	JPanel contentPane;
 	Account moneyData = new Account();
 	AccountDAO accountDAO;
@@ -45,7 +48,7 @@ public class DataEntry extends JFrame {
 		return thisFrame;
 	}
 
-	private DataEntry() {
+	public DataEntry() {
 		init();
 	}
 
@@ -85,6 +88,12 @@ public class DataEntry extends JFrame {
 		JLabel typeLabel = new JLabel("price");
 		typeLabel.setBounds(107, 195, 50, 21);
 		panel.add(typeLabel);
+		
+		JButton calculator = new JButton("Cal");
+		calculator.setBounds(362, 192, 56, 27);
+		panel.add(calculator);
+		
+		calculator.addActionListener(new CalculatorListener());
 
 		JButton insertBtn = new JButton("insert data");
 		insertBtn.setBounds(147, 260, 125, 29);
@@ -96,7 +105,12 @@ public class DataEntry extends JFrame {
 		setContentPane(contentPane);
 
 	}
-
+	private class CalculatorListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			 new Calculator().create();
+		}
+	}
 	private class InsertListener implements ActionListener {
 
 		@Override

@@ -10,10 +10,12 @@ import java.awt.event.KeyListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import Moneybook.content.DataEntry;
 
 public class Calculator
 {
@@ -29,17 +31,17 @@ public class Calculator
      private JButton selectedOperBtn;
      
      private static final String divideErrorText = "0으로 나눌 수 없습니다.";
-     
+	
      private Font buttonFont;
      private Container container;
-     private JTextField txt;
+     public static JTextField txt;
      private JLabel mLabel;
      private JButton plusBtn;
      private JButton minusBtn;
      private JButton multBtn;
      private JButton divBtn;
      private JButton enterBtn;
-
+     DataEntry dataEntry;
      public void create()
      {
          this.init();
@@ -119,6 +121,10 @@ public class Calculator
                          inputEscape();
                          break;
                          
+                     case "input":
+                    	 inputValue();
+                    	 break;
+                         
                      default:
                          pressNumberPad(_name);
                          break;
@@ -183,9 +189,9 @@ public class Calculator
          enterBtn = createButton("=", _scaleNum * 3 + 18, 246, _scaleNum, 124);
          createButton("←", _scaleNum * 3 + 18, 123 + 6, _scaleNum, 55);
          createButton("√", _scaleNum * 3 + 18, 178 + 10, _scaleNum, 55);
-         
+         createButton("input", 0, 380, _scaleNum * 3, 55);
          frame.pack();
-         frame.setSize(280,408);
+         frame.setSize(280,480);
          frame.setVisible(true);
      }
 
@@ -288,7 +294,7 @@ public class Calculator
          calculate();
          if(selectedOperBtn != null) selectedOperBtn.setForeground(Color.black);
      }
-
+     
      private void inputEscape()
      {
          txt.setText("0");
@@ -304,7 +310,14 @@ public class Calculator
          txt.setText(txtValue.substring(0, txtValue.length() - 1));
          if(txt.getText().equals("")) txt.setText("0");
      }
-
+     
+     public void inputValue()
+     {
+    	 dataEntry = DataEntry.thisFrame;
+    	 String txtValue = txt.getText();
+    	 dataEntry.priceField.setText(txtValue);
+    	 frame.setVisible(false);
+     }
      private void calculate()
      {
          Float fValue = Float.valueOf(txt.getText());
