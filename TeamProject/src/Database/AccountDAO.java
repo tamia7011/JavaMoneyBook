@@ -138,4 +138,52 @@ public class AccountDAO {
 
 	}
 
+	public void Delete(Account data) {
+		String query = "DELETE FROM expense WHERE name=" + data.getName();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	public void Update(Account data) {
+		String query = "";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1, data.getName());
+			pstmt.setInt(2, data.getPrice());
+			pstmt.setString(3, data.getType());
+			pstmt.setString(4, data.getDate());
+			System.out.println(data.getDate());
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
 }
