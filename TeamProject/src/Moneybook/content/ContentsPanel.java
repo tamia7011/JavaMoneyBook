@@ -67,9 +67,9 @@ public class ContentsPanel extends JPanel{
 		JToolBar toolBar = new JToolBar();
 		add(toolBar, BorderLayout.SOUTH);
 		
-		JButton btnNewButton_1 = new JButton("insert data");
-		toolBar.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton InsertDataBtn = new JButton("insert data");
+		toolBar.add(InsertDataBtn);
+		InsertDataBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -79,9 +79,9 @@ public class ContentsPanel extends JPanel{
 			
 		}); 
 		
-		JButton btnNewButton_2 = new JButton("delete data");
-		toolBar.add(btnNewButton_2);
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton DeleteDataBtn = new JButton("delete data");
+		toolBar.add(DeleteDataBtn);
+		DeleteDataBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -91,12 +91,12 @@ public class ContentsPanel extends JPanel{
 			
 		});
 		
-		JButton btnNewButton = new JButton("edit data");
-		toolBar.add(btnNewButton);
+		JButton EditDataBtn = new JButton("edit data");
+		toolBar.add(EditDataBtn);
 		
-		JButton btnNewButton_3 = new JButton("statistic");
-		toolBar.add(btnNewButton_3);
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton StatisticBtn = new JButton("statistic");
+		toolBar.add(StatisticBtn);
+		StatisticBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
