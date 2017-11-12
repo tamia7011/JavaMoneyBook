@@ -14,10 +14,10 @@ import Moneybook.calculator.Calculator;
 public class MenuBar extends JMenuBar {
 	
 	public MenuBar() {
-		JButton btnNewButton_1 = new JButton("set budget");
-		add(btnNewButton_1);
+		JButton SetBudgetBtn = new JButton("set budget");
+		add(SetBudgetBtn);
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
+		SetBudgetBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -26,6 +26,7 @@ public class MenuBar extends JMenuBar {
 				MonthAccount budget = MonthAccount.getInstance();
 				budget.salary = salary;
 				budgetPopup.dispose();
+				JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});
