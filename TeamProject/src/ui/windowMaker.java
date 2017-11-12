@@ -30,7 +30,6 @@ import javax.swing.JTextField;
 public class windowMaker extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -54,37 +53,55 @@ public class windowMaker extends JFrame {
 	 */
 	public windowMaker() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 914, 545);
+		setBounds(100, 100, 900, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 		
+		JLabel lblState = new JLabel("State");
+		lblState.setFont(new Font("±¼¸²", Font.PLAIN, 26));
+		lblState.setBounds(389, 31, 76, 80);
+		contentPane.add(lblState);
 		
-		JPanel calenderPanel = new JPanel();
-		calenderPanel.setBackground(Color.LIGHT_GRAY);
-		contentPane.add(calenderPanel, BorderLayout.CENTER);
-		calenderPanel.setLayout(new BorderLayout(0, 0));
+		JLabel lblMyBudget = new JLabel("My budget");
+		lblMyBudget.setBounds(293, 137, 115, 21);
+		contentPane.add(lblMyBudget);
+		
+		JLabel lblTotexp = new JLabel("Total expenses");
+		lblTotexp.setBounds(253, 186, 145, 21);
+		contentPane.add(lblTotexp);
+		
+		JLabel lblFixedexp = new JLabel("Fixed expenses");
+		lblFixedexp.setBounds(253, 237, 155, 21);
+		contentPane.add(lblFixedexp);
+		
+		JLabel lblFlexexp = new JLabel("Flexible expenses");
+		lblFlexexp.setBounds(239, 289, 145, 21);
+		contentPane.add(lblFlexexp);
+		
+		JLabel lblDiscexp = new JLabel("Discretionary expenses");
+		lblDiscexp.setBounds(193, 336, 191, 21);
+		contentPane.add(lblDiscexp);
+		
+		JLabel lblBudget = new JLabel("New label");
+		lblBudget.setBounds(460, 137, 223, 21);
+		contentPane.add(lblBudget);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		calenderPanel.add(lblNewLabel);
+		lblNewLabel.setBounds(458, 186, 225, 21);
+		contentPane.add(lblNewLabel);
 		
-		JPanel panel = new JPanel();
-		calenderPanel.add(panel);
-		panel.setLayout(null);
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(458, 237, 225, 21);
+		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("Insert data name for delete data");
-		lblNewLabel_1.setFont(new Font("±¼¸²", Font.PLAIN, 24));
-		lblNewLabel_1.setBounds(274, 36, 341, 45);
-		panel.add(lblNewLabel_1);
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setBounds(458, 289, 225, 21);
+		contentPane.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBounds(292, 111, 174, 27);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Delete");
-		btnNewButton.setBounds(483, 110, 96, 29);
-		panel.add(btnNewButton);
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setBounds(458, 336, 225, 21);
+		contentPane.add(lblNewLabel_3);
 	}
 }
