@@ -44,6 +44,7 @@ public class DeleteData extends JFrame{
 				AccountDAO DAO = AccountDAO.getInstance();
 				DAO.Delete(name);
 				setVisible(false);
+				ContentsPanel.getInstance().showTable();
 				JOptionPane.showMessageDialog(null, "Successfully deleted your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
