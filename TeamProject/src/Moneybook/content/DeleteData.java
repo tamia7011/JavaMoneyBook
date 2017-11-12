@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -43,6 +44,8 @@ public class DeleteData extends JFrame{
 				AccountDAO DAO = AccountDAO.getInstance();
 				DAO.Delete(name);
 				setVisible(false);
+				ContentsPanel.getInstance().showTable();
+				JOptionPane.showMessageDialog(null, "Successfully deleted your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		});

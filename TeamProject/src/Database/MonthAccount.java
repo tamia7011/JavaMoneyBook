@@ -69,6 +69,8 @@ public class MonthAccount {
 	public int getTotalExpenses() {
 		return totalExpense;
 	}
-
+	public int getSalary() {
+		return salary;
+	}
 	
 }
