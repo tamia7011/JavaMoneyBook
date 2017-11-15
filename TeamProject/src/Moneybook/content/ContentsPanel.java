@@ -55,15 +55,15 @@ public class ContentsPanel extends JPanel{
 		table.setRowHeight(height+10);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"type", "name", "price"},
+				{"type", "name", "price", },
 			},
 			new String[] {
-				"type", "name", "price"
+				"type", "name", "price", 
 			}
 		));
 		
 		add(table,BorderLayout.CENTER);
-		
+			
 		JToolBar toolBar = new JToolBar();
 		add(toolBar, BorderLayout.SOUTH);
 		
@@ -96,6 +96,20 @@ public class ContentsPanel extends JPanel{
 		
 		JButton StatisticBtn = new JButton("statistic");
 		toolBar.add(StatisticBtn);
+		
+		JButton SearchBtn = new JButton("Search");
+		toolBar.add(SearchBtn);
+
+		SearchBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SearchData searData = SearchData.getInstance();
+				searData.setVisible(true);
+			}
+			
+		});
+		
 		StatisticBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -116,7 +130,6 @@ public class ContentsPanel extends JPanel{
 		}
 		setVisible(status); 
 		showTable();
-		
 	}
 	
 	public void showStatics() {
