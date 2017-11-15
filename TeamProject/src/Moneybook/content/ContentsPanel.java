@@ -67,6 +67,18 @@ public class ContentsPanel extends JPanel{
 		JToolBar toolBar = new JToolBar();
 		add(toolBar, BorderLayout.SOUTH);
 		
+		JButton ShowStateBtn = new JButton("show state");
+		toolBar.add(ShowStateBtn);
+		ShowStateBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				State state = new State();
+				state.setVisible(true);
+			}
+			
+		});
+		
 		JButton InsertDataBtn = new JButton("insert data");
 		toolBar.add(InsertDataBtn);
 		InsertDataBtn.addActionListener(new ActionListener() {
