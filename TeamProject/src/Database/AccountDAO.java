@@ -61,7 +61,6 @@ public class AccountDAO {
 			rs = stmt.executeQuery(query);
 		while (rs.next()) {
 			Account data = new Account();
-			//data.setid(rs.getInt("id"));
 			data.setName(rs.getString("name"));
 			data.setPrice(rs.getInt("price"));
 			data.setType(rs.getString("type"));
@@ -277,29 +276,5 @@ public class AccountDAO {
 			}
 		}
 
-	}
-	public void SearchData(String name) {
-		// TODO Auto-generated method stub
-		   // initializing unsorted array
-		AccountDAO accountDAO = AccountDAO.getInstance();
-		ArrayList<Account> list = accountDAO.selectAll();
-		System.out.println(list);
-		
-		//Arrays.sort(p);
-		//int retVal = Arrays.binarySearch(p,name);
-		 /*  // sorting array
-		   Arrays.sort(arr);
-
-		   // let us print all the elements available
-		   System.out.println("The sorted array is:");
-		   for (Object number : arr) {
-		   System.out.println("Number = " + number);
-		   }
-
-		   // entering the value to be searched
-		   int retVal = Arrays.binarySearch(row,name);
-
-		   System.out.println("The index of element 22 is : " + retVal);
-		   */
 	}
 }
