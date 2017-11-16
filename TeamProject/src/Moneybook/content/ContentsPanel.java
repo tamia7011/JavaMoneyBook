@@ -108,10 +108,17 @@ public class ContentsPanel extends JPanel{
 		
 		JButton StatisticBtn = new JButton("statistic");
 		toolBar.add(StatisticBtn);
+		StatisticBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showStatics();
+			}
+			
+		}); 
 		
 		JButton SearchBtn = new JButton("Search");
 		toolBar.add(SearchBtn);
-
 		SearchBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -121,15 +128,6 @@ public class ContentsPanel extends JPanel{
 			}
 			
 		});
-		
-		StatisticBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				showStatics();
-			}
-			
-		}); 
 		
 		setVisible(status);
 	}

@@ -63,7 +63,6 @@ public class SearchData extends JFrame{
 				SearchedData frame = new SearchedData();
 				frame.setSize(1000, 600);
 				frame.setVisible(true);
-				
 			}
 			
 		});
