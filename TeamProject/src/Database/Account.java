@@ -9,16 +9,26 @@ import Constants.Constants.expenseType;
 public class Account {
 
 	private int price; 
+	private int id;
 	private String name; 
 	private String type;//Fixed,Flexible,Waste,Default
 	private String date;/*yyyy-mm-dd*/
 	
 	public Account () {
 		price = 0;  
+		id = 0;
 		name = ""; 
 		type = expenseType.Default.toString();
 		date = "";
 	} 
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public int getPrice() {
 		return price;

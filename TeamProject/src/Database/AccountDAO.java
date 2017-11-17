@@ -169,7 +169,7 @@ public class AccountDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense WHERE date=?";
+		String query = "SELECT id,name,price,type,date FROM expense WHERE date=?";
 
 		try { 
 
@@ -178,6 +178,7 @@ public class AccountDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Account data = new Account();
+				data.setId(rs.getInt("id"));
 				data.setName(rs.getString("name"));
 				data.setPrice(rs.getInt("price"));
 				data.setType(rs.getString("type"));
@@ -251,17 +252,34 @@ public class AccountDAO {
 
 	}
 	
-	public void Update(Account data) {
-		String query = "";
+	public void Update(int id, int column, Object value) {
+		String query;
 		PreparedStatement pstmt = null;
+		System.out.println(column);
 		try {
+		
+			switch (column) {
+			case 1:
+				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id;
+				break;
+			case 2:
+				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id;
+				break;
+			case 3:
+				query = "UPDATE expense SET price= " + (Integer)value + " WHERE id=" + id;
+				break;
+			default:
+				query = "";
+				break;
+			}
+			
 			pstmt = con.prepareStatement(query);
-
-			pstmt.setString(1, data.getName());
-			pstmt.setInt(2, data.getPrice());
-			pstmt.setString(3, data.getType());
-			pstmt.setString(4, data.getDate());
-			System.out.println(data.getDate());
+			
+//			pstmt.setString(1, data.getName());
+//			pstmt.setInt(2, data.getPrice());
+//			pstmt.setString(3, data.getType());
+//			pstmt.setString(4, data.getDate());
+//			System.out.println(data.getDate());
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {

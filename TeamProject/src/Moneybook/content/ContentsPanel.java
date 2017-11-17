@@ -6,12 +6,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -28,6 +28,8 @@ import Chart.PieChart_AWT;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import Chart.PiChartManager;
+import javax.swing.event.*;
+import javax.swing.table.TableModel;
 
 public class ContentsPanel extends JPanel{
 	private static ContentsPanel instance;
@@ -55,13 +57,38 @@ public class ContentsPanel extends JPanel{
 		table.setRowHeight(height+10);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"type", "name", "price", },
+				{"id", "type", "name", "price", },
 			},
 			new String[] {
-				"type", "name", "price", 
+				"id", "type", "name", "price", 
 			}
 		));
 		
+		class JtableModelListener implements TableModelListener {
+		    AccountDAO dao;
+		    public JtableModelListener() {
+		        super();
+		        table.getModel().addTableModelListener(this);
+		        dao = AccountDAO.getInstance();
+		    }
+
+		    public void tableChanged(TableModelEvent e) {
+		        int row = e.getFirstRow();
+		        int column = e.getColumn();
+		        int id;
+		        if (column > -1) {
+			        TableModel model = (TableModel)e.getSource();
+			        String columnName = model.getColumnName(column);
+			        Object data = model.getValueAt(row, column);
+			        id = (int) model.getValueAt(row, 0); 
+			        
+			        // Do something with the data...
+			        dao.Update(id, column, data);
+		        }
+		    }
+		}
+		JtableModelListener a = new JtableModelListener();
+		showTable();
 		add(table,BorderLayout.CENTER);
 			
 		JToolBar toolBar = new JToolBar();
@@ -163,7 +190,7 @@ public class ContentsPanel extends JPanel{
 		DefaultTableModel model = (DefaultTableModel) table.getModel(); 
 		model.setNumRows(1); 
 		for(Account account:list) {
-			Object[] row = { account.getType(), account.getName(), account.getPrice() };
+			Object[] row = { account.getId(), account.getType(), account.getName(), account.getPrice() };
 			model.addRow(row);
 		}  
 	}
