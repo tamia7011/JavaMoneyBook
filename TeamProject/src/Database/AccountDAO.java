@@ -266,7 +266,7 @@ public class AccountDAO {
 				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id;
 				break;
 			case 3:
-				query = "UPDATE expense SET price= " + (Integer)value + " WHERE id=" + id;
+				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id;
 				break;
 			default:
 				query = "";
