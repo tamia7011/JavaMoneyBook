@@ -130,9 +130,6 @@ public class ContentsPanel extends JPanel{
 			
 		});
 		
-		JButton EditDataBtn = new JButton("edit data");
-		toolBar.add(EditDataBtn);
-		
 		JButton StatisticBtn = new JButton("statistic");
 		toolBar.add(StatisticBtn);
 		StatisticBtn.addActionListener(new ActionListener() {

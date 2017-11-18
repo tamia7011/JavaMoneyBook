@@ -70,7 +70,7 @@ public class MonthAccount {
 		return totalExpense;
 	}
 	public int getSalary() {
-		return salary;
+		return salary-totalExpense;
 	}
 	
 }
