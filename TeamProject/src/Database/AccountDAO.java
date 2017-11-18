@@ -295,4 +295,80 @@ public class AccountDAO {
 		}
 
 	}
+
+	
+	public void updateTotalBudget(MonthAccount budget) {
+		String query;
+		PreparedStatement pstmt = null;
+		try {
+		
+			query = "UPDATE total SET fixed=" + Integer.toString(budget.getFixedExpenses()) +
+					", flexible=" + Integer.toString(budget.getFlexibleExpenses()) + 
+					", discretionary=" + Integer.toString(budget.getDiscretionaryExpenses()) + 
+					", total=" + Integer.toString(budget.getTotalExpenses()) +
+					", salary=" + Integer.toString(budget.getSalary()) +
+					" WHERE name='" + budget.getName() + "'";
+			
+			pstmt = con.prepareStatement(query);
+			
+//			pstmt.setString(1, data.getName());
+//			pstmt.setInt(2, data.getPrice());
+//			pstmt.setString(3, data.getType());
+//			pstmt.setString(4, data.getDate());
+//			System.out.println(data.getDate());
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	public tempRepository setBudget() {
+
+		tempRepository data = new tempRepository();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT fixed,flexible,discretionary,salary,total FROM total WHERE name=?";
+
+		try { 
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "user");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				data.setFixedExpenses(rs.getInt("fixed"));
+				data.setFlexibleExpenses(rs.getInt("flexible"));
+				data.setDiscretionaryExpenses(rs.getInt("discretionary"));
+				data.setTotalExpenses(rs.getInt("total"));
+				data.setSalary(rs.getInt("salary"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) { 
+				e.printStackTrace();
+			}
+		}
+		return data;
+	}
+
+
 }
