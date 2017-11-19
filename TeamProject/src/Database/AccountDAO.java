@@ -343,7 +343,7 @@ public class AccountDAO {
 		try { 
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, "user");
+			pstmt.setString(1, "jihoson94@gmail.com");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				data.setFixedExpenses(rs.getInt("fixed"));

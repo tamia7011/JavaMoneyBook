@@ -35,6 +35,7 @@ public class DataEntry extends JFrame {
     private BigDecimal resultValue;
 	JPanel contentPane;
 	Account moneyData = new Account();
+	MonthAccount monthAccount;
 	AccountDAO accountDAO;
 
 	private JComboBox comboList;
@@ -121,7 +122,7 @@ public class DataEntry extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			accountDAO = Database.AccountDAO.getInstance();
-
+			monthAccount = MonthAccount.getInstance();
 			String name = nameField.getText();
 			int price = Integer.parseInt(priceField.getText());
 			String type = comboList.getSelectedItem().toString();
@@ -130,6 +131,7 @@ public class DataEntry extends JFrame {
 			moneyData.setPrice(price);
 			moneyData.setType(type);
 			moneyData.setDate(CalendarManager.getDate());
+			monthAccount.calculateDataset(moneyData);
 
 			accountDAO.Insert(moneyData); 
 			ContentsPanel.getInstance().showTable();
