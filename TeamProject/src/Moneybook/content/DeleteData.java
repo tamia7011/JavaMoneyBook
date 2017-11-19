@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,10 +43,15 @@ public class DeleteData extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String name = DeletedNameField.getText();
 				AccountDAO DAO = AccountDAO.getInstance();
-				DAO.Delete(name);
-				setVisible(false);
-				ContentsPanel.getInstance().showTable();
-				JOptionPane.showMessageDialog(null, "Successfully deleted your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+				ArrayList<Account> isExist = DAO.selectName(name);
+				if(isExist.isEmpty() == true) {
+					JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning", JOptionPane.WARNING_MESSAGE);
+				} else {
+					DAO.Delete(name);
+					setVisible(false);
+					ContentsPanel.getInstance().showTable();
+					JOptionPane.showMessageDialog(null, "Successfully deleted your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			
 		});

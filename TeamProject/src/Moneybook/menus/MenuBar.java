@@ -24,7 +24,7 @@ public class MenuBar extends JMenuBar {
 				JFrame budgetPopup = new JFrame();
 				int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
 				MonthAccount budget = MonthAccount.getInstance();
-				budget.salary = salary;
+				budget.setSalary(salary);
 				budgetPopup.dispose();
 				JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -41,6 +41,7 @@ public class MenuBar extends JMenuBar {
 				int deposit = Integer.parseInt(JOptionPane.showInputDialog(DepositPopup, "How much do you want to add?", null));
 				MonthAccount budget = MonthAccount.getInstance();
 				budget.salary += deposit;
+				budget.setSalary(budget.getSalary());
 				DepositPopup.dispose();
 				JOptionPane.showMessageDialog(null, "Successfully added your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 			}

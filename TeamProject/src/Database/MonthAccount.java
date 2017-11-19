@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import Constants.Constants;
 import Moneybook.MainFrame;
+import Database.AccountDAO;
 
 public class MonthAccount {
 	private static MonthAccount instance;
@@ -11,12 +12,12 @@ public class MonthAccount {
 	private static String DEFAULT_MONTH = "0000-00";
 	public String month = DEFAULT_MONTH;//YYYY-MM
 	public int salary;
-	 
-	
+	private String name = "jihoson94@gmail.com";
 	private int totalExpense;
 	private int fixedExpense;
 	private int flexibleExpense;
 	private int discretionaryExpense;
+	private AccountDAO DAO;
 	
 	public static MonthAccount getInstance() {
 		if(instance == null) {
@@ -28,10 +29,14 @@ public class MonthAccount {
 	
 
 	private void init() {
-		totalExpense = 0;
-		fixedExpense = 0;
-		flexibleExpense = 0;
-		discretionaryExpense = 0;
+		DAO = AccountDAO.getInstance();
+		totalExpense = DAO.setBudget().getTotalExpenses();
+		fixedExpense = DAO.setBudget().getFixedExpenses();
+		flexibleExpense = DAO.setBudget().getFlexibleExpenses();
+		discretionaryExpense = DAO.setBudget().getDiscretionaryExpenses();
+		salary = DAO.setBudget().getSalary();
+		System.out.println(DAO.setBudget().getSalary());
+		name = "user";
 	}
 	
 	private MonthAccount() {
@@ -58,19 +63,52 @@ public class MonthAccount {
 		return fixedExpense;
 	}
 	
+	public void setFixedExpenses(int in_fixedExpense) {
+		fixedExpense = in_fixedExpense;
+		DAO.updateTotalBudget(this);
+	}
+	
 	public int getFlexibleExpenses() {
 		return flexibleExpense;
+	}
+	
+	public void setFlexibleExpenses(int in_flexibleExpense) {
+		flexibleExpense = in_flexibleExpense;
+		DAO.updateTotalBudget(this);
 	}
 	
 	public int getDiscretionaryExpenses() {
 		return discretionaryExpense;
 	}
+	
+	public void setDiscretionaryExpenses(int in_discretionaryExpense) {
+		discretionaryExpense = in_discretionaryExpense;
+		DAO.updateTotalBudget(this);
+	}
 
 	public int getTotalExpenses() {
 		return totalExpense;
 	}
+
+	public void setTotalExpenses(int in_totalExpense) {
+		totalExpense = in_totalExpense;
+		DAO.updateTotalBudget(this);
+	}
 	public int getSalary() {
-		return salary;
+		return salary-totalExpense;
+	}
+	
+	public void setSalary(int in_salaryExpense) {
+		salary = in_salaryExpense;
+		DAO.updateTotalBudget(this);
+	}
+	
+	public String getName() {	
+		return name;
+	}
+	
+	public void setName(String Name) {	
+		name = Name;
 	}
 	
 }

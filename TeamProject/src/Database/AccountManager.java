@@ -5,8 +5,15 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import java.util.Arrays;
+
 import Constants.Constants;
 import Moneybook.MainFrame;
+import Moneybook.calendar.CalendarManager;
 
 public class AccountManager {
 
@@ -14,11 +21,12 @@ public class AccountManager {
 	private static AccountManager dataManager;
 	private Account selectedData;
 	private ArrayList<Account> DataList;//Money Data List
-	
 	DataPriority comparator;
 	PriorityQueue<Account> priorityQueue;
 	AccountDAO dac;
 	int score;
+	private AccountDAO accountDAO;
+	public JTable table;
 
 	public static AccountManager getInstance() {
 		if(dataManager == null) {
@@ -92,5 +100,4 @@ public class AccountManager {
 			priorityQueue.add((Account) it.next());
 		}
 	}
-	
 }
