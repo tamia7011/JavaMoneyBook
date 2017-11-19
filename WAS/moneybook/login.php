@@ -5,7 +5,6 @@ include 'login_verf.php';
 $email = $_GET["email"];
 $pwd = $_GET["pwd"];
 
-# db 
 
 # id is exist, move another page.
 if(isset($email) && isset($pwd)){
@@ -29,9 +28,14 @@ if(isset($email) && isset($pwd)){
 body {
 	background-color: #f4511e;
 }
-.ld {
-	margin :  100px auto;
+.ld{
+	margin : 100px auto;
 	width : 80%;
+	text-align:center;
+}
+
+.form-group{
+	text-align:left;
 }
 
 </style>
