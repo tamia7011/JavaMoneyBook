@@ -41,7 +41,7 @@ public class MenuBar extends JMenuBar {
 				int deposit = Integer.parseInt(JOptionPane.showInputDialog(DepositPopup, "How much do you want to add?", null));
 				MonthAccount budget = MonthAccount.getInstance();
 				budget.salary += deposit;
-				budget.setSalary(budget.getSalary());
+				budget.setSalary(budget.salary);
 				DepositPopup.dispose();
 				JOptionPane.showMessageDialog(null, "Successfully added your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 			}
