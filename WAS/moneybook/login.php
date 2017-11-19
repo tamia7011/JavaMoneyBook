@@ -56,6 +56,7 @@ body {
 
   <div>
 	<button class="btn btn-default" type="submit" id="login">Login</button>
+	<button class="btn btn-default" type="button" onclick="location.href='makeUser.php'" id="sign-in">Sign in</button>
   </div>
  </div>
 </form> 
