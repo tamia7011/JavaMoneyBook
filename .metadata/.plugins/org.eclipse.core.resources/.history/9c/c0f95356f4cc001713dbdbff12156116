@@ -307,7 +307,7 @@ public class AccountDAO {
 					", discretionary=" + Integer.toString(budget.getDiscretionaryExpenses()) + 
 					", total=" + Integer.toString(budget.getTotalExpenses()) +
 					", salary=" + Integer.toString(budget.getSalary()) +
-					" WHERE email='" + "jihoson94@gmail.com" + "'";
+					" WHERE email='" + budget.getName() + "'";
 			
 			pstmt = con.prepareStatement(query);
 			

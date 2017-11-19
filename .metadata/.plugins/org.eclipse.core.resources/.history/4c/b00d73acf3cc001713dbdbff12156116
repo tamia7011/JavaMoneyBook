@@ -132,8 +132,6 @@ public class DataEntry extends JFrame {
 			moneyData.setType(type);
 			moneyData.setDate(CalendarManager.getDate());
 			monthAccount.calculateDataset(moneyData);
-			System.out.println(monthAccount.getFixedExpenses());
-			accountDAO.updateTotalBudget(monthAccount);
 
 			accountDAO.Insert(moneyData); 
 			ContentsPanel.getInstance().showTable();

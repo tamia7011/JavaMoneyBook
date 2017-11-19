@@ -12,7 +12,7 @@ public class MonthAccount {
 	private static String DEFAULT_MONTH = "0000-00";
 	public String month = DEFAULT_MONTH;//YYYY-MM
 	public int salary;
-	private String name = "jihoson94@gmail.com";
+	private String name;
 	private int totalExpense;
 	private int fixedExpense;
 	private int flexibleExpense;
