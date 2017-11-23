@@ -139,6 +139,9 @@ public class DataEntry extends JFrame {
 			ContentsPanel.getInstance().showTable();
 			thisFrame.setVisible(false);
 			JOptionPane.showMessageDialog(null, "Successfully entered your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+			if(monthAccount.getSalary()/0.5 <= monthAccount.getTotalExpenses()){
+				JOptionPane.showMessageDialog(null, "You've spent more than 50% of your budget!!", "warning", JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 

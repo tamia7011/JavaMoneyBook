@@ -130,13 +130,24 @@ public class ContentsPanel extends JPanel{
 			
 		});
 		
-		JButton StatisticBtn = new JButton("statistic");
-		toolBar.add(StatisticBtn);
-		StatisticBtn.addActionListener(new ActionListener() {
+		JButton DailyBtn = new JButton("Daily Statistic");
+		toolBar.add(DailyBtn);
+		DailyBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showStatics();
+			}
+			
+		}); 
+		
+		JButton MonthlyBtn = new JButton("Monthly Statistic");
+		toolBar.add(MonthlyBtn);
+		MonthlyBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showMonthlyStatics();
 			}
 			
 		}); 
@@ -172,6 +183,16 @@ public class ContentsPanel extends JPanel{
 		ArrayList<Account> list = accountDAO.selectByDate(date);
 		
 		Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" , list  );  
+	    demo.setSize( 560 , 367 );    
+	    RefineryUtilities.centerFrameOnScreen( demo );    
+	    demo.setVisible( true );
+	}
+	
+	public void showMonthlyStatics() {
+		AccountDAO accountDAO = AccountDAO.getInstance();
+		String date = CalendarManager.getDate();
+		ArrayList<Account> list = accountDAO.selectByDate(date);
+		Chart.PieChart_Monthly demo = new Chart.PieChart_Monthly( "Expenses" , list  );  
 	    demo.setSize( 560 , 367 );    
 	    RefineryUtilities.centerFrameOnScreen( demo );    
 	    demo.setVisible( true );
