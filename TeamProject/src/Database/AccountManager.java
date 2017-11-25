@@ -1,5 +1,6 @@
 package Database;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -56,9 +57,6 @@ public class AccountManager {
 		selectedData = null;
 	}
 	
-	public ArrayList<Account> getFutureData(){
-		return list;
-	}
 	// calculating scores
 	public int getScore(Account data) {
 		int priceScore = data.getPrice() / 1000;

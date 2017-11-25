@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.LayoutManager;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -180,7 +181,7 @@ public class ContentsPanel extends JPanel{
 	
 	public void showStatics() {
 		AccountDAO accountDAO = AccountDAO.getInstance();
-		String date = CalendarManager.getDate();
+		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
 		
 		Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" , list  );  
@@ -192,7 +193,7 @@ public class ContentsPanel extends JPanel{
 	public void showTable() { 
 		
 		AccountDAO accountDAO = AccountDAO.getInstance();
-		String date = CalendarManager.getDate();
+		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
 		
 		

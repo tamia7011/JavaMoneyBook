@@ -12,14 +12,14 @@ public class Account {
 	private int id;
 	private String name; 
 	private String type;//Fixed,Flexible,Waste,Default
-	private String date;/*yyyy-mm-dd*/
+	private Date date; /*yyyy-mm-dd*/
 	
 	public Account () {
 		price = 0;  
 		id = 0;
 		name = ""; 
 		type = expenseType.Default.toString();
-		date = "";
+		date = null;
 	} 
 	
 	public int getId() {
@@ -60,12 +60,12 @@ public class Account {
 	}
 
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }

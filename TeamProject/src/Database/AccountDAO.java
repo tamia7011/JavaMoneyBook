@@ -1,6 +1,7 @@
 package Database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,7 +65,7 @@ public class AccountDAO {
 			data.setName(rs.getString("name"));
 			data.setPrice(rs.getInt("price"));
 			data.setType(rs.getString("type"));
-			data.setDate(rs.getString("date"));
+			data.setDate(rs.getDate("date"));
 			dataArray.add(data);
 			
 			name.add(rs.getString("name"));
@@ -144,7 +145,7 @@ public class AccountDAO {
 				data.setName(rs.getString("name"));
 				data.setPrice(rs.getInt("price"));
 				data.setType(rs.getString("type"));
-				data.setDate(rs.getString("date"));
+				data.setDate(rs.getDate("date"));
 				dataArray.add(data);
 			}
 		} catch (SQLException e) {
@@ -163,7 +164,7 @@ public class AccountDAO {
 		}
 		return dataArray;
 	}
-	public ArrayList<Account> selectByDate(String date) {
+	public ArrayList<Account> selectByDate(Date date) {
 
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 		
@@ -174,7 +175,7 @@ public class AccountDAO {
 		try { 
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, date);
+			pstmt.setDate(1, date);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Account data = new Account();
@@ -182,7 +183,7 @@ public class AccountDAO {
 				data.setName(rs.getString("name"));
 				data.setPrice(rs.getInt("price"));
 				data.setType(rs.getString("type"));
-				data.setDate(rs.getDate("date").toString());
+				data.setDate(rs.getDate("date"));
 
 				System.out.println(data.getDate());
 				dataArray.add(data);
@@ -212,7 +213,7 @@ public class AccountDAO {
 			pstmt.setString(1, data.getName());
 			pstmt.setInt(2, data.getPrice());
 			pstmt.setString(3, data.getType());
-			pstmt.setString(4, data.getDate());
+			pstmt.setDate(4, data.getDate());
 			System.out.println(data.getDate());
 			pstmt.executeUpdate();
 
