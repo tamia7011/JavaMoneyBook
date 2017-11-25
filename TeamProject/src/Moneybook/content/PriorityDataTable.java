@@ -45,7 +45,7 @@ public class PriorityDataTable extends JFrame {
 		System.out.println(Integer.parseInt(priorityData.PriorityNumField.getText()));
 		try {
 			list = new ArrayList<Account>();
-			list.addAll(accountManager.poll(Integer.parseInt(priorityData.PriorityNumField.getText())));
+			list = accountManager.poll(Integer.parseInt(priorityData.PriorityNumField.getText()));
 		}catch(NumberFormatException e){
 			list = new ArrayList<Account>();
 		}

@@ -45,9 +45,10 @@ public class AccountManager {
 		comparator = new DataPriority();
 		priorityQueue = new PriorityQueue<Account>(20, comparator);
 		score = 0;
+		DataList = accountDAO.selectAll();
 	}
 	
-	public void setCurrentData(String date) {
+	public void setCurrentData(Date date) {
 		for(Account data : DataList) {
 			if(data.getDate().equals(date)) {
 				selectedData = data;
@@ -55,6 +56,14 @@ public class AccountManager {
 			}
 		}
 		selectedData = null;
+	}
+	
+	public void setFutureData(Date date) {
+		for(Account data : DataList) {
+			if(data.getDate().after(date)) {
+				priorityQueue.add(data);
+			}
+		}
 	}
 	
 	// calculating scores
@@ -73,7 +82,6 @@ public class AccountManager {
 		else if (type == Constants.expenseType.Waste.toString()){
 			typeScore = 0;
 		}		
-		//TODO: NOT IMPLEMNETED.
 		return score; 
 	}
 	

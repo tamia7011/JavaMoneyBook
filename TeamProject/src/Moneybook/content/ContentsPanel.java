@@ -203,7 +203,7 @@ public class ContentsPanel extends JPanel{
 	
 	public void showMonthlyStatics() {
 		AccountDAO accountDAO = AccountDAO.getInstance();
-		String date = CalendarManager.getDate();
+		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
 		Chart.PieChart_Monthly demo = new Chart.PieChart_Monthly( "Expenses" , list  );  
 	    demo.setSize( 560 , 367 );    
@@ -214,9 +214,10 @@ public class ContentsPanel extends JPanel{
 	public void showTable() { 
 		
 		AccountDAO accountDAO = AccountDAO.getInstance();
+		AccountManager accountManager = AccountManager.getInstance();
 		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
-		
+		accountManager.setFutureData(date);
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel(); 
 		model.setNumRows(1); 
