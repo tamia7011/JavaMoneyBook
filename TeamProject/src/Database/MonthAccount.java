@@ -58,6 +58,7 @@ public class MonthAccount {
 		}
 		
 		totalExpense += moneydata.getPrice();
+		salary -= totalExpense;
 	}
 	public int getFixedExpenses() {
 		return fixedExpense;
@@ -95,7 +96,7 @@ public class MonthAccount {
 		DAO.updateTotalBudget(this);
 	}
 	public int getSalary() {
-		return salary-totalExpense;
+		return salary;
 	}
 	
 	public void setSalary(int in_salaryExpense) {

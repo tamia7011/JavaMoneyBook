@@ -13,15 +13,17 @@ import javax.swing.table.DefaultTableModel;
 
 import Database.Account;
 import Database.AccountDAO;
+import Database.AccountManager;
 import Moneybook.calendar.CalendarManager;
 
-public class SearchedData extends JFrame {
+public class PriorityDataTable extends JFrame {
 	private JTable table;
-	SearchData searchData;
-
-	public SearchedData() {
+	PriorityData priorityData;
+	ArrayList<Account> list;
+	
+	public PriorityDataTable() {
 		setTitle("Searched Data");
-		searchData = searchData.thisFrame;
+		priorityData = priorityData.thisFrame;
 		
 		table = new JTable();
 		table.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -38,20 +40,25 @@ public class SearchedData extends JFrame {
 			}
 		));
 		getContentPane().add(table, BorderLayout.CENTER);
-		AccountDAO accountDAO = AccountDAO.getInstance();
+		AccountManager accountManager = AccountManager.getInstance();
 		//System.out.println(searchdata.SearchedNameField.getText());
-//		ArrayList<Account> list = accountDAO.selectName(searchData.SearchedNameField.getText());
-//		
-//		if(list.isEmpty() == true) {
-//			JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning", JOptionPane.WARNING_MESSAGE);
-//		} else {
-//			DefaultTableModel model = (DefaultTableModel) table.getModel(); 
-//			model.setNumRows(1); 
-//			for(Account account:list) {
-//				Object[] row = { account.getType(), account.getName(), account.getPrice(), account.getDate() };
-//				model.addRow(row);
-//			}
-//		}
-//		
+		System.out.println(Integer.parseInt(priorityData.PriorityNumField.getText()));
+		try {
+			list = new ArrayList<Account>();
+			list.addAll(accountManager.poll(Integer.parseInt(priorityData.PriorityNumField.getText())));
+		}catch(NumberFormatException e){
+			list = new ArrayList<Account>();
+		}
+		if(list.isEmpty() == true) {
+			JOptionPane.showMessageDialog(null, "No data", "warning", JOptionPane.WARNING_MESSAGE);
+		} else {
+			DefaultTableModel model = (DefaultTableModel) table.getModel(); 
+			model.setNumRows(1); 
+			for(Account account:list) {
+				Object[] row = { account.getType(), account.getName(), account.getPrice(), account.getDate() };
+				model.addRow(row);
+			}
+		}
+		
 	}
 }

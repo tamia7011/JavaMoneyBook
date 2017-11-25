@@ -153,6 +153,18 @@ public class ContentsPanel extends JPanel{
 			
 		});
 		
+		JButton PriorityBtn = new JButton("Priority");
+		toolBar.add(PriorityBtn);
+		PriorityBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PriorityData priorityData = PriorityData.getInstance();
+				priorityData.setVisible(true);
+			}
+			
+		});
+		
 		setVisible(status);
 	}
 	
