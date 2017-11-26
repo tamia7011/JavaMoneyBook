@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.PriorityQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -46,6 +46,7 @@ public class ContentsPanel extends JPanel{
 	} 
 	
 	private ContentsPanel() {
+		
 		this.setLayout(new BorderLayout());
 
 		
@@ -217,7 +218,6 @@ public class ContentsPanel extends JPanel{
 		AccountManager accountManager = AccountManager.getInstance();
 		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
-		accountManager.setFutureData(date);
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel(); 
 		model.setNumRows(1); 
@@ -226,4 +226,5 @@ public class ContentsPanel extends JPanel{
 			model.addRow(row);
 		}  
 	}
+		
 }

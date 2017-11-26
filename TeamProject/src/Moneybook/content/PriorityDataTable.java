@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,7 +24,7 @@ public class PriorityDataTable extends JFrame {
 	ArrayList<Account> list;
 	
 	public PriorityDataTable() {
-		setTitle("Searched Data");
+		setTitle("Priority Data");
 		priorityData = priorityData.thisFrame;
 		
 		table = new JTable();
@@ -30,7 +32,7 @@ public class PriorityDataTable extends JFrame {
 		Dimension dim = new Dimension(20,1);
 		table.setIntercellSpacing(new Dimension(dim));
 		int height = table.getRowHeight();
-		table.setRowHeight(height+10);
+		table.setRowHeight(height + 10);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"type", "name", "price", "date"},
@@ -41,14 +43,10 @@ public class PriorityDataTable extends JFrame {
 		));
 		getContentPane().add(table, BorderLayout.CENTER);
 		AccountManager accountManager = AccountManager.getInstance();
-		//System.out.println(searchdata.SearchedNameField.getText());
 		System.out.println(Integer.parseInt(priorityData.PriorityNumField.getText()));
-		try {
-			list = new ArrayList<Account>();
-			list = accountManager.poll(Integer.parseInt(priorityData.PriorityNumField.getText()));
-		}catch(NumberFormatException e){
-			list = new ArrayList<Account>();
-		}
+		Date date = CalendarManager.getDate();
+		PriorityQueue<Account> list = accountManager.getFuturePriorityQueue(date);
+	
 		if(list.isEmpty() == true) {
 			JOptionPane.showMessageDialog(null, "No data", "warning", JOptionPane.WARNING_MESSAGE);
 		} else {
@@ -62,3 +60,5 @@ public class PriorityDataTable extends JFrame {
 		
 	}
 }
+
+

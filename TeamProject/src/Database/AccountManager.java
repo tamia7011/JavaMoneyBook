@@ -20,9 +20,9 @@ public class AccountManager {
 
 	
 	private static AccountManager dataManager;
-	Date Today;
 	private Account selectedData;
 	private ArrayList<Account> DataList;//Money Data List
+	private ArrayList<Account> futureList;//Future Data List
 	DataPriority comparator;
 	PriorityQueue<Account> priorityQueue; //Priority Queue List
 	AccountDAO dac;
@@ -44,8 +44,10 @@ public class AccountManager {
 	private void init() {
 		comparator = new DataPriority();
 		priorityQueue = new PriorityQueue<Account>(20, comparator);
+		accountDAO = AccountDAO.getInstance();
+		DataList = new ArrayList<Account>();
+		futureList = new ArrayList<Account>();
 		score = 0;
-		DataList = accountDAO.selectAll();
 	}
 	
 	public void setCurrentData(Date date) {
@@ -58,12 +60,25 @@ public class AccountManager {
 		selectedData = null;
 	}
 	
+	public ArrayList<Account> getDataList() {
+		DataList = new ArrayList<Account>();
+		DataList = accountDAO.selectAll();
+		return DataList;
+	}
+	
 	public void setFutureData(Date date) {
-		for(Account data : DataList) {
+		futureList = new ArrayList<Account>();
+		for(Account data : getDataList()) {
 			if(data.getDate().after(date)) {
-				priorityQueue.add(data);
+				futureList.add(data);
 			}
 		}
+	}
+	
+	public PriorityQueue<Account> getFuturePriorityQueue(Date date) {
+		setFutureData(date);
+		SetPriorityQueue(futureList);
+		return priorityQueue;
 	}
 	
 	// calculating scores
@@ -108,10 +123,6 @@ public class AccountManager {
 		}
 	}
 	
-	public void AddToPriorityQueue(Account account) {
-		//add data to priority queue
-		priorityQueue.add(account);
-	}
 	
 	public ArrayList<Account> poll(int num){
 		ArrayList<Account> temp = new ArrayList<Account>();
@@ -119,5 +130,9 @@ public class AccountManager {
 			temp.add(priorityQueue.poll());
 		}
 		return temp;
+	}
+	
+	public PriorityQueue<Account> get() {
+		return priorityQueue;
 	}
 }

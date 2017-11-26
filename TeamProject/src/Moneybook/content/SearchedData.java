@@ -39,19 +39,19 @@ public class SearchedData extends JFrame {
 		));
 		getContentPane().add(table, BorderLayout.CENTER);
 		AccountDAO accountDAO = AccountDAO.getInstance();
-		//System.out.println(searchdata.SearchedNameField.getText());
-//		ArrayList<Account> list = accountDAO.selectName(searchData.SearchedNameField.getText());
-//		
-//		if(list.isEmpty() == true) {
-//			JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning", JOptionPane.WARNING_MESSAGE);
-//		} else {
-//			DefaultTableModel model = (DefaultTableModel) table.getModel(); 
-//			model.setNumRows(1); 
-//			for(Account account:list) {
-//				Object[] row = { account.getType(), account.getName(), account.getPrice(), account.getDate() };
-//				model.addRow(row);
-//			}
-//		}
-//		
+		System.out.println(searchData.SearchedNameField.getText());
+		ArrayList<Account> list = accountDAO.selectName(searchData.SearchedNameField.getText());
+		
+		if(list.isEmpty() == true) {
+			JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning", JOptionPane.WARNING_MESSAGE);
+		} else {
+			DefaultTableModel model = (DefaultTableModel) table.getModel(); 
+			model.setNumRows(1); 
+			for(Account account:list) {
+				Object[] row = { account.getType(), account.getName(), account.getPrice(), account.getDate() };
+				model.addRow(row);
+			}
+		}
+		
 	}
 }
