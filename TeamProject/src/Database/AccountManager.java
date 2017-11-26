@@ -68,10 +68,14 @@ public class AccountManager {
 	
 	public void setFutureData(Date date) {
 		futureList = new ArrayList<Account>();
-		for(Account data : getDataList()) {
+		ArrayList<Account> list = getDataList();
+		for(Account data : list) {
 			if(data.getDate().after(date)) {
 				futureList.add(data);
 			}
+		}
+		for (Account data: futureList) {
+			System.out.println(data.getDate());
 		}
 	}
 	
@@ -83,8 +87,8 @@ public class AccountManager {
 	
 	// calculating scores
 	public int getScore(Account data) {
-		int priceScore = data.getPrice() / 1000;
-		int typeScore;
+		int priceScore = data.getPrice();
+		int typeScore = 0;
 
 		String type= data.getType(); 
 		
@@ -96,7 +100,8 @@ public class AccountManager {
 		}
 		else if (type == Constants.expenseType.Waste.toString()){
 			typeScore = 0;
-		}		
+		}
+		score = priceScore + typeScore;
 		return score; 
 	}
 	
@@ -108,23 +113,27 @@ public class AccountManager {
 			
 			Account dataA = (Account)data1;
 			Account dataB = (Account)data2;
-			
-			return Integer.compare(getScore(dataA), getScore(dataB));
+			if(getScore(dataA) < getScore(dataB)) return 1;
+			else if(getScore(dataA) > getScore(dataB)) return -1;
+			else return 0;
 		}
 		
 	}
 	
 	
 	public void SetPriorityQueue(ArrayList<Account> arraylist) {
-		//add data to priority queue
+
+		priorityQueue.clear();
 		Iterator<Account> it = arraylist.iterator();
 		while (it.hasNext()){
-			priorityQueue.add((Account) it.next());
+			priorityQueue.add((Account)it.next());
 		}
 	}
 	
 	
-	public ArrayList<Account> poll(int num){
+	public ArrayList<Account> PollPriorityQueue(int num, Date date){
+		
+		priorityQueue = getFuturePriorityQueue(date);
 		ArrayList<Account> temp = new ArrayList<Account>();
 		for (int i = 0; i < num; i++) {
 			temp.add(priorityQueue.poll());

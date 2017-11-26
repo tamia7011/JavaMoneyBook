@@ -45,7 +45,8 @@ public class PriorityDataTable extends JFrame {
 		AccountManager accountManager = AccountManager.getInstance();
 		System.out.println(Integer.parseInt(priorityData.PriorityNumField.getText()));
 		Date date = CalendarManager.getDate();
-		PriorityQueue<Account> list = accountManager.getFuturePriorityQueue(date);
+		int num = Integer.parseInt(priorityData.PriorityNumField.getText());
+		ArrayList<Account> list = accountManager.PollPriorityQueue(num, date);
 	
 		if(list.isEmpty() == true) {
 			JOptionPane.showMessageDialog(null, "No data", "warning", JOptionPane.WARNING_MESSAGE);

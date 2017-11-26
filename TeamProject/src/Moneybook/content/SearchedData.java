@@ -21,7 +21,7 @@ public class SearchedData extends JFrame {
 
 	public SearchedData() {
 		setTitle("Searched Data");
-		searchData = searchData.thisFrame;
+		searchData = SearchData.thisFrame;
 		
 		table = new JTable();
 		table.setFont(new Font("Arial", Font.PLAIN, 20));
