@@ -1,4 +1,3 @@
-
 <?php
 include 'login_verf.php';
 
@@ -10,6 +9,11 @@ $pwd = $_GET["pwd"];
 if(isset($email) && isset($pwd)){
 	$result = verification($conn,$email,$pwd);		
 	if($result == True){
+		session_start();
+		$_SESSION['email'] = $email;
+		//session 
+		//connect
+		//email
 		header("Location:/main.php");
 	}
 }
