@@ -21,48 +21,48 @@ import javax.swing.table.DefaultTableModel;
 import Database.*;
 import Moneybook.content.*;
 
-public class SearchData extends JFrame{
-	public JTextField SearchedNameField;
+public class PriorityData extends JFrame{
+	public JTextField PriorityNumField;
 	public JTable table;
 	public ContentsPanel Contents;
-	public static SearchData thisFrame;
-	public SearchedData SearchedData;
+	public static PriorityData thisFrame;
+	public PriorityDataTable priorityDataTable;
 	public JLabel lblNewLabel;
-	public JButton SearchBtn;
+	public JButton PriorityBtn;
 	
-	public static SearchData getInstance() {
+	public static PriorityData getInstance() {
 		if (thisFrame == null) {
-			thisFrame = new SearchData();
+			thisFrame = new PriorityData();
 			return thisFrame;
 		}
 		return thisFrame;
 	}
 	
-	public SearchData() {
+	public PriorityData() {
 		setBounds(100, 100, 450, 350);
-		setTitle("Search Data");
+		setTitle("Priority Data");
 		getContentPane().setLayout(null);
 		
-		lblNewLabel = new JLabel("Insert data name for search");
+		lblNewLabel = new JLabel("The number to check");
 		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 24));
 		lblNewLabel.setBounds(69, 57, 291, 51);
 		getContentPane().add(lblNewLabel);
 		
-		SearchedNameField = new JTextField();
-		SearchedNameField.setBounds(58, 123, 180, 27);
-		getContentPane().add(SearchedNameField);
-		SearchedNameField.setColumns(10);
+		PriorityNumField = new JTextField();
+		PriorityNumField.setBounds(58, 123, 180, 27);
+		getContentPane().add(PriorityNumField);
+		PriorityNumField.setColumns(10);
 		
-		SearchBtn = new JButton("Search");
-		SearchBtn.setBounds(255, 123, 91, 29);
-		getContentPane().add(SearchBtn);
+		PriorityBtn = new JButton("Search");
+		PriorityBtn.setBounds(255, 123, 91, 29);
+		getContentPane().add(PriorityBtn);
 			
-		SearchBtn.addActionListener(new ActionListener() {
+		PriorityBtn.addActionListener(new ActionListener() {
 		
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SearchedData frame = new SearchedData();
+				PriorityDataTable frame = new PriorityDataTable();
 				frame.setSize(1000, 600);
 				frame.setVisible(true);
 			}

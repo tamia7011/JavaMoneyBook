@@ -48,7 +48,7 @@ public class State extends JFrame{
 		lblWasexp.setBounds(249, 336, 159, 21);
 		contentPane.add(lblWasexp);
 		
-		JLabel lblBudget = new JLabel(String.valueOf(monthAccount.getSalary()-monthAccount.getTotalExpenses()));
+		JLabel lblBudget = new JLabel(String.valueOf(monthAccount.getSalary()));
 		lblBudget.setFont(new Font("±¼¸²", Font.PLAIN, 20));
 		lblBudget.setBounds(460, 137, 223, 21);
 		contentPane.add(lblBudget);

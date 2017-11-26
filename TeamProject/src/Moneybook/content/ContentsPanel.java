@@ -7,9 +7,10 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.LayoutManager;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.PriorityQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -45,6 +46,7 @@ public class ContentsPanel extends JPanel{
 	} 
 	
 	private ContentsPanel() {
+		
 		this.setLayout(new BorderLayout());
 
 		
@@ -130,13 +132,24 @@ public class ContentsPanel extends JPanel{
 			
 		});
 		
-		JButton StatisticBtn = new JButton("statistic");
-		toolBar.add(StatisticBtn);
-		StatisticBtn.addActionListener(new ActionListener() {
+		JButton DailyBtn = new JButton("Daily Statistic");
+		toolBar.add(DailyBtn);
+		DailyBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showStatics();
+			}
+			
+		}); 
+		
+		JButton MonthlyBtn = new JButton("Monthly Statistic");
+		toolBar.add(MonthlyBtn);
+		MonthlyBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showMonthlyStatics();
 			}
 			
 		}); 
@@ -149,6 +162,18 @@ public class ContentsPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				SearchData searData = SearchData.getInstance();
 				searData.setVisible(true);
+			}
+			
+		});
+		
+		JButton PriorityBtn = new JButton("Priority");
+		toolBar.add(PriorityBtn);
+		PriorityBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PriorityData priorityData = PriorityData.getInstance();
+				priorityData.setVisible(true);
 			}
 			
 		});
@@ -168,7 +193,7 @@ public class ContentsPanel extends JPanel{
 	
 	public void showStatics() {
 		AccountDAO accountDAO = AccountDAO.getInstance();
-		String date = CalendarManager.getDate();
+		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
 		
 		Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" , list  );  
@@ -177,12 +202,22 @@ public class ContentsPanel extends JPanel{
 	    demo.setVisible( true );
 	}
 	
+	public void showMonthlyStatics() {
+		AccountDAO accountDAO = AccountDAO.getInstance();
+		Date date = CalendarManager.getDate();
+		ArrayList<Account> list = accountDAO.selectByDate(date);
+		Chart.PieChart_Monthly demo = new Chart.PieChart_Monthly( "Expenses" , list  );  
+	    demo.setSize( 560 , 367 );    
+	    RefineryUtilities.centerFrameOnScreen( demo );    
+	    demo.setVisible( true );
+	}
+	
 	public void showTable() { 
 		
 		AccountDAO accountDAO = AccountDAO.getInstance();
-		String date = CalendarManager.getDate();
+		AccountManager accountManager = AccountManager.getInstance();
+		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
-		
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel(); 
 		model.setNumRows(1); 
@@ -191,4 +226,5 @@ public class ContentsPanel extends JPanel{
 			model.addRow(row);
 		}  
 	}
+		
 }

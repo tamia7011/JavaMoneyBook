@@ -1,5 +1,6 @@
 package Database;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -21,12 +22,12 @@ public class AccountManager {
 	private static AccountManager dataManager;
 	private Account selectedData;
 	private ArrayList<Account> DataList;//Money Data List
+	private ArrayList<Account> futureList;//Future Data List
 	DataPriority comparator;
-	PriorityQueue<Account> priorityQueue;
+	PriorityQueue<Account> priorityQueue; //Priority Queue List
 	AccountDAO dac;
 	int score;
 	private AccountDAO accountDAO;
-	public JTable table;
 
 	public static AccountManager getInstance() {
 		if(dataManager == null) {
@@ -42,13 +43,14 @@ public class AccountManager {
 	
 	private void init() {
 		comparator = new DataPriority();
-		priorityQueue = new PriorityQueue<Account>();
+		priorityQueue = new PriorityQueue<Account>(20, comparator);
+		accountDAO = AccountDAO.getInstance();
+		DataList = new ArrayList<Account>();
+		futureList = new ArrayList<Account>();
 		score = 0;
-		
-		
 	}
 	
-	public void setCurrentData(String date) {
+	public void setCurrentData(Date date) {
 		for(Account data : DataList) {
 			if(data.getDate().equals(date)) {
 				selectedData = data;
@@ -58,10 +60,35 @@ public class AccountManager {
 		selectedData = null;
 	}
 	
+	public ArrayList<Account> getDataList() {
+		DataList = new ArrayList<Account>();
+		DataList = accountDAO.selectAll();
+		return DataList;
+	}
+	
+	public void setFutureData(Date date) {
+		futureList = new ArrayList<Account>();
+		ArrayList<Account> list = getDataList();
+		for(Account data : list) {
+			if(data.getDate().after(date)) {
+				futureList.add(data);
+			}
+		}
+		for (Account data: futureList) {
+			System.out.println(data.getDate());
+		}
+	}
+	
+	public PriorityQueue<Account> getFuturePriorityQueue(Date date) {
+		setFutureData(date);
+		SetPriorityQueue(futureList);
+		return priorityQueue;
+	}
+	
 	// calculating scores
 	public int getScore(Account data) {
-		int priceScore = data.getPrice() / 1000;
-		int typeScore;
+		int priceScore = data.getPrice();
+		int typeScore = 0;
 
 		String type= data.getType(); 
 		
@@ -73,8 +100,8 @@ public class AccountManager {
 		}
 		else if (type == Constants.expenseType.Waste.toString()){
 			typeScore = 0;
-		}		
-		//TODO: NOT IMPLEMNETED.
+		}
+		score = priceScore + typeScore;
 		return score; 
 	}
 	
@@ -86,18 +113,35 @@ public class AccountManager {
 			
 			Account dataA = (Account)data1;
 			Account dataB = (Account)data2;
-			
-			return Integer.compare(getScore(dataA), getScore(dataB));
+			if(getScore(dataA) < getScore(dataB)) return 1;
+			else if(getScore(dataA) > getScore(dataB)) return -1;
+			else return 0;
 		}
 		
 	}
 	
 	
-	public void AddToPriorityQueue(ArrayList<Account> arraylist) {
-		//add data to priority queue
+	public void SetPriorityQueue(ArrayList<Account> arraylist) {
+
+		priorityQueue.clear();
 		Iterator<Account> it = arraylist.iterator();
 		while (it.hasNext()){
-			priorityQueue.add((Account) it.next());
+			priorityQueue.add((Account)it.next());
 		}
+	}
+	
+	
+	public ArrayList<Account> PollPriorityQueue(int num, Date date){
+		
+		priorityQueue = getFuturePriorityQueue(date);
+		ArrayList<Account> temp = new ArrayList<Account>();
+		for (int i = 0; i < num; i++) {
+			temp.add(priorityQueue.poll());
+		}
+		return temp;
+	}
+	
+	public PriorityQueue<Account> get() {
+		return priorityQueue;
 	}
 }

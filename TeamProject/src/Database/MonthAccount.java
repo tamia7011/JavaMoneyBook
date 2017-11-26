@@ -11,7 +11,7 @@ public class MonthAccount {
 	
 	private static String DEFAULT_MONTH = "0000-00";
 	public String month = DEFAULT_MONTH;//YYYY-MM
-	public int salary;
+	private int salary;
 	private String name = "jihoson94@gmail.com";
 	private int totalExpense;
 	private int fixedExpense;
@@ -45,11 +45,12 @@ public class MonthAccount {
 	
 	public void calculateDataset(Account moneydata) {
 		String type = moneydata.getType();
-		if (type == Constants.expenseType.Fixed.toString()) {
+		int price = moneydata.getPrice();
+		if (type.equals(Constants.expenseType.Fixed.toString())) {
 			fixedExpense += moneydata.getPrice();
 		}
 		
-		else if (type == Constants.expenseType.Flexible.toString()) {
+		else if (type.equals(Constants.expenseType.Flexible.toString())) {
 			flexibleExpense += moneydata.getPrice();
 		}
 		
@@ -57,8 +58,30 @@ public class MonthAccount {
 			discretionaryExpense += moneydata.getPrice();
 		}
 		
-		totalExpense += moneydata.getPrice();
+		totalExpense += price;
+		salary -= price;
 	}
+	
+	public void calculateDeleteSet(Account moneydata) {
+		String type = moneydata.getType();
+		System.out.println(type);
+		int price = moneydata.getPrice();
+		if (type.equals(Constants.expenseType.Fixed.toString())) {
+			fixedExpense -= moneydata.getPrice();
+		}
+		
+		else if (type.equals(Constants.expenseType.Flexible.toString())) {
+			flexibleExpense -= moneydata.getPrice();
+		}
+		
+		else {
+			discretionaryExpense -= moneydata.getPrice();
+		}
+		
+		totalExpense -= price;
+		salary += price;
+	}
+	
 	public int getFixedExpenses() {
 		return fixedExpense;
 	}
@@ -109,6 +132,10 @@ public class MonthAccount {
 	
 	public void setName(String Name) {	
 		name = Name;
+	}
+	
+	public void plusSalary(int budget) {
+		salary += budget;
 	}
 	
 }

@@ -126,7 +126,10 @@ public class DataEntry extends JFrame {
 			String name = nameField.getText();
 			int price = Integer.parseInt(priceField.getText());
 			String type = comboList.getSelectedItem().toString();
-
+			Account data = new Account();
+			data = accountDAO.selectinsertName(nameField.getText());
+			System.out.println(data);
+			if(data.getPrice() == 0) {
 			moneyData.setName(name);
 			moneyData.setPrice(price);
 			moneyData.setType(type);
@@ -139,6 +142,12 @@ public class DataEntry extends JFrame {
 			ContentsPanel.getInstance().showTable();
 			thisFrame.setVisible(false);
 			JOptionPane.showMessageDialog(null, "Successfully entered your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+			if(monthAccount.getSalary()/0.5 <= monthAccount.getTotalExpenses()){
+				JOptionPane.showMessageDialog(null, "You've spent more than 50% of your budget!!", "warning", JOptionPane.WARNING_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Duplicate name", "warning", JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 

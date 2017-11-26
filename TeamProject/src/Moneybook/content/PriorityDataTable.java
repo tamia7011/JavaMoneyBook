@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -13,22 +15,24 @@ import javax.swing.table.DefaultTableModel;
 
 import Database.Account;
 import Database.AccountDAO;
+import Database.AccountManager;
 import Moneybook.calendar.CalendarManager;
 
-public class SearchedData extends JFrame {
+public class PriorityDataTable extends JFrame {
 	private JTable table;
-	SearchData searchData;
-
-	public SearchedData() {
-		setTitle("Searched Data");
-		searchData = SearchData.thisFrame;
+	PriorityData priorityData;
+	ArrayList<Account> list;
+	
+	public PriorityDataTable() {
+		setTitle("Priority Data");
+		priorityData = priorityData.thisFrame;
 		
 		table = new JTable();
 		table.setFont(new Font("Arial", Font.PLAIN, 20));
 		Dimension dim = new Dimension(20,1);
 		table.setIntercellSpacing(new Dimension(dim));
 		int height = table.getRowHeight();
-		table.setRowHeight(height+10);
+		table.setRowHeight(height + 10);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"type", "name", "price", "date"},
@@ -38,12 +42,14 @@ public class SearchedData extends JFrame {
 			}
 		));
 		getContentPane().add(table, BorderLayout.CENTER);
-		AccountDAO accountDAO = AccountDAO.getInstance();
-		System.out.println(searchData.SearchedNameField.getText());
-		ArrayList<Account> list = accountDAO.selectName(searchData.SearchedNameField.getText());
-		
+		AccountManager accountManager = AccountManager.getInstance();
+		System.out.println(Integer.parseInt(priorityData.PriorityNumField.getText()));
+		Date date = CalendarManager.getDate();
+		int num = Integer.parseInt(priorityData.PriorityNumField.getText());
+		ArrayList<Account> list = accountManager.PollPriorityQueue(num, date);
+	
 		if(list.isEmpty() == true) {
-			JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No data", "warning", JOptionPane.WARNING_MESSAGE);
 		} else {
 			DefaultTableModel model = (DefaultTableModel) table.getModel(); 
 			model.setNumRows(1); 
@@ -55,3 +61,5 @@ public class SearchedData extends JFrame {
 		
 	}
 }
+
+

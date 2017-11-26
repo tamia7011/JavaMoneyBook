@@ -14,12 +14,12 @@ public class CalendarManager {
 	// Calendar Data.
 	private static Calendar calendarData = Calendar.getInstance();
 
-	public static String getDate() {
+	public static java.sql.Date getDate() {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date time = calendarData.getTime();
-		String date = format.format(time);
-		return date;
+	    java.sql.Date sqlDate = new java.sql.Date(time.getTime());
+		return sqlDate;
 	}
 
 	public static Calendar getCalendarData() {
