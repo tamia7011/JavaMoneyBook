@@ -47,7 +47,16 @@ public class DeleteData extends JFrame{
 				if(isExist.isEmpty() == true) {
 					JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning", JOptionPane.WARNING_MESSAGE);
 				} else {
+					MonthAccount monthAccount = MonthAccount.getInstance();
+					Account data = new Account();
+					data = DAO.selectinsertName(name);
+					System.out.println(data.getName());
+					System.out.println(data.getPrice());
+					monthAccount.calculateDeleteSet(data);
 					DAO.Delete(name);
+					System.out.println(monthAccount.getFixedExpenses()); //1000
+					System.out.println(monthAccount.getFlexibleExpenses()); // 0
+					System.out.println(monthAccount.getDiscretionaryExpenses()); // -1000
 					setVisible(false);
 					ContentsPanel.getInstance().showTable();
 					JOptionPane.showMessageDialog(null, "Successfully deleted your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);

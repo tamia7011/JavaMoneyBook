@@ -126,9 +126,10 @@ public class DataEntry extends JFrame {
 			String name = nameField.getText();
 			int price = Integer.parseInt(priceField.getText());
 			String type = comboList.getSelectedItem().toString();
-			ArrayList<String> name3 = new ArrayList<String>();
-			name3 = accountDAO.selectinsertName(nameField.getText());
-			if(name3.size() == 0) {
+			Account data = new Account();
+			data = accountDAO.selectinsertName(nameField.getText());
+			System.out.println(data);
+			if(data.getPrice() == 0) {
 			moneyData.setName(name);
 			moneyData.setPrice(price);
 			moneyData.setType(type);

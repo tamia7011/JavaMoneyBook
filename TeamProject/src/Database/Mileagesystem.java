@@ -1,38 +1,56 @@
 package Database;
 
+import java.awt.BorderLayout;
+import java.sql.SQLException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Moneybook.MainFrame;
+
 public class Mileagesystem {
 	private static double setfixedExpense;
 	private static double setflexibleExpense;
 	private static double setdiscretionaryExpense;
 	private int mileage;
+	private int Fixedmileage;
+	private int Flexiblemileage;
+	private int Discretionarymileage;
+	static Mileagesystem instance;
 	MonthAccount monthaccount;
-	public int mileage() {
-		mileage = 2000;
-		setfixedExpense = monthaccount.salary*0.5;
-		setflexibleExpense = monthaccount.salary*0.3;
-		setdiscretionaryExpense = monthaccount.salary*0.2;
-		
-		if (monthaccount.getFixedExpenses() >= setfixedExpense) {
-			mileage += (setfixedExpense - monthaccount.getFixedExpenses()) / 10000;
-		} else {
-			mileage += (setfixedExpense - monthaccount.getFixedExpenses()) / 10000;
+	
+	public static Mileagesystem getInstance() {
+		if(instance == null) {
+			instance = new Mileagesystem();
+			return instance;
 		}
-		
-		if (monthaccount.getFlexibleExpenses() >= setflexibleExpense) {
-			mileage += (setflexibleExpense - monthaccount.getFlexibleExpenses()) / 10000;
-		} else {
-			mileage += (setflexibleExpense - monthaccount.getFlexibleExpenses()) / 10000;
-		}
-		
-		if (monthaccount.getDiscretionaryExpenses() >= setdiscretionaryExpense) {
-			mileage += (setdiscretionaryExpense - monthaccount.getDiscretionaryExpenses()) / 10000;
-		} else {
-			mileage += (setdiscretionaryExpense - monthaccount.getDiscretionaryExpenses()) / 10000;
-		}
-		
-		return mileage;
+		return instance;
 	}
+	
+	private Mileagesystem()  {
+		init(); 
+	}
+
+	public void init() {
+		mileage = 2000;
+		Fixedmileage = 0;
+		Flexiblemileage = 0;
+		Discretionarymileage = 0;
+		setfixedExpense = monthaccount.getSalary()*0.5;
+		setflexibleExpense = monthaccount.getSalary()*0.3;
+		setdiscretionaryExpense = monthaccount.getSalary()*0.2;
+	}
+	
+	public void calculating() {
+		Fixedmileage += (setfixedExpense - monthaccount.getFixedExpenses()) / 10000;
+		Flexiblemileage += (setflexibleExpense - monthaccount.getFlexibleExpenses()) / 10000;
+		Discretionarymileage += (setdiscretionaryExpense - monthaccount.getDiscretionaryExpenses()) / 10000;
+		mileage += (Fixedmileage + Flexiblemileage + Discretionarymileage);
+	}
+	
 	public void rating() {
+		calculating();
 		int grade = mileage/500;
 		switch(grade){
 	      case 10 : System.out.println("S");

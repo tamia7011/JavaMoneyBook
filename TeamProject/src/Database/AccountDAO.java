@@ -184,19 +184,23 @@ public class AccountDAO {
 		return dataArray;
 	}
 	
-	public ArrayList<String> selectinsertName(String name) {
+	public Account selectinsertName(String name) {
 		// TODO: Statement -> PreparedStatement
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name FROM expense WHERE name=?";
-		ArrayList<String> dataArray = new ArrayList<String>();
+		String query = "SELECT id,name,price,type,date FROM expense WHERE name=?";
+		Account data = new Account();
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 		while (rs.next()) {
-			dataArray.add(rs.getString("name"));
+			data.setId(rs.getInt("id"));
+			data.setName(rs.getString("name"));
+			data.setPrice(rs.getInt("price"));
+			data.setType(rs.getString("type"));
+			data.setDate(rs.getDate("date"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -212,7 +216,7 @@ public class AccountDAO {
 				e.printStackTrace();
 			}
 		}
-		return dataArray;
+		return data;
 	}
 	
 	public void Insert(Account data) {

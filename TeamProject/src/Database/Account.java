@@ -13,6 +13,7 @@ public class Account {
 	private String name; 
 	private String type;//Fixed,Flexible,Waste,Default
 	private Date date; /*yyyy-mm-dd*/
+
 	
 	public Account () {
 		price = 0;  
@@ -64,9 +65,10 @@ public class Account {
 		return date;
 	}
 
-
+	
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 }
 
