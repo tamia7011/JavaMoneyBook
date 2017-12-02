@@ -1,0 +1,77 @@
+package Database;
+
+import java.awt.BorderLayout;
+import java.sql.Date;
+import java.sql.SQLException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Moneybook.MainFrame;
+
+public class Mileagesystem {
+   private int mileage;
+   private int baseline;
+   static Mileagesystem instance;
+   MonthAccount monthaccount;
+   private DailyAccount dailyAccount;
+   private Date tempDate;
+   
+   public static Mileagesystem getInstance() {
+      if(instance == null) {
+         instance = new Mileagesystem();
+         return instance;
+      }
+      return instance;
+   }
+   
+   private Mileagesystem()  {
+      init(); 
+   }
+
+   public void init() {
+      mileage = 0;
+      baseline = monthaccount.getSalary() / 30;
+   }
+   
+   public int calculating() {
+      if (dailyAccount.getTotalPrice() > baseline) {
+         mileage = 0;
+         return mileage;
+      }
+      else {
+         int diff = (baseline - dailyAccount.getTotalPrice()) / 1000;
+         mileage += diff;
+         return mileage;
+      }
+   }
+   
+   public void setDate(Date date) {
+      this.tempDate = date;
+      dailyAccount = new DailyAccount(date);
+   }
+   
+   public void setTodayData(DailyAccount in_dailyAccount) {
+      dailyAccount = in_dailyAccount;
+   }
+   
+   public void rating() {
+      calculating();
+      int grade = mileage/500;
+      switch(grade){
+         case 10 : System.out.println("S");
+         break;
+         case 9 : System.out.println("A");
+         break;
+         case 8 : System.out.println("B");
+         break;
+         case 7 : System.out.println("C");
+         break;
+         case 6 : System.out.println("D");
+         break;
+         default : System.out.println("F");
+         break;
+       }
+   }
+}
