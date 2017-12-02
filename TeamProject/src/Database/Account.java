@@ -13,6 +13,7 @@ public class Account {
 	private String name; 
 	private String type;//Fixed,Flexible,Waste,Default
 	private Date date; /*yyyy-mm-dd*/
+	private String Email;
 
 	
 	public Account () {
@@ -70,5 +71,13 @@ public class Account {
 		this.date = date;
 	}
 	
+	public String getEmail() {
+		return Email;
+	}
+
+	
+	public void setEmail(String Email) {
+		this.Email = Email;
+	}
 }
 
