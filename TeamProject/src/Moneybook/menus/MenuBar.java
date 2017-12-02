@@ -13,7 +13,6 @@ import Database.MonthAccount;
 import Moneybook.calculator.Calculator;
 
 public class MenuBar extends JMenuBar {
-	
 	public MenuBar() {
 		JButton SetIDBtn = new JButton("Set E-mail");
 		add(SetIDBtn);
@@ -23,9 +22,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				Account moneyData = new Account();
 				JFrame EmailPopup = new JFrame();
-				String Email;
-				Email = JOptionPane.showInputDialog(EmailPopup, "What is your Email?", null);
-				moneyData.setEmail(Email);
+				Constants.Constants.Email = JOptionPane.showInputDialog(EmailPopup, "What is your Email?", null);
 				JOptionPane.showMessageDialog(null, "Successfully insert your Email!!", "Insert Email", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
