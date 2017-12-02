@@ -322,8 +322,7 @@ public class AccountDAO {
 					", flexible=" + Integer.toString(budget.getFlexibleExpenses()) + 
 					", discretionary=" + Integer.toString(budget.getDiscretionaryExpenses()) + 
 					", total=" + Integer.toString(budget.getTotalExpenses()) +
-					", budget=" + Integer.toString(budget.getBudget()) +
-					", salary=" + Integer.toString(budget.getSalary()) +
+					", salary=" + Integer.toString(budget.getBudget()) +
 					" WHERE email='" + "jihoson94@gmail.com" + "'";
 			
 			pstmt = con.prepareStatement(query);
@@ -355,7 +354,7 @@ public class AccountDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT fixed,flexible,discretionary,salary,total,budget FROM total WHERE email=?";
+		String query = "SELECT fixed,flexible,discretionary,salary,total FROM total WHERE email=?";
 
 		try { 
 
@@ -367,8 +366,7 @@ public class AccountDAO {
 				data.setFlexibleExpenses(rs.getInt("flexible"));
 				data.setDiscretionaryExpenses(rs.getInt("discretionary"));
 				data.setTotalExpenses(rs.getInt("total"));
-				data.setSalary(rs.getInt("salary"));
-				data.setBudget(rs.getInt("budget"));
+				data.setBudget(rs.getInt"budget"));
 
 			}
 		} catch (SQLException e) {

@@ -53,7 +53,6 @@ public class tempRepository {
 	}
 	
 	public int getBudget() {
-		System.out.println(budget);
 		return budget;
 	}
 	
@@ -61,12 +60,8 @@ public class tempRepository {
 		return salary;
 	}
 	
-	public void setBudget(int in_budget) {
-		budget = in_budget;
-	}
-	
-	public void setSalary(int in_salary) {
-		salary = in_salary;
+	public void setSalary(int in_salaryExpense) {
+		salary = in_salaryExpense;
 	}
 	
 	public String getName() {	
