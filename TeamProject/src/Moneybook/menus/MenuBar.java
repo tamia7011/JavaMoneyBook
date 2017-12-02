@@ -27,19 +27,41 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		
+		JButton SetSalaryBtn = new JButton("Set Salary");
+		add(SetSalaryBtn);
+		
+		SetSalaryBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame budgetPopup = new JFrame();
+				try {
+					int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Salary?", null));
+					MonthAccount budget = MonthAccount.getInstance();
+					budget.setSalary(salary);
+					System.out.println(salary);
+					budget.plusBudget(salary);
+					budgetPopup.dispose();
+					JOptionPane.showMessageDialog(null, "Successfully set your salary!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+				
+				} catch(Exception e1) {
+					
+				}
+			}
+			
+		});
+		
 		JButton SetBudgetBtn = new JButton("Set budget");
 		add(SetBudgetBtn);
-		
 		SetBudgetBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFrame budgetPopup = new JFrame();
 				try {
-					int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
+					int myBudget = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
 					MonthAccount budget = MonthAccount.getInstance();
-					budget.setBudget(salary);
-					budget.setSalary(salary);
+					budget.setBudget(myBudget);
 					budgetPopup.dispose();
 					JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
 				
@@ -47,7 +69,6 @@ public class MenuBar extends JMenuBar {
 					
 				}
 			}
-			
 		});
 		
 		JButton AddBudgetBtn = new JButton("Add budget");
@@ -60,7 +81,6 @@ public class MenuBar extends JMenuBar {
 				try {
 				int deposit = Integer.parseInt(JOptionPane.showInputDialog(DepositPopup, "How much do you want to add?", null));
 				MonthAccount budget = MonthAccount.getInstance();
-				budget.plusSalary(deposit);
 				budget.plusBudget(deposit);
 				budget.setSalary(budget.getSalary());
 				DepositPopup.dispose();

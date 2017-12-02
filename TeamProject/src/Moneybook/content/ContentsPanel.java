@@ -186,8 +186,8 @@ public class ContentsPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Mileagesystem mileage = Mileagesystem.getInstance();
-				System.out.println(mileage.calculating());
-				//DAO.InsertMileage(mileage.calculating());
+				DAO = DAO.getInstance();
+				DAO.UPDATEMileage(mileage.calculating());
 			}
 			
 		});

@@ -247,28 +247,6 @@ public class AccountDAO {
 		}
 
 	}
-	public void InsertMileage(int mileage) {
-		String query = "INSERT INTO expense(mileage) VALUES (?)";
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = con.prepareStatement(query);
-
-			pstmt.setInt(5, mileage);
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}
 
 	public void Delete(String name) {
 		String query = "DELETE FROM expense WHERE name='" + name + "'" + "and email = '" + Constants.Email + "'";
@@ -351,12 +329,6 @@ public class AccountDAO {
 					" WHERE email='" + Constants.Email + "'";
 			
 			pstmt = con.prepareStatement(query);
-			
-//			pstmt.setString(1, data.getName());
-//			pstmt.setInt(2, data.getPrice());
-//			pstmt.setString(3, data.getType());
-//			pstmt.setString(4, data.getDate());
-//			System.out.println(data.getDate());
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -373,13 +345,41 @@ public class AccountDAO {
 
 	}
 	
+	public void UPDATEMileage(int mileage) {
+		String query;
+		PreparedStatement pstmt = null;
+		System.out.println(Integer.toString(mileage));
+		try {
+		
+			query = "UPDATE total SET mileage='" + Integer.toString(mileage) +
+					"' WHERE email='" + Constants.Email + "'";
+			
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	
 	public tempRepository setBudget() {
 
 		tempRepository data = new tempRepository();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT fixed,flexible,discretionary,salary,total,budget FROM total WHERE email=?";
+		String query = "SELECT fixed,flexible,discretionary,salary,total,budget,mileage FROM total WHERE email=?";
 
 		try { 
 
@@ -393,6 +393,7 @@ public class AccountDAO {
 				data.setTotalExpenses(rs.getInt("total"));
 				data.setSalary(rs.getInt("salary"));
 				data.setBudget(rs.getInt("budget"));
+				data.setMileage(rs.getInt("mileage"));
 
 			}
 		} catch (SQLException e) {

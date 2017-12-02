@@ -18,6 +18,7 @@ public class MonthAccount {
 	private int fixedExpense;
 	private int flexibleExpense;
 	private int discretionaryExpense;
+	private int mileage;
 	private AccountDAO DAO;
 	
 	public static MonthAccount getInstance() {
@@ -35,7 +36,9 @@ public class MonthAccount {
 		fixedExpense = DAO.setBudget().getFixedExpenses();
 		flexibleExpense = DAO.setBudget().getFlexibleExpenses();
 		discretionaryExpense = DAO.setBudget().getDiscretionaryExpenses();
+		salary = DAO.setBudget().getSalary();
 		budget = DAO.setBudget().getBudget();
+		mileage = DAO.setBudget().getMileage();
 		System.out.println(budget);
 		name = "user";
 	}
@@ -129,6 +132,7 @@ public class MonthAccount {
 	
 	public void setSalary(int in_salary) {
 		salary = in_salary;
+		DAO.updateTotalBudget(this);
 	}
 	
 	public void setBudget(int in_salaryExpense) {
@@ -144,13 +148,14 @@ public class MonthAccount {
 		name = Name;
 	}
 	
-	public void plusBudget(int budget) {
-		budget += budget;
+	public void plusBudget(int in_budget) {
+		budget += in_budget;
+		DAO.updateTotalBudget(this);
 	}
 	
-	public void plusSalary(int in_salary) {
-		salary += in_salary;
+	public int getMileage() {
+		return mileage;
 	}
-	
+
 }
 

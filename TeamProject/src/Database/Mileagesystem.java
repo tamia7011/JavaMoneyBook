@@ -33,15 +33,14 @@ public class Mileagesystem {
 
 	public void init() {
 		monthaccount = MonthAccount.getInstance();
-		mileage = 0;
+		mileage = monthaccount.getMileage();
 		baseline = monthaccount.getSalary() / 30;
+		
 	}
 	
 	public int calculating() {
 		setDate(CalendarManager.getDate());
 		dailyAccount.calculateDataset();
-		System.out.println(dailyAccount.getTotalPrice());
-		System.out.println(baseline);
 		if (dailyAccount.getTotalPrice() > baseline) {
 			mileage += 0;
 			return mileage;
