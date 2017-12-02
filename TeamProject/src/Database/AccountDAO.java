@@ -322,7 +322,7 @@ public class AccountDAO {
 					", flexible=" + Integer.toString(budget.getFlexibleExpenses()) + 
 					", discretionary=" + Integer.toString(budget.getDiscretionaryExpenses()) + 
 					", total=" + Integer.toString(budget.getTotalExpenses()) +
-					", salary=" + Integer.toString(budget.getSalary()) +
+					", salary=" + Integer.toString(budget.getBudget()) +
 					" WHERE email='" + "jihoson94@gmail.com" + "'";
 			
 			pstmt = con.prepareStatement(query);

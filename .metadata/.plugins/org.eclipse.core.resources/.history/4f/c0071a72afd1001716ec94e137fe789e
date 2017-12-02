@@ -1,0 +1,32 @@
+package Moneybook.content;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class PriorityData extends SearchData {
+	public static PriorityData thisFrame;
+	public PriorityDataTable PriorityData;
+	
+	public static PriorityData getInstance() {
+		if (thisFrame == null) {
+			String title = "Priority Data";
+			String label = "The number to check?";
+			thisFrame = new PriorityData(title, label);
+			return thisFrame;
+		}
+		return thisFrame;
+	}
+	
+	public PriorityData(String title, String label) {
+		super(title, label);
+		SearchBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PriorityDataTable frame = new PriorityDataTable();
+				frame.setSize(1000, 600);
+				frame.setVisible(true);
+			}
+			
+		});
+	}
+}

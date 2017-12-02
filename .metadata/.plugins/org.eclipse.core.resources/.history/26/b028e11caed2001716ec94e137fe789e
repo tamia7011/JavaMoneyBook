@@ -1,0 +1,43 @@
+package Database;
+
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import Constants.Constants;
+import Moneybook.MainFrame;
+import Database.AccountDAO;
+
+public class DailyAccount {
+	private static DailyAccount instance;
+	
+	private static String DEFAULT_MONTH = "0000-00";
+	public String month = DEFAULT_MONTH;//YYYY-MM
+	private int salary;
+	private String name = "jihoson94@gmail.com";
+	private int totalExpense;
+	private AccountDAO DAO;
+	private ArrayList<Account> todayDataArray;
+	int totalPrice;
+
+	public DailyAccount() {
+		DAO = AccountDAO.getInstance();
+		todayDataArray = new ArrayList<Account>();
+		totalPrice = 0;
+		name = "user";
+	}
+	
+	
+	public void calculateDataset(Date date) {
+		todayDataArray = DAO.selectByDate(date);
+		for (Account tempData : todayDataArray) {
+			totalPrice += tempData.getPrice();
+		}
+	}
+	
+	public void calculateDeleteSet(Account moneydata) {
+		
+	}
+
+	
+}

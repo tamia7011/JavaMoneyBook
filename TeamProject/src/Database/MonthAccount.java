@@ -11,6 +11,7 @@ public class MonthAccount {
 	
 	private static String DEFAULT_MONTH = "0000-00";
 	public String month = DEFAULT_MONTH;//YYYY-MM
+	private int budget;
 	private int salary;
 	private String name = "jihoson94@gmail.com";
 	private int totalExpense;
@@ -34,8 +35,8 @@ public class MonthAccount {
 		fixedExpense = DAO.setBudget().getFixedExpenses();
 		flexibleExpense = DAO.setBudget().getFlexibleExpenses();
 		discretionaryExpense = DAO.setBudget().getDiscretionaryExpenses();
-		salary = DAO.setBudget().getSalary();
-		System.out.println(DAO.setBudget().getSalary());
+		budget = DAO.setBudget().getBudget();
+		System.out.println(budget);
 		name = "user";
 	}
 	
@@ -59,7 +60,7 @@ public class MonthAccount {
 		}
 		
 		totalExpense += price;
-		salary -= price;
+		budget -= price;
 	}
 	
 	public void calculateDeleteSet(Account moneydata) {
@@ -79,7 +80,7 @@ public class MonthAccount {
 		}
 		
 		totalExpense -= price;
-		salary += price;
+		budget += price;
 	}
 	
 	public int getFixedExpenses() {
@@ -117,12 +118,21 @@ public class MonthAccount {
 		totalExpense = in_totalExpense;
 		DAO.updateTotalBudget(this);
 	}
+	
+	public int getBudget() {
+		return budget;
+	}
+	
 	public int getSalary() {
 		return salary;
 	}
 	
-	public void setSalary(int in_salaryExpense) {
-		salary = in_salaryExpense;
+	public void setSalary(int in_salary) {
+		salary = in_salary;
+	}
+	
+	public void setBudget(int in_salaryExpense) {
+		budget = in_salaryExpense;
 		DAO.updateTotalBudget(this);
 	}
 	
@@ -134,8 +144,12 @@ public class MonthAccount {
 		name = Name;
 	}
 	
-	public void plusSalary(int budget) {
-		salary += budget;
+	public void plusBudget(int budget) {
+		budget += budget;
+	}
+	
+	public void plusSalary(int in_salary) {
+		salary += in_salary;
 	}
 	
 }

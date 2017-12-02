@@ -1,0 +1,45 @@
+package Moneybook.content;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class PriorityData extends SearchedData {
+	public JTextField SearchedNameField;
+	public SearchedData SearchedData;
+	
+	public PriorityData() {
+		setBounds(100, 100, 450, 350);
+		setTitle("Priority Data");
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("How many expenses do you want to check?");
+		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 24));
+		lblNewLabel.setBounds(69, 57, 291, 51);
+		getContentPane().add(lblNewLabel);
+		
+		SearchedNameField = new JTextField();
+		SearchedNameField.setBounds(58, 123, 180, 27);
+		getContentPane().add(SearchedNameField);
+		SearchedNameField.setColumns(10);
+		
+		JButton SearchBtn = new JButton("Setting");
+		SearchBtn.setBounds(255, 123, 91, 29);
+		getContentPane().add(SearchBtn);
+			
+		SearchBtn.addActionListener(new ActionListener() {
+		
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SearchedData frame = new SearchedData();
+				frame.setSize(1000, 600);
+				frame.setVisible(true);
+			}
+			
+		});
+}

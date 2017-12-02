@@ -1,0 +1,67 @@
+package transformer;
+
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+
+import constants.GEConstants.EAnchorTypes;
+import shapes.GEShape;
+
+public class GEResizer extends GETransformer {
+	
+	private Point previousP;
+	private Point resizeAnchor;
+	
+	public GEResizer(GEShape shape) {
+		super(shape);
+		previousP = new Point();
+	}
+	
+	private Point getResizeAnchor() {
+		//고정되는 앵커 탐색, 결정
+		Point resizeAnchor = new Point();
+		Ellipse2D.Double tempAnchor = null;
+		if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.SE.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NN) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.SS.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.SW.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.EE.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.WW.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.NE.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.NN.ordinal());
+		}else if(shape.getSelectedAnchor() == EAnchorTypes.NW) {
+			tempAnchor = shape.getAnchorList().getAnchors().get(EAnchorTypes.NW.ordinal());
+		}
+		resizeAnchor.setLocation(tempAnchor.x, tempAnchor.y);
+		return resizeAnchor;
+	}
+	
+	private Point2D.Double computeResizeFactor(Point previousP, Point currentP){
+		//비율 계산
+		return new Point2D.Double(arg0, arg1)
+	}
+	
+	public void finalize() {
+		shape.move(resizeAnchor);
+	}
+	
+	@Override
+	public void transformer(Graphics2D g2d, Point p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void init(Point p) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

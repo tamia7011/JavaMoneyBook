@@ -3,6 +3,7 @@ package Database;
 public class tempRepository {
 	
 	public int salary;
+	private int budget;
 	private String name;
 	private int totalExpense;
 	private int fixedExpense;
@@ -11,6 +12,7 @@ public class tempRepository {
 	
 	public tempRepository() {
 		salary = 0;
+		budget = 0;
 		name = "user";
 		totalExpense = 0;
 		fixedExpense = 0;
@@ -49,6 +51,12 @@ public class tempRepository {
 	public void setTotalExpenses(int in_totalExpense) {
 		totalExpense = in_totalExpense;
 	}
+	
+	public int getBudget() {
+		budget += salary;
+		return budget;
+	}
+	
 	public int getSalary() {
 		return salary;
 	}

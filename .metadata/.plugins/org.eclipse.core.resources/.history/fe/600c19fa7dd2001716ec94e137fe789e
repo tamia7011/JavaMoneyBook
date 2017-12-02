@@ -1,0 +1,44 @@
+package Database;
+
+public class Mileagesystem {
+	private static double setfixedExpense;
+	private static double setflexibleExpense;
+	private static double setdiscretionaryExpense;
+	private int mileage;
+	private int Fixedmileage;
+	private int Flexiblemileage;
+	private int Discretionarymileage;
+	MonthAccount monthaccount;
+	public int mileage() {
+		mileage = 2000;
+		FixedMileage = 0;
+		setfixedExpense = monthaccount.getSalary()*0.5;
+		setflexibleExpense = monthaccount.getSalary()*0.3;
+		setdiscretionaryExpense = monthaccount.getSalary()*0.2;
+		
+		mileage += (setfixedExpense - monthaccount.getFixedExpenses()) / 10000;
+		
+		mileage += (setflexibleExpense - monthaccount.getFlexibleExpenses()) / 10000;
+		
+		mileage += (setdiscretionaryExpense - monthaccount.getDiscretionaryExpenses()) / 10000;
+			
+		return mileage;
+	}
+	public void rating() {
+		int grade = mileage/500;
+		switch(grade){
+	      case 10 : System.out.println("S");
+	      break;
+	      case 9 : System.out.println("A");
+	      break;
+	      case 8 : System.out.println("B");
+	      break;
+	      case 7 : System.out.println("C");
+	      break;
+	      case 6 : System.out.println("D");
+	      break;
+	      default : System.out.println("F");
+	      break;
+	    }
+	}
+}

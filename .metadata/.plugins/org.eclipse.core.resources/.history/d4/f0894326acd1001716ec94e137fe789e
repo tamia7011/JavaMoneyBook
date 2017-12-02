@@ -1,0 +1,5 @@
+package Moneybook.content;
+
+public class PriorityData extends SearchData {
+
+}

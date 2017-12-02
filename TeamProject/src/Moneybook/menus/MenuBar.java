@@ -22,11 +22,17 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFrame budgetPopup = new JFrame();
-				int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
-				MonthAccount budget = MonthAccount.getInstance();
-				budget.setSalary(salary);
-				budgetPopup.dispose();
-				JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+				try {
+					int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
+					MonthAccount budget = MonthAccount.getInstance();
+					budget.setBudget(salary);
+					budget.setSalary(salary);
+					budgetPopup.dispose();
+					JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
+				
+				} catch(Exception e1) {
+					
+				}
 			}
 			
 		});
@@ -41,6 +47,7 @@ public class MenuBar extends JMenuBar {
 				int deposit = Integer.parseInt(JOptionPane.showInputDialog(DepositPopup, "How much do you want to add?", null));
 				MonthAccount budget = MonthAccount.getInstance();
 				budget.plusSalary(deposit);
+				budget.plusBudget(deposit);
 				budget.setSalary(budget.getSalary());
 				DepositPopup.dispose();
 				JOptionPane.showMessageDialog(null, "Successfully added your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);

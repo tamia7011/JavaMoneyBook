@@ -1,0 +1,18 @@
+package Moneybook.content;
+
+public class PriorityData extends SearchData {
+	
+	public static SearchData getInstance() {
+		if (thisFrame == null) {
+			String title = "Search Data";
+			String label = "Insert data name for search";
+			thisFrame = new SearchData(title, label);
+			return thisFrame;
+		}
+		return thisFrame;
+	}
+	
+	public PriorityData(String title, String label) {
+		
+	}
+}

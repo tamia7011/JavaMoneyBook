@@ -50,16 +50,6 @@ public class AccountManager {
 		score = 0;
 	}
 	
-	public void setCurrentData(Date date) {
-		for(Account data : DataList) {
-			if(data.getDate().equals(date)) {
-				selectedData = data;
-				return;
-			}
-		}
-		selectedData = null;
-	}
-	
 	public ArrayList<Account> getDataList() {
 		DataList = new ArrayList<Account>();
 		DataList = accountDAO.selectAll();
