@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 
+import Database.Account;
 import Database.MonthAccount;
 import Moneybook.calculator.Calculator;
 
@@ -16,6 +17,18 @@ public class MenuBar extends JMenuBar {
 	public MenuBar() {
 		JButton SetIDBtn = new JButton("Set E-mail");
 		add(SetIDBtn);
+		SetIDBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Account moneyData = new Account();
+				JFrame EmailPopup = new JFrame();
+				String Email;
+				Email = JOptionPane.showInputDialog(EmailPopup, "What is your Email?", null);
+				moneyData.setEmail(Email);
+				JOptionPane.showMessageDialog(null, "Successfully insert your Email!!", "Insert Email", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		
 		JButton SetBudgetBtn = new JButton("Set budget");
 		add(SetBudgetBtn);
