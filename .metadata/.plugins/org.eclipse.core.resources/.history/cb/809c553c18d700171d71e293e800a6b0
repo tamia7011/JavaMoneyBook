@@ -9,7 +9,7 @@ import Moneybook.MainFrame;
 import Database.AccountDAO;
 
 public class DailyAccount {
-
+<<<<<<< HEAD
 	private static DailyAccount instance;
 	
 	private static String DEFAULT_MONTH = "0000-00";

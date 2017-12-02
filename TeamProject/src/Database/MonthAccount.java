@@ -110,9 +110,9 @@ public class MonthAccount {
 		DAO.updateTotalBudget(this);
 	}
 
-	public int getTotalExpenses() {
-		return totalExpense;
-	}
+   public int getTotalExpenses() {
+      return totalExpense;
+   }
 
 	public void setTotalExpenses(int in_totalExpense) {
 		totalExpense = in_totalExpense;
@@ -153,3 +153,4 @@ public class MonthAccount {
 	}
 	
 }
+
