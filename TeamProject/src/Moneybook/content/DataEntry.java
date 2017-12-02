@@ -45,6 +45,7 @@ public class DataEntry extends JFrame {
 
    static String[] petStrings = { Constants.expenseType.Fixed.toString(), Constants.expenseType.Flexible.toString(),
          Constants.expenseType.Waste.toString(), Constants.expenseType.Default.toString() };
+   private JTextField EmailField;
 
    public static DataEntry getInstance() {
       if (thisFrame == null) {
@@ -66,12 +67,12 @@ public class DataEntry extends JFrame {
       panel.setLayout(null);
 
       JLabel lblNewLabel = new JLabel("Insert information");
-      lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 22));
       lblNewLabel.setBounds(147, 15, 168, 34);
+      lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 22));
       panel.add(lblNewLabel);
 
        comboList = new JComboBox(petStrings);
-      comboList.setBounds(182, 75, 182, 27);
+       comboList.setBounds(182, 75, 182, 27);
       comboList.setSelectedIndex(0);
       panel.add(comboList);
 
@@ -104,14 +105,13 @@ public class DataEntry extends JFrame {
       calculator.addActionListener(new CalculatorListener());
 
       JButton insertBtn = new JButton("insert data");
-      insertBtn.setBounds(147, 260, 125, 29);
+      insertBtn.setBounds(147, 270, 125, 29);
       panel.add(insertBtn);
 
       insertBtn.addActionListener(new InsertListener());
 
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
-
    }
    private class CalculatorListener implements ActionListener{
       @Override
@@ -158,5 +158,4 @@ public class DataEntry extends JFrame {
          }
       }
    }
-
 }

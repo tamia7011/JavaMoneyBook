@@ -178,6 +178,9 @@ public class ContentsPanel extends JPanel{
 			
 		});
 		
+		JButton MileageBtn = new JButton("Mileage accumulate");
+		toolBar.add(MileageBtn);
+		
 		setVisible(status);
 	}
 	

@@ -14,6 +14,9 @@ import Moneybook.calculator.Calculator;
 public class MenuBar extends JMenuBar {
 	
 	public MenuBar() {
+		JButton SetIDBtn = new JButton("Set E-mail");
+		add(SetIDBtn);
+		
 		JButton SetBudgetBtn = new JButton("Set budget");
 		add(SetBudgetBtn);
 		
