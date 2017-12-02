@@ -9,13 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Moneybook.MainFrame;
+import Moneybook.calendar.CalendarManager;
 
 public class Mileagesystem {
 	private int mileage;
 	private int baseline;
 	static Mileagesystem instance;
 	MonthAccount monthaccount;
-	private DailyAccount dailyAccount;
+	DailyAccount dailyAccount;
 	private Date tempDate;
 	
 	public static Mileagesystem getInstance() {
@@ -37,6 +38,10 @@ public class Mileagesystem {
 	}
 	
 	public int calculating() {
+		setDate(CalendarManager.getDate());
+		dailyAccount.calculateDataset();
+		System.out.println(dailyAccount.getTotalPrice());
+		System.out.println(baseline);
 		if (dailyAccount.getTotalPrice() > baseline) {
 			mileage += 0;
 			return mileage;

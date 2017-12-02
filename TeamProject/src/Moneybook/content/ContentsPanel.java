@@ -36,6 +36,7 @@ public class ContentsPanel extends JPanel{
 	private static ContentsPanel instance;
 	boolean status = false;
 	public JTable table;
+	AccountDAO DAO;
 	
 	public static ContentsPanel getInstance() {
 		if(instance == null) {
@@ -180,8 +181,16 @@ public class ContentsPanel extends JPanel{
 		
 		JButton MileageBtn = new JButton("Mileage accumulate");
 		toolBar.add(MileageBtn);
-		
-		setVisible(status);
+		MileageBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mileagesystem mileage = Mileagesystem.getInstance();
+				System.out.println(mileage.calculating());
+				//DAO.InsertMileage(mileage.calculating());
+			}
+			
+		});
 	}
 	
 	public void show(Calendar cal) { 

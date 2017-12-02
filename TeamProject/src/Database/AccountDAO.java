@@ -245,6 +245,28 @@ public class AccountDAO {
 		}
 
 	}
+	public void InsertMileage(int mileage) {
+		String query = "INSERT INTO expense(mileage) VALUES (?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setInt(5, mileage);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
 
 	public void Delete(String name) {
 		String query = "DELETE FROM expense WHERE name='" + name + "'";
