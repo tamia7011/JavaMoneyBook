@@ -19,9 +19,6 @@ import java.awt.Cursor;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import Constants.Constants;
-
 import java.util.*;
 
 
@@ -53,7 +50,7 @@ public class AccountDAO {
 	public ArrayList<Account> selectName(String values){
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense WHERE email=" + Constants.Email;
+		String query = "SELECT name,price,type,date FROM expense";
 		bsals = new BinarySearchArrayList();
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 		ArrayList<String> name = new ArrayList<String>();
@@ -114,7 +111,7 @@ public class AccountDAO {
 		// TODO: Statement -> PreparedStatement
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense WHERE email='" + Constants.Email + "'";
+		String query = "SELECT name,price,type,date FROM expense";
 
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 
@@ -152,10 +149,12 @@ public class AccountDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT id,name,price,type,date FROM expense WHERE date='" + date + "'and email='" + Constants.Email + "'";
+		String query = "SELECT id,name,price,type,date FROM expense WHERE date=?";
+
 		try { 
 
 			pstmt = con.prepareStatement(query);
+			pstmt.setDate(1, date);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Account data = new Account();
@@ -189,12 +188,12 @@ public class AccountDAO {
 		// TODO: Statement -> PreparedStatement
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(Constants.Email);
-		String query = "SELECT id,name,price,type,date FROM expense WHERE name='" + name + "'and email='" + Constants.Email + "'";
+		String query = "SELECT id,name,price,type,date FROM expense WHERE name=?";
 		Account data = new Account();
 		
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 		while (rs.next()) {
 			data.setId(rs.getInt("id"));
@@ -221,7 +220,7 @@ public class AccountDAO {
 	}
 	
 	public void Insert(Account data) {
-		String query = "INSERT INTO expense(name,price,type,date,email) VALUES (?,?,?,?,?)";
+		String query = "INSERT INTO expense(name,price,type,date) VALUES (?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
@@ -230,30 +229,7 @@ public class AccountDAO {
 			pstmt.setInt(2, data.getPrice());
 			pstmt.setString(3, data.getType());
 			pstmt.setDate(4, data.getDate());
-			pstmt.setString(5, Constants.Email);
 			System.out.println(data.getDate());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}
-	public void InsertMileage(int mileage) {
-		String query = "INSERT INTO expense(mileage) VALUES (?)";
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = con.prepareStatement(query);
-
-			pstmt.setInt(5, mileage);
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -271,7 +247,7 @@ public class AccountDAO {
 	}
 
 	public void Delete(String name) {
-		String query = "DELETE FROM expense WHERE name='" + name + "'" + "and email = '" + Constants.Email + "'";
+		String query = "DELETE FROM expense WHERE name='" + name + "'";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
@@ -300,13 +276,13 @@ public class AccountDAO {
 		
 			switch (column) {
 			case 1:
-				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id + "and email='" + Constants.Email + "'"; 
+				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id;
 				break;
 			case 2:
-				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id + "and email='" + Constants.Email + "'";
+				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id;
 				break;
 			case 3:
-				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id + "and email='" + Constants.Email + "'";
+				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id;
 				break;
 			default:
 				query = "";
@@ -346,9 +322,8 @@ public class AccountDAO {
 					", flexible=" + Integer.toString(budget.getFlexibleExpenses()) + 
 					", discretionary=" + Integer.toString(budget.getDiscretionaryExpenses()) + 
 					", total=" + Integer.toString(budget.getTotalExpenses()) +
-					", budget=" + Integer.toString(budget.getBudget()) +
-					", salary=" + Integer.toString(budget.getSalary()) +
-					" WHERE email='" + Constants.Email + "'";
+					", salary=" + Integer.toString(budget.getBudget()) +
+					" WHERE email='" + "jihoson94@gmail.com" + "'";
 			
 			pstmt = con.prepareStatement(query);
 			
@@ -379,20 +354,19 @@ public class AccountDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT fixed,flexible,discretionary,salary,total,budget FROM total WHERE email=?";
+		String query = "SELECT fixed,flexible,discretionary,salary,total FROM total WHERE email=?";
 
 		try { 
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, Constants.Email);
+			pstmt.setString(1, "jihoson94@gmail.com");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				data.setFixedExpenses(rs.getInt("fixed"));
 				data.setFlexibleExpenses(rs.getInt("flexible"));
 				data.setDiscretionaryExpenses(rs.getInt("discretionary"));
 				data.setTotalExpenses(rs.getInt("total"));
-				data.setSalary(rs.getInt("salary"));
-				data.setBudget(rs.getInt("budget"));
+				data.setBudget(rs.getInt("salary"));
 
 			}
 		} catch (SQLException e) {
