@@ -19,6 +19,9 @@ import java.awt.Cursor;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Constants.Constants;
+
 import java.util.*;
 
 
@@ -50,7 +53,7 @@ public class AccountDAO {
 	public ArrayList<Account> selectName(String values){
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense";
+		String query = "SELECT name,price,type,date FROM expense WHERE email=" + Constants.Email;
 		bsals = new BinarySearchArrayList();
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 		ArrayList<String> name = new ArrayList<String>();
@@ -111,7 +114,7 @@ public class AccountDAO {
 		// TODO: Statement -> PreparedStatement
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense";
+		String query = "SELECT name,price,type,date FROM expense WHERE email='" + Constants.Email + "'";
 
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 
@@ -149,12 +152,10 @@ public class AccountDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT id,name,price,type,date FROM expense WHERE date=?";
-
+		String query = "SELECT id,name,price,type,date FROM expense WHERE date='" + date + "'and email='" + Constants.Email + "'";
 		try { 
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setDate(1, date);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Account data = new Account();
@@ -188,12 +189,12 @@ public class AccountDAO {
 		// TODO: Statement -> PreparedStatement
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT id,name,price,type,date FROM expense WHERE name=?";
+		System.out.println(Constants.Email);
+		String query = "SELECT id,name,price,type,date FROM expense WHERE name='" + name + "'and email='" + Constants.Email + "'";
 		Account data = new Account();
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 		while (rs.next()) {
 			data.setId(rs.getInt("id"));
@@ -220,7 +221,7 @@ public class AccountDAO {
 	}
 	
 	public void Insert(Account data) {
-		String query = "INSERT INTO expense(name,price,type,date) VALUES (?,?,?,?)";
+		String query = "INSERT INTO expense(name,price,type,date,email) VALUES (?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
@@ -229,6 +230,7 @@ public class AccountDAO {
 			pstmt.setInt(2, data.getPrice());
 			pstmt.setString(3, data.getType());
 			pstmt.setDate(4, data.getDate());
+			pstmt.setString(5, Constants.Email);
 			System.out.println(data.getDate());
 			pstmt.executeUpdate();
 
@@ -247,7 +249,7 @@ public class AccountDAO {
 	}
 
 	public void Delete(String name) {
-		String query = "DELETE FROM expense WHERE name='" + name + "'";
+		String query = "DELETE FROM expense WHERE name='" + name + "'" + "and email = '" + Constants.Email + "'";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
@@ -276,13 +278,13 @@ public class AccountDAO {
 		
 			switch (column) {
 			case 1:
-				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id;
+				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id + "and email='" + Constants.Email + "'"; 
 				break;
 			case 2:
-				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id;
+				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id + "and email='" + Constants.Email + "'";
 				break;
 			case 3:
-				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id;
+				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id + "and email='" + Constants.Email + "'";
 				break;
 			default:
 				query = "";
@@ -317,13 +319,14 @@ public class AccountDAO {
 		String query;
 		PreparedStatement pstmt = null;
 		try {
+		
 			query = "UPDATE total SET fixed=" + Integer.toString(budget.getFixedExpenses()) +
 					", flexible=" + Integer.toString(budget.getFlexibleExpenses()) + 
 					", discretionary=" + Integer.toString(budget.getDiscretionaryExpenses()) + 
 					", total=" + Integer.toString(budget.getTotalExpenses()) +
 					", budget=" + Integer.toString(budget.getBudget()) +
 					", salary=" + Integer.toString(budget.getSalary()) +
-					" WHERE email='" + "jihoson94@gmail.com" + "'";
+					" WHERE email='" + Constants.Email + "'";
 			
 			pstmt = con.prepareStatement(query);
 			
@@ -359,7 +362,7 @@ public class AccountDAO {
 		try { 
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, "jihoson94@gmail.com");
+			pstmt.setString(1, Constants.Email);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				data.setFixedExpenses(rs.getInt("fixed"));

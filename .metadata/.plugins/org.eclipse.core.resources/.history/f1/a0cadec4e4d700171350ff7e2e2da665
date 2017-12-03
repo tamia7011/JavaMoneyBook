@@ -46,17 +46,19 @@ public class PriorityDataTable extends JFrame {
 		System.out.println(Integer.parseInt(priorityData.PriorityNumField.getText()));
 		Date date = CalendarManager.getDate();
 		int num = Integer.parseInt(priorityData.PriorityNumField.getText());
-		int futureListSize = accountManager.getFuturePriorityQueue(date).size();
-		int finalListSize = (num < futureListSize) ? num : futureListSize;
-		ArrayList<Account> list = accountManager.PollPriorityQueue(finalListSize, date);
+		ArrayList<Account> list = accountManager.PollPriorityQueue(num, date);
 		if(list.isEmpty() == true) {
 			JOptionPane.showMessageDialog(null, "No data", "warning", JOptionPane.WARNING_MESSAGE);
 		} 
 		else {
 			DefaultTableModel model = (DefaultTableModel) table.getModel(); 
-			model.setNumRows(1); 
-			for(Account account:list) {
-				Object[] row = { account.getType(), account.getName(), account.getPrice(), account.getDate() };
+			model.setNumRows(1);
+			
+			while(list.listIterator().hasNext()) {
+				Object[] row = { list.listIterator().next().getType(), 
+						list.listIterator().next().getName(), 
+						list.listIterator().next().getPrice(), 
+						list.listIterator().next().getDate() };
 				model.addRow(row);
 			}
 		}
