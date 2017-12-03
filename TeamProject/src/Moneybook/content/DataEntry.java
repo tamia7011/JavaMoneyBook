@@ -126,7 +126,6 @@ public class DataEntry extends JFrame {
 
          accountDAO = Database.AccountDAO.getInstance();
          monthAccount = MonthAccount.getInstance();
-         Mileagesystem mileage = Mileagesystem.getInstance();
          String name = nameField.getText();
          int price = Integer.parseInt(priceField.getText());
          String type = comboList.getSelectedItem().toString();
@@ -141,10 +140,6 @@ public class DataEntry extends JFrame {
          monthAccount.calculateDataset(moneyData);
          System.out.println(monthAccount.getFixedExpenses());
          accountDAO.updateTotalBudget(monthAccount);
-         dailyAccount = new DailyAccount(CalendarManager.getDate());
-         dailyAccount.calculateDataset();
-         mileage.setDate(CalendarManager.getDate());
-         mileage.calculating();
 
          accountDAO.Insert(moneyData); 
          ContentsPanel.getInstance().showTable();

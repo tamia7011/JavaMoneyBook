@@ -9,6 +9,7 @@ public class tempRepository {
 	private int fixedExpense;
 	private int flexibleExpense;
 	private int discretionaryExpense;
+	private int mileage;
 	
 	public tempRepository() {
 		salary = 0;
@@ -18,6 +19,7 @@ public class tempRepository {
 		fixedExpense = 0;
 		flexibleExpense = 0;
 		discretionaryExpense = 0;
+		mileage = 0;
 	}
 	
 	public int getFixedExpenses() {
@@ -75,6 +77,14 @@ public class tempRepository {
 	
 	public void setName(String Name) {	
 		name = Name;
+	}
+	
+	public int getMileage() {
+		return mileage;
+	}
+	
+	public void setMileage(int in_mileage) {
+		mileage = in_mileage;
 	}
 	
 }
