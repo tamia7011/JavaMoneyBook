@@ -89,7 +89,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
 	<li><a href="#Introduce">Introduce</a></li>
-	<li><a href="#Profile">Profile</a></li>
+	<li><a href="#Profile">Expense</a></li>
 	<li><a href="#Mileage">Mileage</a></li>
       </ul>
     </div>
@@ -121,22 +121,13 @@
 <div id="Profile" class="container-fluid bg-grey">
   <div class="row">
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-folder-open logo slideanim"></span>
+      <span class="glyphicon glyphicon-folder-open logo slideanim" onclick = "location.href='expense.php'"></span>
     </div>
     <div class="col-sm-8">
-      <h1>Profile</h1><br>
-      <h4><strong>COST ANALYSIS:</strong> We can figure out how much we can
-         spend a month on, where we spend money for a month, why
-         we spend money,we write it.</h4><br>
-     <h4><strong>SETTINGS:</strong> Additional money can be found in addition
-                 to the monthly salary, and you can know the amount
-                 of money you pay regularly,for example, a fixed
-                 fee for installment savings such as installment
-                 savings,cell phone bills,or insurance fees.</h4><br>
-	<h4><strong>OPTIONS:</strong> If a moneybook user is unable to pay
-                    enough money throgh the current cash flow through the
-                    set up, the window will be visible, and a window will be
-                    visible.</h4><br>
+      <h1>Expense</h1><br>
+      <h4><strong>EXPENSE:</strong> Family users can conveniently enter the web 
+                  in the web by entering the fi - fixer, flexible, and waste costs.
+                   You can also see a graph at a glance through the input.</h4><br>
     </div>
   </div>
 </div>
@@ -144,7 +135,9 @@
 <div id="Mileage" class="container-fluid bg-grey">
   <div class="row">
 	<div class="col-sm-4">
-	  <span class="glyphicon glyphicon-phone logo slideanim" onclick="location.href='mileage.php'"></span>
+	        
+	<button class="btn btn-default" type="button" onclick="location.href='compare.php'" id="sign-in">compare</button>
+        <span class="glyphicon glyphicon-phone logo slideanim" onclick="location.href='mileage.php'"></span>
    	</div>
   <div class="consol-sm-8">
   <h1>Mileage</h1><br>

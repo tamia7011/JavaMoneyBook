@@ -201,6 +201,7 @@ type :'line',
 
 	{	
 		label: "Waste",
+		fill: false,
                 backgroundColor: 'rgb(200, 100, 250)',
                 borderColor: 'rgb(10, 30, 0)',
 		data: waste_list,

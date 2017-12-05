@@ -2,19 +2,19 @@
 <html> 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>회원가입</title>
 <style>
 body{
 	background-image:url("bg.png")
 }
 .myform{
-	margin:10px;
-	width:400px;
+	margin:30px auto;
+	width:80%;
 	padding:14px;
 }
 
 #stylized{
-	border:solid 2px #b7ddf2;
 	background:#ebf4fb;
 }
 
@@ -37,8 +37,7 @@ body{
 	display:block;
 	font-weight:bold;
 	text-align:right;
-	width:140px;
-	float:left;
+	float: left;	
 	font-family:tahoma;
 }
 
@@ -79,33 +78,29 @@ body{
 </head>
 <body>
   <div id="stylized" class="myform"> 
-    <form action="register.php" data-ajax="false" method="post">
-	<h1>회원 가입</h1>
-
-	<label>
-	<span class="name">이름</span>
-	</label>
-	<input type="text" id="Name" name="name"required><br>
-	<label>
-	<span class="email">Email</span>
-        </label>
-	<input type="text" id="email" name="email" required><br>
+    <h1>회원가입</h1>
+	<form class="well well-lg "action="register.php" data-ajax="false" method="post">
+	<div class="form-group">
+	<label><span class="name">이름</span></label>
+	<input class="form-control" type="text" id="Name" name="name"required><br>
+	<label><span class="email">Email</span></label>
+	<input type="text" class="form-control" id="email" name="email" required><br>
 	<label>
 	<span class="pw">PW</span>
         </label>
-	<input type="password" id="Pw" name="password" required><br>
+	<input type="password" class="form-control" id="Pw" name="password" required><br>
         <label>
 	<span class="password">PW 확인</span>
         </label>
-	<input type="password" id="PwCheck" required><br>
+	<input class="form-control" type="password" id="PwCheck" required><br>
  	<label>
 	<span class="phone">Phone Number</span>
 	</label>
-        <input type="text" id="Phone" name="phone_no" required><br>
- 
+        <input class="form-control" type="text" id="Phone" name="phone_no" required><br>
+ 	</div>
         <br><br>
-        <input type="submit" value="확인">
-        <input type="reset" value="취소">
+        <button class="btn btn-default" type="submit" >확인</button>
+        <button class="btn btn-default" type="reset">취소</button>
     </form>
    </div>
 </body>

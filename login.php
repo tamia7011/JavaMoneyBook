@@ -1,16 +1,19 @@
-
 <?php
 include 'login_verf.php';
 
 $email = $_GET["email"];
 $pwd = $_GET["pwd"];
 
-# db 
 
 # id is exist, move another page.
 if(isset($email) && isset($pwd)){
 	$result = verification($conn,$email,$pwd);		
 	if($result == True){
+		session_start();
+		$_SESSION['email'] = $email;
+		//session 
+		//connect
+		//email
 		header("Location:/main.php");
 	}
 }
@@ -29,9 +32,14 @@ if(isset($email) && isset($pwd)){
 body {
 	background-color: #f4511e;
 }
-.ld {
-	margin :  100px auto;
+.ld{
+	margin : 100px auto;
 	width : 80%;
+	text-align:center;
+}
+
+.form-group{
+	text-align:left;
 }
 
 </style>
@@ -52,6 +60,7 @@ body {
 
   <div>
 	<button class="btn btn-default" type="submit" id="login">Login</button>
+	<button class="btn btn-default" type="button" onclick="location.href='makeUser.php'" id="sign-in">Sign in</button>
   </div>
  </div>
 </form> 
