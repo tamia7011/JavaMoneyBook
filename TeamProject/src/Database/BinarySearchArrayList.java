@@ -26,8 +26,6 @@ public class BinarySearchArrayList {
 
 			if (low > high) {
 				mid = NOT_FOUND;
-				JOptionPane.showMessageDialog(null, "No data of that name exist!!", "warning",
-						JOptionPane.WARNING_MESSAGE);
 			}
 
 		}

@@ -53,7 +53,7 @@ public class AccountDAO {
 	public ArrayList<Account> selectName(String values) {
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense WHERE email=" + Constants.Email;
+		String query = "SELECT name,price,type,date FROM expense WHERE email='" + Constants.Email + "'";
 		bsals = new BinarySearchArrayList();
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 		ArrayList<String> name = new ArrayList<String>();
@@ -102,9 +102,13 @@ public class AccountDAO {
 		});
 
 		ArrayList<Account> findAccounts = new ArrayList<Account>();
-		for (int i : positions) {
-			if (name.get(i).equalsIgnoreCase(values))
-				findAccounts.add(dataArray.get(i));
+		try {
+			for (int i : positions) {
+				if (name.get(i).equalsIgnoreCase(values))
+					findAccounts.add(dataArray.get(i));
+			}
+		} catch (Exception e) {
+
 		}
 
 		return findAccounts;
@@ -281,16 +285,16 @@ public class AccountDAO {
 
 			switch (column) {
 			case 1:
-				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id + "and email='"
+				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id='" + id + "'and email='"
 						+ Constants.Email + "'";
 				break;
 			case 2:
-				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id + "and email='"
+				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id='" + id + "'and email='"
 						+ Constants.Email + "'";
 				break;
 			case 3:
-				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id
-						+ "and email='" + Constants.Email + "'";
+				query = "UPDATE expense SET price= '" + Integer.valueOf((String) value) + "' WHERE id='" + id
+						+ "'and email='" + Constants.Email + "'";
 				break;
 			default:
 				query = "";
