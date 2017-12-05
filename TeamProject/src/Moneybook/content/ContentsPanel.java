@@ -14,6 +14,7 @@ import java.util.PriorityQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -182,6 +183,8 @@ public class ContentsPanel extends JPanel {
 				Mileagesystem mileage = Mileagesystem.getInstance();
 				DAO = DAO.getInstance();
 				DAO.UPDATEMileage(mileage.calculating());
+				JOptionPane.showMessageDialog(null, "Successfully acculated your mileage!!", "show information",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		});

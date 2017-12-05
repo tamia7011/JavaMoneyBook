@@ -53,7 +53,7 @@ public class AccountDAO {
 	public ArrayList<Account> selectName(String values) {
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "SELECT name,price,type,date FROM expense WHERE email=" + Constants.Email;
+		String query = "SELECT name,price,type,date FROM expense WHERE email='" + Constants.Email + "'";
 		bsals = new BinarySearchArrayList();
 		ArrayList<Account> dataArray = new ArrayList<Account>();
 		ArrayList<String> name = new ArrayList<String>();
@@ -100,13 +100,14 @@ public class AccountDAO {
 				return a1.getName().compareToIgnoreCase(a2.getName());
 			}
 		});
-
 		ArrayList<Account> findAccounts = new ArrayList<Account>();
-		for (int i : positions) {
-			if (name.get(i).equalsIgnoreCase(values))
-				findAccounts.add(dataArray.get(i));
+		try {
+			for (int i : positions) {
+				if (name.get(i).equalsIgnoreCase(values))
+					findAccounts.add(dataArray.get(i));
+			}
+		} catch (Exception e) {
 		}
-
 		return findAccounts;
 	}
 
