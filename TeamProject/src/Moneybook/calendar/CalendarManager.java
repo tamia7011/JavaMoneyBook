@@ -18,7 +18,7 @@ public class CalendarManager {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date time = calendarData.getTime();
-	    java.sql.Date sqlDate = new java.sql.Date(time.getTime());
+		java.sql.Date sqlDate = new java.sql.Date(time.getTime());
 		return sqlDate;
 	}
 
@@ -71,11 +71,11 @@ public class CalendarManager {
 	}
 
 	public static void setCalendarDay(int day) {
-		calendarData.set(Calendar.DATE,day);
+		calendarData.set(Calendar.DATE, day);
 	}
 
 	public void setCalendarMonth(int month) {
-			//TODO not yet
+		// TODO not yet
 	}
 
 }

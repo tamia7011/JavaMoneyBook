@@ -12,10 +12,10 @@ import java.io.IOException;
 
 public class Launcher {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
- 
-		Class.forName("com.mysql.jdbc.Driver");  
-		
-		//start main frame
+
+		Class.forName("com.mysql.jdbc.Driver");
+
+		// start main frame
 		MainFrame frame = MainFrame.getInstance();
 		frame.start();
 	}

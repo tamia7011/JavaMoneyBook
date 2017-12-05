@@ -1,36 +1,35 @@
 package Constants;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class BinarySearchArrayList {
 	private final static int NOT_FOUND = -1;
-    public int binarySearch(ArrayList<String> stringList, String searchValue) {
 
-        int low = 0;
-        int high = stringList.size();
-        int mid = (low + high) / 2;
-        
+	public int binarySearch(ArrayList<String> stringList, String searchValue) {
 
-        while (low <= high && !stringList.get(mid).equalsIgnoreCase(searchValue)) {
-            if (stringList.get(mid).compareTo(searchValue) < 0) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
-            }
+		int low = 0;
+		int high = stringList.size();
+		int mid = (low + high) / 2;
 
-            mid = (low + high) / 2;
+		while (low <= high && !stringList.get(mid).equalsIgnoreCase(searchValue)) {
+			if (stringList.get(mid).compareTo(searchValue) < 0) {
+				low = mid + 1;
+			} else {
+				high = mid - 1;
+			}
 
-            if (low > high) {
-                mid = NOT_FOUND;
-            }
+			mid = (low + high) / 2;
 
-        }
-        
-        return mid;
+			if (low > high) {
+				mid = NOT_FOUND;
+			}
 
-    }
+		}
+
+		return mid;
+
+	}
 
 }
