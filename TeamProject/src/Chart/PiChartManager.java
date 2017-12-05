@@ -12,26 +12,20 @@ import Database.MonthAccount;
 
 public class PiChartManager {
 
-	
-	public ChartPanel getChart(MonthAccount budgetdata){
-		
-		
-		 DefaultPieDataset dataset = new DefaultPieDataset( );
-		 
-	      dataset.setValue( "Fixed" , new Double( budgetdata.getFixedExpenses() ) );  
-	      dataset.setValue( "Flexible" , new Double( budgetdata.getFlexibleExpenses() ) );   
-	      dataset.setValue( "Discretionary" , new Double( budgetdata.getDiscretionaryExpenses() ) );    
-	      
-	
-	      JFreeChart chart = ChartFactory.createPieChart(      
-	    	         "Mobile Sales",   // chart title 
-	    	         dataset,          // data    
-	    	         true,             // include legend   
-	    	         true, 
-	    	         false);
-		
-		
+	public ChartPanel getChart(MonthAccount budgetdata) {
+
+		DefaultPieDataset dataset = new DefaultPieDataset();
+
+		dataset.setValue("Fixed", new Double(budgetdata.getFixedExpenses()));
+		dataset.setValue("Flexible", new Double(budgetdata.getFlexibleExpenses()));
+		dataset.setValue("Discretionary", new Double(budgetdata.getDiscretionaryExpenses()));
+
+		JFreeChart chart = ChartFactory.createPieChart("Mobile Sales", // chart title
+				dataset, // data
+				true, // include legend
+				true, false);
+
 		return new ChartPanel(chart);
 	}
-	
+
 }

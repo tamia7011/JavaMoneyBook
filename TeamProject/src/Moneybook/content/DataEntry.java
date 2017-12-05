@@ -29,128 +29,131 @@ import java.awt.Font;
 
 public class DataEntry extends JFrame {
 
-   private static final long serialVersionUID = 1L; // i dont know what it is .....
-   public static DataEntry thisFrame;
-   private JTextField typeField;
-   private JTextField nameField;
-   public static JTextField priceField;
-    private BigDecimal resultValue;
-   JPanel contentPane;
-   Account moneyData = new Account();
-   MonthAccount monthAccount;
-   AccountDAO accountDAO;
-   DailyAccount dailyAccount;
+	private static final long serialVersionUID = 1L; // i dont know what it is .....
+	public static DataEntry thisFrame;
+	private JTextField typeField;
+	private JTextField nameField;
+	public static JTextField priceField;
+	private BigDecimal resultValue;
+	JPanel contentPane;
+	Account moneyData = new Account();
+	MonthAccount monthAccount;
+	AccountDAO accountDAO;
+	DailyAccount dailyAccount;
 
-   private JComboBox comboList;
+	private JComboBox comboList;
 
-   static String[] petStrings = { Constants.expenseType.Fixed.toString(), Constants.expenseType.Flexible.toString(),
-         Constants.expenseType.Waste.toString(), Constants.expenseType.Default.toString() };
-   private JTextField EmailField;
+	static String[] petStrings = { Constants.expenseType.Fixed.toString(), Constants.expenseType.Flexible.toString(),
+			Constants.expenseType.Waste.toString(), Constants.expenseType.Default.toString() };
+	private JTextField EmailField;
 
-   public static DataEntry getInstance() {
-      if (thisFrame == null) {
-         thisFrame = new DataEntry();
-         return thisFrame;
-      }
-      return thisFrame;
-   }
+	public static DataEntry getInstance() {
+		if (thisFrame == null) {
+			thisFrame = new DataEntry();
+			return thisFrame;
+		}
+		return thisFrame;
+	}
 
-   public DataEntry() {
-      setTitle("DataEntry");
-      init();
-   }
+	public DataEntry() {
+		setTitle("DataEntry");
+		init();
+	}
 
-   public void init() {
-      setBounds(100, 100, 450, 450);
-      JPanel panel = new JPanel();
-      JPanel contentPane = panel;
-      panel.setLayout(null);
+	public void init() {
+		setBounds(100, 100, 450, 450);
+		JPanel panel = new JPanel();
+		JPanel contentPane = panel;
+		panel.setLayout(null);
 
-      JLabel lblNewLabel = new JLabel("Insert information");
-      lblNewLabel.setBounds(147, 15, 168, 34);
-      lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 22));
-      panel.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Insert information");
+		lblNewLabel.setBounds(147, 15, 168, 34);
+		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 22));
+		panel.add(lblNewLabel);
 
-       comboList = new JComboBox(petStrings);
-       comboList.setBounds(182, 75, 182, 27);
-      comboList.setSelectedIndex(0);
-      panel.add(comboList);
+		comboList = new JComboBox(petStrings);
+		comboList.setBounds(182, 75, 182, 27);
+		comboList.setSelectedIndex(0);
+		panel.add(comboList);
 
-      nameField = new JTextField();
-      nameField.setBounds(182, 134, 182, 27);
-      panel.add(nameField);
-      nameField.setColumns(10);
+		nameField = new JTextField();
+		nameField.setBounds(182, 134, 182, 27);
+		panel.add(nameField);
+		nameField.setColumns(10);
 
-      priceField = new JTextField();
-      priceField.setBounds(182, 192, 182, 27);
-      panel.add(priceField);
-      priceField.setColumns(10);
+		priceField = new JTextField();
+		priceField.setBounds(182, 192, 182, 27);
+		panel.add(priceField);
+		priceField.setColumns(10);
 
-      JLabel nameLabel = new JLabel("type");
-      nameLabel.setBounds(107, 78, 43, 21);
-      panel.add(nameLabel);
+		JLabel nameLabel = new JLabel("type");
+		nameLabel.setBounds(107, 78, 43, 21);
+		panel.add(nameLabel);
 
-      JLabel priceLabel = new JLabel("name");
-      priceLabel.setBounds(100, 137, 50, 21);
-      panel.add(priceLabel);
+		JLabel priceLabel = new JLabel("name");
+		priceLabel.setBounds(100, 137, 50, 21);
+		panel.add(priceLabel);
 
-      JLabel typeLabel = new JLabel("price");
-      typeLabel.setBounds(107, 195, 50, 21);
-      panel.add(typeLabel);
-      
-      JButton calculator = new JButton("Cal");
-      calculator.setBounds(362, 192, 56, 27);
-      panel.add(calculator);
-      
-      calculator.addActionListener(new CalculatorListener());
+		JLabel typeLabel = new JLabel("price");
+		typeLabel.setBounds(107, 195, 50, 21);
+		panel.add(typeLabel);
 
-      JButton insertBtn = new JButton("insert data");
-      insertBtn.setBounds(147, 270, 125, 29);
-      panel.add(insertBtn);
+		JButton calculator = new JButton("Cal");
+		calculator.setBounds(362, 192, 56, 27);
+		panel.add(calculator);
 
-      insertBtn.addActionListener(new InsertListener());
+		calculator.addActionListener(new CalculatorListener());
 
-      contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-      setContentPane(contentPane);
-   }
-   private class CalculatorListener implements ActionListener{
-      @Override
-      public void actionPerformed(ActionEvent e) {
-          new Calculator().create();
-      }
-   }
-   private class InsertListener implements ActionListener {
+		JButton insertBtn = new JButton("insert data");
+		insertBtn.setBounds(147, 270, 125, 29);
+		panel.add(insertBtn);
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
+		insertBtn.addActionListener(new InsertListener());
 
-         accountDAO = Database.AccountDAO.getInstance();
-         monthAccount = MonthAccount.getInstance();
-         String name = nameField.getText();
-         int price = Integer.parseInt(priceField.getText());
-         String type = comboList.getSelectedItem().toString();
-         Account data = new Account();
-         data = accountDAO.selectinsertName(nameField.getText());
-         System.out.println(data);
-         if(data.getPrice() == 0) {
-         moneyData.setName(name);
-         moneyData.setPrice(price);
-         moneyData.setType(type);
-         moneyData.setDate(CalendarManager.getDate());
-         monthAccount.calculateDataset(moneyData);
-         System.out.println(monthAccount.getFixedExpenses());
-         accountDAO.updateTotalBudget(monthAccount);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+	}
 
-         accountDAO.Insert(moneyData); 
-         ContentsPanel.getInstance().showTable();
-         thisFrame.setVisible(false);
-         JOptionPane.showMessageDialog(null, "Successfully entered your data!!", "show information", JOptionPane.INFORMATION_MESSAGE);
-         if(monthAccount.getSalary() < monthAccount.getTotalExpenses()){
-            JOptionPane.showMessageDialog(null, "It is deficit!!", "warning", JOptionPane.WARNING_MESSAGE);
-            }
-         } else {
-            JOptionPane.showMessageDialog(null, "Duplicate name", "warning", JOptionPane.WARNING_MESSAGE);
-         }
-      }
-   }
+	private class CalculatorListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new Calculator().create();
+		}
+	}
+
+	private class InsertListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			accountDAO = Database.AccountDAO.getInstance();
+			monthAccount = MonthAccount.getInstance();
+			String name = nameField.getText();
+			int price = Integer.parseInt(priceField.getText());
+			String type = comboList.getSelectedItem().toString();
+			Account data = new Account();
+			data = accountDAO.selectinsertName(nameField.getText());
+			System.out.println(data);
+			if (data.getPrice() == 0) {
+				moneyData.setName(name);
+				moneyData.setPrice(price);
+				moneyData.setType(type);
+				moneyData.setDate(CalendarManager.getDate());
+				monthAccount.calculateDataset(moneyData);
+				System.out.println(monthAccount.getFixedExpenses());
+				accountDAO.updateTotalBudget(monthAccount);
+
+				accountDAO.Insert(moneyData);
+				ContentsPanel.getInstance().showTable();
+				thisFrame.setVisible(false);
+				JOptionPane.showMessageDialog(null, "Successfully entered your data!!", "show information",
+						JOptionPane.INFORMATION_MESSAGE);
+				if (monthAccount.getSalary() < monthAccount.getTotalExpenses()) {
+					JOptionPane.showMessageDialog(null, "It is deficit!!", "warning", JOptionPane.WARNING_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Duplicate name", "warning", JOptionPane.WARNING_MESSAGE);
+			}
+		}
+	}
 }

@@ -23,34 +23,37 @@ public class MenuBar extends JMenuBar {
 				Account moneyData = new Account();
 				JFrame EmailPopup = new JFrame();
 				Constants.Constants.Email = JOptionPane.showInputDialog(EmailPopup, "What is your Email?", null);
-				JOptionPane.showMessageDialog(null, "Successfully insert your Email!!", "Insert Email", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Successfully insert your Email!!", "Insert Email",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		
+
 		JButton SetSalaryBtn = new JButton("Set Salary");
 		add(SetSalaryBtn);
-		
+
 		SetSalaryBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFrame budgetPopup = new JFrame();
 				try {
-					int salary = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Salary?", null));
+					int salary = Integer
+							.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Salary?", null));
 					MonthAccount budget = MonthAccount.getInstance();
 					budget.setSalary(salary);
 					System.out.println(salary);
 					budget.plusBudget(salary);
 					budgetPopup.dispose();
-					JOptionPane.showMessageDialog(null, "Successfully set your salary!!", "show information", JOptionPane.INFORMATION_MESSAGE);
-				
-				} catch(Exception e1) {
-					
+					JOptionPane.showMessageDialog(null, "Successfully set your salary!!", "show information",
+							JOptionPane.INFORMATION_MESSAGE);
+
+				} catch (Exception e1) {
+
 				}
 			}
-			
+
 		});
-		
+
 		JButton SetBudgetBtn = new JButton("Set budget");
 		add(SetBudgetBtn);
 		SetBudgetBtn.addActionListener(new ActionListener() {
@@ -59,18 +62,20 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				JFrame budgetPopup = new JFrame();
 				try {
-					int myBudget = Integer.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
+					int myBudget = Integer
+							.parseInt(JOptionPane.showInputDialog(budgetPopup, "How much is your Budget?", null));
 					MonthAccount budget = MonthAccount.getInstance();
 					budget.setBudget(myBudget);
 					budgetPopup.dispose();
-					JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
-				
-				} catch(Exception e1) {
-					
+					JOptionPane.showMessageDialog(null, "Successfully entered your budget!!", "show information",
+							JOptionPane.INFORMATION_MESSAGE);
+
+				} catch (Exception e1) {
+
 				}
 			}
 		});
-		
+
 		JButton AddBudgetBtn = new JButton("Add budget");
 		add(AddBudgetBtn);
 		AddBudgetBtn.addActionListener(new ActionListener() {
@@ -79,19 +84,20 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				JFrame DepositPopup = new JFrame();
 				try {
-				int deposit = Integer.parseInt(JOptionPane.showInputDialog(DepositPopup, "How much do you want to add?", null));
-				MonthAccount budget = MonthAccount.getInstance();
-				budget.plusBudget(deposit);
-				budget.setSalary(budget.getSalary());
-				DepositPopup.dispose();
-				JOptionPane.showMessageDialog(null, "Successfully added your budget!!", "show information", JOptionPane.INFORMATION_MESSAGE);
-				} catch(Exception e1) {
-					
+					int deposit = Integer
+							.parseInt(JOptionPane.showInputDialog(DepositPopup, "How much do you want to add?", null));
+					MonthAccount budget = MonthAccount.getInstance();
+					budget.plusBudget(deposit);
+					budget.setSalary(budget.getSalary());
+					DepositPopup.dispose();
+					JOptionPane.showMessageDialog(null, "Successfully added your budget!!", "show information",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception e1) {
+
 				}
 			}
-			
+
 		});
 	}
 
-	
 }

@@ -8,9 +8,9 @@ import Database.AccountDAO;
 
 public class MonthAccount {
 	private static MonthAccount instance;
-	
+
 	private static String DEFAULT_MONTH = "0000-00";
-	public String month = DEFAULT_MONTH;//YYYY-MM
+	public String month = DEFAULT_MONTH;// YYYY-MM
 	private int budget;
 	private int salary;
 	private String name = "jihoson94@gmail.com";
@@ -20,15 +20,14 @@ public class MonthAccount {
 	private int discretionaryExpense;
 	private int mileage;
 	private AccountDAO DAO;
-	
+
 	public static MonthAccount getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new MonthAccount();
 			return instance;
 		}
 		return instance;
 	}
-	
 
 	private void init() {
 		DAO = AccountDAO.getInstance();
@@ -42,30 +41,30 @@ public class MonthAccount {
 		System.out.println(budget);
 		name = "user";
 	}
-	
+
 	private MonthAccount() {
 		init();
 	}
-	
+
 	public void calculateDataset(Account moneydata) {
 		String type = moneydata.getType();
 		int price = moneydata.getPrice();
 		if (type.equals(Constants.expenseType.Fixed.toString())) {
 			fixedExpense += moneydata.getPrice();
 		}
-		
+
 		else if (type.equals(Constants.expenseType.Flexible.toString())) {
 			flexibleExpense += moneydata.getPrice();
 		}
-		
+
 		else {
 			discretionaryExpense += moneydata.getPrice();
 		}
-		
+
 		totalExpense += price;
 		budget -= price;
 	}
-	
+
 	public void calculateDeleteSet(Account moneydata) {
 		String type = moneydata.getType();
 		System.out.println(type);
@@ -73,89 +72,88 @@ public class MonthAccount {
 		if (type.equals(Constants.expenseType.Fixed.toString())) {
 			fixedExpense -= moneydata.getPrice();
 		}
-		
+
 		else if (type.equals(Constants.expenseType.Flexible.toString())) {
 			flexibleExpense -= moneydata.getPrice();
 		}
-		
+
 		else {
 			discretionaryExpense -= moneydata.getPrice();
 		}
-		
+
 		totalExpense -= price;
 		budget += price;
 	}
-	
+
 	public int getFixedExpenses() {
 		return fixedExpense;
 	}
-	
+
 	public void setFixedExpenses(int in_fixedExpense) {
 		fixedExpense = in_fixedExpense;
 		DAO.updateTotalBudget(this);
 	}
-	
+
 	public int getFlexibleExpenses() {
 		return flexibleExpense;
 	}
-	
+
 	public void setFlexibleExpenses(int in_flexibleExpense) {
 		flexibleExpense = in_flexibleExpense;
 		DAO.updateTotalBudget(this);
 	}
-	
+
 	public int getDiscretionaryExpenses() {
 		return discretionaryExpense;
 	}
-	
+
 	public void setDiscretionaryExpenses(int in_discretionaryExpense) {
 		discretionaryExpense = in_discretionaryExpense;
 		DAO.updateTotalBudget(this);
 	}
 
-   public int getTotalExpenses() {
-      return totalExpense;
-   }
+	public int getTotalExpenses() {
+		return totalExpense;
+	}
 
 	public void setTotalExpenses(int in_totalExpense) {
 		totalExpense = in_totalExpense;
 		DAO.updateTotalBudget(this);
 	}
-	
+
 	public int getBudget() {
 		return budget;
 	}
-	
+
 	public int getSalary() {
 		return salary;
 	}
-	
+
 	public void setSalary(int in_salary) {
 		salary = in_salary;
 		DAO.updateTotalBudget(this);
 	}
-	
+
 	public void setBudget(int in_salaryExpense) {
 		budget = in_salaryExpense;
 		DAO.updateTotalBudget(this);
 	}
-	
-	public String getName() {	
+
+	public String getName() {
 		return name;
 	}
-	
-	public void setName(String Name) {	
+
+	public void setName(String Name) {
 		name = Name;
 	}
-	
+
 	public void plusBudget(int in_budget) {
 		budget += in_budget;
 		DAO.updateTotalBudget(this);
 	}
-	
+
 	public int getMileage() {
 		return mileage;
 	}
 
 }
-

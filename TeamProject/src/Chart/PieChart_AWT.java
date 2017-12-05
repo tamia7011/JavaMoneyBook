@@ -15,8 +15,8 @@ import org.jfree.ui.RefineryUtilities;
 import Constants.Constants;
 
 public class PieChart_AWT extends ApplicationFrame {
-	
-	public PieChart_AWT(String title,ArrayList<Account> accountData) {
+
+	public PieChart_AWT(String title, ArrayList<Account> accountData) {
 		super(title);
 		setContentPane(createDemoPanel(accountData));
 	}
@@ -30,7 +30,7 @@ public class PieChart_AWT extends ApplicationFrame {
 		for (Account account : accountData) {
 
 			if (account.getType().equals(Constants.expenseType.Fixed.toString())) {
-				
+
 				FixedExpenses += account.getPrice();
 			} else if (account.getType().equals(Constants.expenseType.Flexible.toString())) {
 				FlexibleExpenses += account.getPrice();

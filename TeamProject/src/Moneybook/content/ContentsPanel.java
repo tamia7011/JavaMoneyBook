@@ -32,71 +32,65 @@ import Chart.PiChartManager;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
 
-public class ContentsPanel extends JPanel{
+public class ContentsPanel extends JPanel {
 	private static ContentsPanel instance;
 	boolean status = false;
 	public JTable table;
 	AccountDAO DAO;
-	
+
 	public static ContentsPanel getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new ContentsPanel();
 			return instance;
 		}
 		return instance;
-	} 
-	
+	}
+
 	private ContentsPanel() {
-		
+
 		this.setLayout(new BorderLayout());
 
-		
-		table = new JTable(); 
-		
+		table = new JTable();
+
 		table.setFont(new Font("Arial", Font.PLAIN, 20));
-		Dimension dim = new Dimension(20,1);
+		Dimension dim = new Dimension(20, 1);
 		table.setIntercellSpacing(new Dimension(dim));
 		int height = table.getRowHeight();
-		table.setRowHeight(height+10);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"id", "type", "name", "price", },
-			},
-			new String[] {
-				"id", "type", "name", "price", 
-			}
-		));
-		
-		class JtableModelListener implements TableModelListener {
-		    AccountDAO dao;
-		    public JtableModelListener() {
-		        super();
-		        table.getModel().addTableModelListener(this);
-		        dao = AccountDAO.getInstance();
-		    }
+		table.setRowHeight(height + 10);
+		table.setModel(new DefaultTableModel(new Object[][] { { "id", "type", "name", "price", }, },
+				new String[] { "id", "type", "name", "price", }));
 
-		    public void tableChanged(TableModelEvent e) {
-		        int row = e.getFirstRow();
-		        int column = e.getColumn();
-		        int id;
-		        if (column > -1) {
-			        TableModel model = (TableModel)e.getSource();
-			        String columnName = model.getColumnName(column);
-			        Object data = model.getValueAt(row, column);
-			        id = (int) model.getValueAt(row, 0); 
-			        
-			        // Do something with the data...
-			        dao.Update(id, column, data);
-		        }
-		    }
+		class JtableModelListener implements TableModelListener {
+			AccountDAO dao;
+
+			public JtableModelListener() {
+				super();
+				table.getModel().addTableModelListener(this);
+				dao = AccountDAO.getInstance();
+			}
+
+			public void tableChanged(TableModelEvent e) {
+				int row = e.getFirstRow();
+				int column = e.getColumn();
+				int id;
+				if (column > -1) {
+					TableModel model = (TableModel) e.getSource();
+					String columnName = model.getColumnName(column);
+					Object data = model.getValueAt(row, column);
+					id = (int) model.getValueAt(row, 0);
+
+					// Do something with the data...
+					dao.Update(id, column, data);
+				}
+			}
 		}
 		JtableModelListener a = new JtableModelListener();
 		showTable();
-		add(table,BorderLayout.CENTER);
-			
+		add(table, BorderLayout.CENTER);
+
 		JToolBar toolBar = new JToolBar();
 		add(toolBar, BorderLayout.SOUTH);
-		
+
 		JButton ShowStateBtn = new JButton("show state");
 		toolBar.add(ShowStateBtn);
 		ShowStateBtn.addActionListener(new ActionListener() {
@@ -106,21 +100,21 @@ public class ContentsPanel extends JPanel{
 				State state = new State();
 				state.setVisible(true);
 			}
-			
+
 		});
-		
+
 		JButton InsertDataBtn = new JButton("insert data");
 		toolBar.add(InsertDataBtn);
 		InsertDataBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DataEntry dataEntry =  DataEntry.getInstance();
+				DataEntry dataEntry = DataEntry.getInstance();
 				dataEntry.setVisible(true);
 			}
-			
-		}); 
-		
+
+		});
+
 		JButton DeleteDataBtn = new JButton("delete data");
 		toolBar.add(DeleteDataBtn);
 		DeleteDataBtn.addActionListener(new ActionListener() {
@@ -130,9 +124,9 @@ public class ContentsPanel extends JPanel{
 				DeleteData delData = new DeleteData();
 				delData.setVisible(true);
 			}
-			
+
 		});
-		
+
 		JButton DailyBtn = new JButton("Daily Statistic");
 		toolBar.add(DailyBtn);
 		DailyBtn.addActionListener(new ActionListener() {
@@ -141,9 +135,9 @@ public class ContentsPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				showStatics();
 			}
-			
-		}); 
-		
+
+		});
+
 		JButton MonthlyBtn = new JButton("Monthly Statistic");
 		toolBar.add(MonthlyBtn);
 		MonthlyBtn.addActionListener(new ActionListener() {
@@ -152,9 +146,9 @@ public class ContentsPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				showMonthlyStatics();
 			}
-			
-		}); 
-		
+
+		});
+
 		JButton SearchBtn = new JButton("Search");
 		toolBar.add(SearchBtn);
 		SearchBtn.addActionListener(new ActionListener() {
@@ -164,9 +158,9 @@ public class ContentsPanel extends JPanel{
 				SearchData searData = SearchData.getInstance();
 				searData.setVisible(true);
 			}
-			
+
 		});
-		
+
 		JButton PriorityBtn = new JButton("Priority");
 		toolBar.add(PriorityBtn);
 		PriorityBtn.addActionListener(new ActionListener() {
@@ -176,9 +170,9 @@ public class ContentsPanel extends JPanel{
 				PriorityData priorityData = PriorityData.getInstance();
 				priorityData.setVisible(true);
 			}
-			
+
 		});
-		
+
 		JButton MileageBtn = new JButton("Mileage accumulate");
 		toolBar.add(MileageBtn);
 		MileageBtn.addActionListener(new ActionListener() {
@@ -189,54 +183,54 @@ public class ContentsPanel extends JPanel{
 				DAO = DAO.getInstance();
 				DAO.UPDATEMileage(mileage.calculating());
 			}
-			
+
 		});
 	}
-	
-	public void show(Calendar cal) { 
-		if(status) {
+
+	public void show(Calendar cal) {
+		if (status) {
 			status = false;
-		}else {
+		} else {
 			status = true;
 		}
-		setVisible(status); 
+		setVisible(status);
 		showTable();
 	}
-	
+
 	public void showStatics() {
 		AccountDAO accountDAO = AccountDAO.getInstance();
 		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
-		
-		Chart.PieChart_AWT demo = new Chart.PieChart_AWT( "Expenses" , list  );  
-	    demo.setSize( 560 , 367 );    
-	    RefineryUtilities.centerFrameOnScreen( demo );    
-	    demo.setVisible( true );
+
+		Chart.PieChart_AWT demo = new Chart.PieChart_AWT("Expenses", list);
+		demo.setSize(560, 367);
+		RefineryUtilities.centerFrameOnScreen(demo);
+		demo.setVisible(true);
 	}
-	
+
 	public void showMonthlyStatics() {
 		AccountDAO accountDAO = AccountDAO.getInstance();
 		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
-		Chart.PieChart_Monthly demo = new Chart.PieChart_Monthly( "Expenses" , list  );  
-	    demo.setSize( 560 , 367 );    
-	    RefineryUtilities.centerFrameOnScreen( demo );    
-	    demo.setVisible( true );
+		Chart.PieChart_Monthly demo = new Chart.PieChart_Monthly("Expenses", list);
+		demo.setSize(560, 367);
+		RefineryUtilities.centerFrameOnScreen(demo);
+		demo.setVisible(true);
 	}
-	
-	public void showTable() { 
-		
+
+	public void showTable() {
+
 		AccountDAO accountDAO = AccountDAO.getInstance();
 		AccountManager accountManager = AccountManager.getInstance();
 		Date date = CalendarManager.getDate();
 		ArrayList<Account> list = accountDAO.selectByDate(date);
-		
-		DefaultTableModel model = (DefaultTableModel) table.getModel(); 
-		model.setNumRows(1); 
-		for(Account account:list) {
+
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setNumRows(1);
+		for (Account account : list) {
 			Object[] row = { account.getId(), account.getType(), account.getName(), account.getPrice() };
 			model.addRow(row);
-		}  
+		}
 	}
-		
+
 }

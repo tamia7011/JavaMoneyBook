@@ -15,10 +15,10 @@ import org.jfree.ui.RefineryUtilities;
 import Constants.Constants;
 
 public class PieChart_Monthly extends ApplicationFrame {
-	
+
 	static MonthAccount monthAccount = MonthAccount.getInstance();
-	
-	public PieChart_Monthly(String title,ArrayList<Account> accountData) {
+
+	public PieChart_Monthly(String title, ArrayList<Account> accountData) {
 		super(title);
 		setContentPane(createDemoPanel(accountData));
 	}
