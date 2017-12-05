@@ -27,7 +27,7 @@
 		);
 		array_push($mileage_list,$data);	
 	}
-	$mileage_sum_list = array();
+	
 	$fixed_sum_list = array();
 	$flexible_sum_list = array();
 	$waste_sum_list = array();
@@ -35,26 +35,22 @@
 	foreach($mileage_list as $data){
 		$date = $data["date"];
 		$key = $date['year'] . "-" . $date['mon']  ; #"0000-00"	
-		if(!isset($sum_list[$key])){
-			$mileage_sum_list[$key] = intval($data["point"]);
-		}else{
-			$mileage_sum_list[$key] += $data["point"];
-		}	
-		if(!strcmp($data['type'],"fixed")){
+		
+		if(!strcmp($data['type'],"Fixed")){
 			if(!isset($fixed_sum_list[$key])){
 				$fixed_sum_list[$key] = intval($data["price"]);
 			}else{
 				$fixed_sum_list[$key] += $data["price"];
 			}		
 		}
-		if(!strcmp($data['type'],"flexible")){
+		if(!strcmp($data['type'],"Flexible")){
 			if(!isset($flexible_sum_list[$key])){
 				$flexible_sum_list[$key] = intval($data["price"]);
 			}else{
 				$flexible_sum_list[$key] += $data["price"];
 			}
 		}
-		if(!strcmp($data['type'],"waste")){
+		if(!strcmp($data['type'],"Waste")){
 			if(!isset($waste_sum_list[$key])){
 				$waste_sum_list[$key] = intval($data["price"]);
 			}else{
@@ -80,8 +76,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- chart js -->
 
-</head>
-
+</head>                                               
 <body>
 <div class="container">
 	<div class="profile">
@@ -106,14 +101,8 @@
 		<thead>
 		<tr>
 			<th>Date</th>
-			<th>Point</th>
+			<th>Price</th>
 			<th>Type</th>
-		<!-- 	
-			<th>Total Point</th>
-			<th>fixed</th>
-			<th>flexible</th>
-			<th>waste</th>
-		-->
 		</tr>
 		</thead>
 		<tbody>
@@ -121,7 +110,7 @@
 	
 	foreach ($mileage_list as $data){
 		echo "<tr>";	
-		echo "<th>".$data["date"]."</th>";
+		echo "<th>".$data["date"]["year"]."-".$data["date"]["mon"]."-".$data["date"]["mday"]."</th>";
 		echo "<th>".$data["point"]."</th>";
 		echo "<th>".$data["type"]."</th>";
 		echo "</tr>";	
@@ -140,17 +129,14 @@
 
 <?php 
 	$year = "2017";
-	$mileage_month_array = array();
 	$fixed_month_array = array();
 	$flexible_month_array = array();
 	$waste_month_array = array();
 	for($i = 1; $i < 13; $i++){
-		$year_month_str = $year."-".$i;
-		$mileage_month_sum = $mileage_sum_list[$year_month_str]; 
+		$year_month_str = $year."-".$i; 
 		$fixed_month_sum = $fixed_sum_list[$year_month_str];
 		$flexible_month_sum = $flexible_sum_list[$year_month_str];
 		$waste_month_sum = $waste_sum_list[$year_month_str];
-		array_push($mileage_month_array,$mileage_month_sum);
 		array_push($fixed_month_array,$fixed_month_sum);
 		array_push($flexible_month_array,$flexible_month_sum);
 		array_push($waste_month_array,$waste_month_sum);
@@ -158,14 +144,6 @@
 ?>
 
 <?php
-	echo "var mileage_list = [";
-	for($i=0;$i < 12;$i++){
-		echo '"' . $mileage_month_array[$i] . '"';
-		if($i != 11){	
-			echo ",";	
-		}
-	}
-	echo "];";
 
 	echo "var fixed_list = [";
 	for($i=0;$i < 12;$i++){
@@ -187,7 +165,7 @@
 
 	echo "var waste_list = [";
 	for($i=0;$i < 12;$i++){
-		echo '"' . $flexible_month_array[$i] . '"';
+		echo '"' . $waste_month_array[$i] . '"';
 		if($i != 11){
 			echo ",";
 		}
@@ -204,32 +182,27 @@ type :'line',
 	data:{
 	labels: ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"],
 	datasets: [
-	{
-		label: "Mileage Point",
-		backgroundColor: 'rgb(255, 99, 132)',
-		borderColor: 'rgb(139, 0, 0)',
-		data: mileage_list,
-		
-	},
 
 	{
 		label: "Fixed",
-		backgroundColor: 'rgb(255,0,  132)',
-		borderColor: 'rgb(255, 0, 132)',
+		fill: false,
+		backgroundColor: 'rgb(255, 99, 132)',
+		borderColor: 'rgb(139, 0, 0)',
 		data: fixed_list,
 	},
 
 	{
 		label: "Flexible",
-		backgroundColor: 'rgb(26, 142, 72)',
-		borderColor: 'rgb(45, 231, 21)',
+		fill: false,
+		backgroundColor: 'rgb(10, 0, 132)',
+		borderColor: 'rgb(255, 0, 132)',
 		data: flexible_list,
 	},
 
 	{	
 		label: "Waste",
-		backgroundColor: 'rgb(24, 18, 132)',
-		borderColor: 'rgb(10, 0, 99)',
+                backgroundColor: 'rgb(200, 100, 250)',
+                borderColor: 'rgb(10, 30, 0)',
 		data: waste_list,
 	
     	},
