@@ -282,16 +282,16 @@ public class AccountDAO {
 
 			switch (column) {
 			case 1:
-				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id=" + id + "and email='"
+				query = "UPDATE expense SET type= '" + value.toString() + "' WHERE id='" + id + "'and email='"
 						+ Constants.Email + "'";
 				break;
 			case 2:
-				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id=" + id + "and email='"
+				query = "UPDATE expense SET name= '" + value.toString() + "' WHERE id='" + id + "'and email='"
 						+ Constants.Email + "'";
 				break;
 			case 3:
-				query = "UPDATE expense SET price= " + Integer.valueOf((String) value) + " WHERE id=" + id
-						+ "and email='" + Constants.Email + "'";
+				query = "UPDATE expense SET price= '" + Integer.valueOf((String) value) + "' WHERE id='" + id
+						+ "'and email='" + Constants.Email + "'";
 				break;
 			default:
 				query = "";
